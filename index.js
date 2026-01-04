@@ -67,6 +67,9 @@ function createLiSection(obj, sectionId, h3Text) {
 
     languageListItems(obj, lang, h3Text, section, grid, secondaryChild);
   })
+
+  // Re-apply Prism.js highlighting only to this section
+  Prism.highlightAllUnder(section);
 }
 
 // HELPER function: used in createLiSection
@@ -87,7 +90,7 @@ function languageListItems(obj, string, text, el1, el2, el3) {
   obj[string].forEach(item => {
     const li = document.createElement('li');
     const code = document.createElement('code');
-    code.className = `custom-${string.toLowerCase()}`;
+    code.className = `language-${string.toLowerCase()}`;
     code.textContent = item;
     li.append(code);
     list.append(li);
