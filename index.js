@@ -4,6 +4,7 @@ import { vars, numbers, strings, arrays, objects } from "./js/listEls.js";
 const languageForm = document.getElementById('languageForm');
 const select = document.getElementById('primaryLang');
 const h1 = document.querySelector('h1');
+const MAX_SECONDARY_LANGUAGES = 3;
 
 /**
  * * FUNCTIONS
@@ -30,11 +31,13 @@ function initHomePage() {
 
     const langs = getLocalStorage('checkedLangs');
 
-    // check the secondary languages the user checked
+    // check secondary languages the user checked
     langs.forEach(val => {
       const checkbox = document.querySelector(`input[type="checkbox"][value="${val}"]`);
       if (checkbox) checkbox.checked = true;
     });
+
+    limitSecondaryLanguages();
 
     createLiSection(vars, 'vars', 'Variables + Miscellaneous');
     createLiSection(numbers, 'numbers', 'Numbers');
@@ -87,11 +90,26 @@ function languageListItems(obj, string, text, el1, el2, el3) {
   obj[string].forEach(item => {
     const li = document.createElement('li');
     const code = document.createElement('code');
-    code.className = `custom-${string.toLowerCase()}`;
+    code.className = `language-${string.toLowerCase()}`;
     code.textContent = item;
     li.append(code);
     list.append(li);
   })
+}
+
+// Limit secondary languages to max of 3
+function limitSecondaryLanguages() {
+  const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+  const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+  const selectedPrimary = select.options[select.selectedIndex].value;
+
+  allCheckboxes.forEach(checkbox => {
+    if (checkbox.checked || checkbox.id === selectedPrimary) {
+      checkbox.disabled = (checkbox.id === selectedPrimary);
+    } else {
+      checkbox.disabled = (checkedBoxes.length >= MAX_SECONDARY_LANGUAGES);
+    }
+  });
 }
 
 
@@ -102,14 +120,13 @@ function languageListItems(obj, string, text, el1, el2, el3) {
 // 1. Load localStorage objects if they exist
 document.addEventListener('DOMContentLoaded', initHomePage);
 
-// Select list 
+// Select list
 select.addEventListener('change', e => {
   const checkedLanguages = getLocalStorage('checkedLangs') || []
   if (checkedLanguages.length > 0) {
     setLocalStorage('checkedLangs', [])
   }
   const selectedvalue = select.options[select.selectedIndex].value;
-  console.log(selectedvalue) // this is correct
 
   const boxes = document.querySelectorAll('input[type="checkbox"]');
 
@@ -117,6 +134,13 @@ select.addEventListener('change', e => {
   const primarySelection = [...boxes].filter(box => box.id === selectedvalue)
 
   // I need to somehow maintain the disabled attribute and only remove it when the user picks a different primary language or clears LS
+
+  limitSecondaryLanguages();
+})
+
+// 3. Checkboxes - limit to max of 3
+document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+  checkbox.addEventListener('change', limitSecondaryLanguages);
 })
 
 // 2. form listener
