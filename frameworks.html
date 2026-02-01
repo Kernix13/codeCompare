@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Compare</title>
+  <link rel="stylesheet" href="./css/prism.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <header>
+    <div class="wrapper header-flex">
+      <div class="logo">codeCompare</div>
+      <nav>
+        <ul class="nav-flex">
+          <li><a href="./compare.html">Compare</a></li>
+          <li><a href="./details.html">In Depth</a></li>
+          <li><a href="./frameworks.html">Frameworks</a></li>
+          <li><a href="./docs/python.md">python.md</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrapper">
+    <!-- FORM -->
+    <form class="language-form" id="languageForm">
+
+      <fieldset class="form-group check">
+        <!-- Consider front-end only here... -->
+        <legend>Primary framework</legend>
+
+        <input type="checkbox" name="comparisonLangs" value="JavaScript" id="js" checked>
+        <label for="js" class="checkbox">React</label>
+
+        <input type="checkbox" name="comparisonLangs" value="Python" id="python">
+        <label for="python" class="checkbox">Vue</label>
+
+        <input type="checkbox" name="comparisonLangs" value="PHP" id="php">
+        <label for="php" class="checkbox">Svelte</label>
+
+        <input type="checkbox" name="comparisonLangs" value="CSharp" id="csharp">
+        <label for="csharp" class="checkbox">Angular</label>
+
+        <!-- ...and full-stack only here -->
+        <input type="checkbox" name="comparisonLangs" value="Dart" id="dart">
+        <label for="dart" class="checkbox">Django</label>
+
+        <input type="checkbox" name="comparisonLangs" value="Dart" id="dart">
+        <label for="dart" class="checkbox">Laravel</label>
+
+        <input type="checkbox" name="comparisonLangs" value="Dart" id="dart">
+        <label for="dart" class="checkbox">ASP.NET</label>
+      </fieldset>
+
+      <fieldset class="form-group check">
+        <legend>Compare with</legend>
+
+        <input type="checkbox" name="comparisonLangs" value="JavaScript" id="js">
+        <label for="js" class="checkbox">React</label>
+
+        <input type="checkbox" name="comparisonLangs" value="Python" id="python" checked>
+        <label for="python" class="checkbox">Vue</label>
+
+        <input type="checkbox" name="comparisonLangs" value="PHP" id="php">
+        <label for="php" class="checkbox">Svelte</label>
+
+        <input type="checkbox" name="comparisonLangs" value="CSharp" id="csharp">
+        <label for="csharp" class="checkbox">Angular</label>
+
+        <input type="checkbox" name="comparisonLangs" value="Dart" id="dart">
+        <label for="dart" class="checkbox">Django</label>
+
+        <input type="checkbox" name="comparisonLangs" value="Dart" id="dart">
+        <label for="dart" class="checkbox">Laravel</label>
+
+        <input type="checkbox" name="comparisonLangs" value="Dart" id="dart">
+        <label for="dart" class="checkbox">ASP.NET</label>
+      </fieldset>
+
+      <button type="submit" class="btn-submit">Compare</button>
+    </form>
+
+    <h1></h1>
+
+    <!-- Start -->
+    <div class="grid-2">
+      <div class="primary">
+        <h2>React</h2>
+        <h3>Project Setup & Run Commands</h3>
+
+        <ol>
+          <li><code class="custom-js">npm create vite@latest my-react-app</code></li>
+          <li><code class="custom-js">npm run dev</code></li>
+          <li><code class="custom-js">npm run build</code></li>
+          <li><code class="custom-js">npm run preview</code></li>
+          <li><code class="custom-js">npm install react-router-dom</code></li>
+          <li><code class="custom-js"></code></li>
+        </ol>
+      </div>
+      <div class="secondary">
+        <h2>Vue</h2>
+        <h3>Project Setup & Run Commands</h3>
+        <ol>
+          <li><code class="custom-js">npm create vite@latest my-vue-app</code></li>
+          <li><code class="custom-js">npm run dev</code></li>
+          <li><code class="custom-js">npm run build</code></li>
+          <li><code class="custom-js">npm run preview</code></li>
+          <li><code class="custom-js">npm install vue-router</code></li>
+          <li><code class="custom-js"></code></li>
+        </ol>
+      </div>
+    </div>
+
+
+    <!-- pre elements sections -->
+    <!-- CONDITIONALS -->
+    <!-- undefined is something you test, not something you assign -->
+    <div class="grid-2">
+      <div class="primary">
+        <h2>React</h2>
+        <h3>???</h3>
+        <pre><code class="language-js">
+// App.jsx
+import { 
+  BrowserRouter, 
+  Routes, 
+  Route, 
+  Link 
+} from "react-router-dom"
+
+function Home() {
+  return &lt;h1&gt;Home&lt;/h1&gt;
+}
+
+function About() {
+  return &lt;h1&gt;About&lt;/h1&gt;
+}
+
+export default function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;nav&gt;
+        &lt;Link to="/"&gt;Home&lt;/Link&gt;
+        &lt;Link to="/about"&gt;About&lt;/Link&gt;
+      &lt;/nav&gt;
+
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+        &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  )
+}</code>
+                </pre>
+        <p>I need less <code class="language-css">padding</code> and <code class="language-css">gap</code></p>
+      </div>
+      <div class="secondary">
+        <h2>Vue</h2>
+        <!-- https://www.php.net/manual/en/ref.array.php -->
+        <h3>???</h3>
+        <pre><code class="language-js">
+// router.js
+import { 
+  createRouter, 
+  createWebHistory 
+} from 'vue-router'
+
+const Home = { template: '&lt;h1&gt;Home&lt;/h1&gt;' }
+const About = { template: '&lt;h1&gt;About&lt;/h1&gt;' }
+
+export const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    { path: '/', component: Home },
+    { path: '/about', component: About }
+  ]
+})
+
+// main.js
+import { createApp } from 'vue'
+import App from './App.vue'
+import { router } from './router'
+
+createApp(App).use(router).mount('#app')
+
+// App.vue
+&lt;template&gt;
+  &lt;nav&gt;
+    &lt;router-link to="/"&gt;Home&lt;/router-link&gt;
+    &lt;router-link to="/about"&gt;About&lt;/router-link&gt;
+  &lt;/nav&gt;
+
+  &lt;router-view /&gt;
+&lt;/template&gt;
+</code>
+                </pre>
+      </div>
+    </div>
+
+
+  </main>
+
+  <footer class="wrapper">Footer text here</footer>
+
+  <script src="./js/listEls.js"></script>
+  <script src="./js/preEls.js"></script>
+  <script src="./index.js"></script>
+  <script src="./js/prism.js"></script>
+</body>
+
+</html>

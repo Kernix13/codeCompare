@@ -1,67 +1,196 @@
 # Code Comparison
 
-A learning tool for developers to compare syntax across programming languages using HTML, CSS, JavaScript, and Prism.js.
+An interactive learning tool that helps developers understand new languages and frameworks by comparing them side-by-side with technologies they already know.
+
+Built with **HTML, CSS, JavaScript, and Prism.js**, the project focuses on visual pattern recognition — showing how similar concepts are expressed across different ecosystems.
+
+---
 
 ## Overview
 
-The Code Comparison Project is an interactive website that helps users learn a new programming language by comparing it to a language they already know. Using `<code>` and `<pre>` tags along with Prism.js for syntax highlighting, the site allows users to visually scan differences and similarities between languages.
+**Code Comparison** is designed to help learners bridge knowledge between technologies. Instead of learning in isolation, users compare syntax, structure, tooling, and architectural patterns across:
 
-> **_Note (as of 1/5/2026)_**:
-> _The HTML content for this project is currently being added. This version is primarily focused on layout and styling. Dynamic generation of code sections and comparisons will be added later using JavaScript and data files. Anyone reviewing the project at this stage will see the visual design but not the full functionality. The `li` list items sections and the `pre` tag sections on `compare.html` are now dynamic, the `details.html` are a WIP._
+- Programming languages
+- Frontend frameworks
+- Full-stack frameworks
+
+The project emphasizes **mental model translation** — helping developers recognize how the same concepts appear in different environments.
+
+> **Note (as of 2/1/2026)**  
+> The layout and comparison structure are in place. Syntax comparison sections are functional and dynamically generated. Full implementation examples are still a work in progress. The project currently demonstrates UI structure, styling, and partial dynamic behavior, with expanded examples to be added.
+
+---
+
+## Project Structure
+
+| Page                | Purpose                            |
+| ------------------- | ---------------------------------- |
+| **index.html**      | Language syntax comparisons        |
+| **frameworks.html** | Framework and tooling comparisons  |
+| **details.html**    | Full example implementations (WIP) |
+
+---
+
+## Developer Notes Section (`/docs`)
+
+The project includes a `/docs` folder that contains personal learning notes in Markdown format.
+
+Example:
+
+- `docs/python.md` — Personal notes, references, and documentation links related to Python
+
+These files are linked within the site navigation and act as a lightweight developer knowledge base alongside the comparison tools.
+
+### Purpose
+
+This section allows:
+
+- Storing personal study notes
+- Linking to official documentation
+- Keeping framework or language-specific tips
+- Building a growing reference library while learning
+
+### Future Direction
+
+The `/docs` section is designed to expand into a customizable notes system where:
+
+- Each language or framework can have its own Markdown file
+- Notes can include:
+  - Code snippets
+  - Links to official docs
+  - Key concepts
+  - Gotchas and reminders
+- The navigation may evolve into a dropdown list of available note files
+- Users could add their own `.md` files to personalize the learning experience
+
+This makes the project not just a comparison tool, but also a structured learning workspace.
 
 ## Features
 
-### Page 1 – Syntax Highlights
+### Page 1 – Syntax Highlights (`index.html`)
 
-- Select your primary language and 1–3 languages to compare.
-- Side-by-side column layout showing language syntax for:
+- Users select:
+  - **Primary language** (what they know)
+  - **1–3 comparison languages**
+- Side-by-side column layout for syntax comparison.
+- Topics include:
+  - Numbers
   - Strings
   - Arrays
-  - Numbers
+  - Objects
   - Conditionals
   - Loops
   - Functions
   - Classes
-- Inline `<code>` tags for simple methods or functions.
-- `<pre>` + `<code>` blocks for structural code (loops, conditionals, function declarations) to maintain line alignment.
-- Notes section below each list highlights important or unique language-specific features.
+- Uses:
+  - Inline `<code>` for short syntax
+  - `<pre><code>` blocks for structural examples
+- Notes section highlights language-specific behaviors and unique features.
 
-### Page 2 – Full Example Implementations
+---
 
-- Displays full code blocks for practical examples.
-- Users can select a specific method or function (e.g., forEach) in their primary language.
-- Matching implementations in other selected languages appear in corresponding columns.
-- Supports comparisons between 1–3 languages per example.
+### Page 2 – Framework Comparisons (`frameworks.html`) — WIP
+
+Compares development tooling and architectural patterns across frameworks.
+
+#### Supported Framework Categories
+
+**Frontend Frameworks**
+
+- React
+- Vue
+- Svelte
+- Angular
+
+**Full-Stack Frameworks**
+
+- Django
+- Laravel
+- ASP.NET Core
+
+#### Comparison Topics Include
+
+- Project setup and CLI commands
+- Development server and build scripts
+- Routing/navigation structure
+- Component structure and rendering patterns
+- Framework-specific conventions
+
+Users select:
+
+- **Primary framework** (what they know)
+- **Comparison framework** (what they want to learn)
+
+Frameworks are grouped by category to reinforce understanding of frontend vs full-stack roles while still allowing broad exploration.
+
+---
+
+### Page 3 – Full Example Implementations (`details.html`) — WIP
+
+This page will show complete working examples for real development tasks.
+
+Planned functionality:
+
+- Two selection groups:
+  - **Primary language/framework**
+  - **Comparison language/framework**
+- Displays full code implementations for:
+  - Common methods or patterns
+  - Real-world tasks
+  - Equivalent logic across ecosystems
+
+This section is scaffolded and will expand as more examples are added.
+
+---
 
 ## Technologies Used
 
-- HTML, CSS, JavaScript
-- [Prism.js](https://prismjs.com/) for syntax highlighting: `css/prism.js` and `js/prism.js`
-- `<code>` and `<pre>` tags for semantic and styled code representation
-- `localStorage` for retaining user selections across sessions
+- HTML5
+- CSS3 (Flexbox & Grid layouts)
+- JavaScript (DOM manipulation & dynamic content generation)
+- [Prism.js](https://prismjs.com/) for syntax highlighting
+- Semantic `<code>` and `<pre>` elements for structured code display
+- `localStorage` to retain user selections between pages
+
+---
 
 ## Usage
 
 1. Open the project in a browser.
-2. On Page 1, select your primary language and 1–3 languages to compare.
-3. Scan the side-by-side columns to view syntax comparisons.
-4. On Page 2, choose a method or function to see full example implementations for each selected language.
+2. On **Syntax Highlights**, select a primary language and comparison languages.
+3. On **Framework Comparisons**, choose a primary framework and one to compare.
+4. On **Full Examples (WIP)**, explore implementation-level comparisons as features are added.
+5. Review side-by-side code to understand structural and conceptual differences.
 
-## Notes
+---
 
-- Inline code uses `<code>` elements; multi-line blocks use `<pre><code>` for proper formatting.
-- Only `<` and `&` need escaping when rendering dynamic code blocks. Quotes and > are safe in text nodes.
-- Default light background ensures readability with Prism’s dark inline code backgrounds.
-- All `code` blocks use the class `class="language-xxxx"` syntax.
-- The Prism.js classes have been removed for list items sections for easier reading.
-- If you add or remove languages from either the primary select list or the secondary check boxes, make sure to duplicate that in the other option. Every primary language should have an associated checkbox AND in the same order, and vice versa.
+## Implementation Notes
+
+- Multi-line code uses `<pre><code>` for alignment and readability.
+- HTML characters such as `<` are escaped when rendering code examples.
+- Prism.js classes follow the `language-xxxx` convention.
+- List-based comparison sections may omit Prism classes for improved readability.
+- Framework options are grouped by category for clarity and future extensibility.
+
+---
+
+## Project Goals
+
+This project aims to:
+
+- Help developers transition between languages and frameworks
+- Reinforce conceptual similarities across ecosystems
+- Teach tooling and architectural differences, not just syntax
+- Serve as both a learning resource and a portfolio project
+
+---
 
 ## Contributing
 
-Contributions are welcome! If you'd like to help improve this project, please read our [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on how to get started, our workflow, and code style expectations.
+Contributions are welcome. Please review [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines, workflow, and code style expectations.
+
+---
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE). This project is open source and free to use for educational purposes.
-
-<!-- TEST 2 -->
+Licensed under the [MIT License](./LICENSE). Free to use for educational purposes.
