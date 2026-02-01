@@ -38,6 +38,8 @@ The project emphasizes **mental model translation** — helping developers recog
 │   └── prism.css
 ├── js/                      # JavaScript logic and Prism
 │   ├── index.js             # Handles form values and comparison logic
+│   ├── listEls.js           # Data file for compare.html list items
+│   ├── preEls.js            # Data file for compare.html pre items
 │   └── prism.js
 ├── index.html               # Language syntax comparisons
 ├── frameworks.html          # Framework & tooling comparisons
