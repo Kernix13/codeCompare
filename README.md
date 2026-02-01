@@ -23,11 +23,11 @@ The project emphasizes **mental model translation** — helping developers recog
 
 ## Project Structure
 
-| Page                | Purpose                            |
-| ------------------- | ---------------------------------- |
-| **index.html**      | Language syntax comparisons        |
-| **frameworks.html** | Framework and tooling comparisons  |
-| **details.html**    | Full example implementations (WIP) |
+| Page                | Purpose                                 |
+| ------------------- | --------------------------------------- |
+| **index.html**      | Language syntax comparisons             |
+| **details.html**    | Method & Pattern Comparisons (WIP)      |
+| **frameworks.html** | Framework and tooling comparisons (WIP) |
 
 ---
 
@@ -70,7 +70,7 @@ This makes the project not just a comparison tool, but also a structured learnin
 ### Page 1 – Syntax Highlights (`index.html`)
 
 - Users select:
-  - **Primary language** (what they know)
+  - **Primary language** (what they know best)
   - **1–3 comparison languages**
 - Side-by-side column layout for syntax comparison.
 - Topics include:
@@ -89,7 +89,28 @@ This makes the project not just a comparison tool, but also a structured learnin
 
 ---
 
-### Page 2 – Framework Comparisons (`frameworks.html`) — WIP
+### Page 2 – Method & Pattern Comparisons (`details.html`) — WIP
+
+This page will show complete working examples for real development tasks.
+
+Planned functionality:
+
+- Two language selection groups:
+  - **Primary language/framework**
+  - **Comparison language/framework**
+- Two specific selection groups:
+  - Data type
+  - Method/function to compare
+- Displays full code implementations for:
+  - Common methods or patterns
+  - Real-world tasks
+  - Equivalent logic across ecosystems
+
+This section is scaffolded and will expand as more examples are added.
+
+---
+
+### Page 3 – Framework Comparisons (`frameworks.html`) — WIP
 
 Compares development tooling and architectural patterns across frameworks.
 
@@ -118,28 +139,10 @@ Compares development tooling and architectural patterns across frameworks.
 
 Users select:
 
-- **Primary framework** (what they know)
+- **Primary framework** (what they know best)
 - **Comparison framework** (what they want to learn)
 
 Frameworks are grouped by category to reinforce understanding of frontend vs full-stack roles while still allowing broad exploration.
-
----
-
-### Page 3 – Full Example Implementations (`details.html`) — WIP
-
-This page will show complete working examples for real development tasks.
-
-Planned functionality:
-
-- Two selection groups:
-  - **Primary language/framework**
-  - **Comparison language/framework**
-- Displays full code implementations for:
-  - Common methods or patterns
-  - Real-world tasks
-  - Equivalent logic across ecosystems
-
-This section is scaffolded and will expand as more examples are added.
 
 ---
 
