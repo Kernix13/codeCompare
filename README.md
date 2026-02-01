@@ -23,11 +23,26 @@ The project emphasizes **mental model translation** — helping developers recog
 
 ## Project Structure
 
-| Page                | Purpose                                 |
-| ------------------- | --------------------------------------- |
-| **index.html**      | Language syntax comparisons             |
-| **details.html**    | Method & Pattern Comparisons (WIP)      |
-| **frameworks.html** | Framework and tooling comparisons (WIP) |
+```py
+/
+├── README.md
+├── LICENSE
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── .github/                 # GitHub workflows, issue templates
+├── .gitignore
+├── docs/                    # Developer notes in Markdown
+│   └── language-example.md
+├── css/                     # Stylesheets
+│   ├── style.css
+│   └── prism.css
+├── js/                      # JavaScript logic and Prism
+│   ├── index.js             # Handles form values and comparison logic
+│   └── prism.js
+├── index.html               # Language syntax comparisons
+├── frameworks.html          # Framework & tooling comparisons
+└── details.html             # Method & Pattern Comparisons (WIP)
+```
 
 ---
 
@@ -185,6 +200,18 @@ This project aims to:
 - Reinforce conceptual similarities across ecosystems
 - Teach tooling and architectural differences, not just syntax
 - Serve as both a learning resource and a portfolio project
+
+---
+
+## To-Do
+
+1. Should I create a home page? Right now I do not have an `index.html` file.
+2. `compare.html` is 95%+ done - finish it.
+3. `details.html`: add a code block for 2 data types - try a good practical example of JavaScript `arr.filter`, and matching blocks for the other languages. Try a string or number method/function as well. I need to visualize how this page will look.
+4. `frameworks.html`: I need to split up front-end frameworks vs full-stack somehow in the form.
+5. Navigation: add a few more dummy `*.md` files then create a dropdown list for `/docs`. The sub-menu will have to be dynamic since each user will add their own files to that folder. And some users may not use it at all so have a defaault.md file
+6. Create an issue for [Markdown Preview Plus](https://github.com/volca/markdown-preview). Anchor links are still not working and frontmatter is not displaying correctly. He said he fixed the same-page anchor link issue but it still is not working.
+7. ???
 
 ---
 

@@ -7,6 +7,10 @@ last_updated: YYYY-MM-DD
 official_docs: https://example.com
 ---
 
+<!-- use this for markdown - Markdown Preview Plus:
+   https://chromewebstore.google.com/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl
+ -->
+
 # Language Name — Reference Notes
 
 A concise, **best-of reference** for Language Name.
