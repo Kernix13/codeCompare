@@ -128,7 +128,7 @@ function languageListItems(obj, string, text, el1, el2, el3) {
 // 1. Load localStorage objects if they exist
 document.addEventListener('DOMContentLoaded', initHomePage);
 
-// Select list 
+// 2. Select list 
 select.addEventListener('change', e => {
   const checkedLanguages = getLocalStorage('checkedLangs') || []
   if (checkedLanguages.length > 0) {
@@ -146,8 +146,7 @@ select.addEventListener('change', e => {
   // I need to somehow maintain the disabled attribute and only remove it when the user picks a different primary language or clears LS
 })
 
-// 2. form listener
-// Why are my form listeners always so busy?
+// 3. form listener
 languageForm.addEventListener('submit', e => {
   e.preventDefault();
   
@@ -159,7 +158,6 @@ languageForm.addEventListener('submit', e => {
   setLocalStorage('primary', selectedText)
 
   // Get the checked boxes and save to LS
-  
   const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
   
   const checkedValues = [...checkedBoxes]
