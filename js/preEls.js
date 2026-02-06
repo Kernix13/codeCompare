@@ -1,6 +1,6 @@
 // For pre code blocks
 const conditionals = {
-  "JavaScript": [
+  "javascript": [
     `
 /* if, else if, else */
 if (condition) {
@@ -27,7 +27,7 @@ switch (value) {
   break;
 }`,
   ],
-  "PHP": [
+  "php": [
     `
 /* if, else if, else */
 if ($condition) {
@@ -54,7 +54,7 @@ switch ($value) {
     break;
 }`,
   ],
-  "Python": [
+  "python": [
     `
 """ if, elif, else """
 if condition:
@@ -82,7 +82,7 @@ match value:
 
 `,
   ],
-  "CSharp": [
+  "csharp": [
     `
 /* if, else if, else */
 if (condition)
@@ -116,7 +116,7 @@ switch (value)
         break;
 }`,
   ],
-  "Dart": [
+  "dart": [
     `
 /* if, else if, else */
 if (condition) {
@@ -147,7 +147,7 @@ switch (value) {
 }
 
 const loops = {
-  "JavaScript": [
+  "javascript": [
     `
 for (let i = 0; i < num; i++) {
   // code
@@ -171,7 +171,7 @@ arr.foreach((item, i) => {
   // code
 })`,
   ],
-  "PHP": [
+  "php": [
     `
 for ($i = 0; $i < $num; $i++) { 
   // code 
@@ -195,7 +195,7 @@ foreach ($arr as $i => $item) {
   // code
 }`,
   ],
-  "Python": [
+  "python": [
     `
 for i in range(num):
   # code
@@ -220,7 +220,7 @@ for i, item in enumerate(arr):
 
 `,
   ],
-  "CSharp": [
+  "csharp": [
     `
 for (int i = 0; i < num; i++)
 {
@@ -249,7 +249,7 @@ arr.ForEach((item) =>
     // code
 });`,
   ],
-  "Dart": [
+  "dart": [
     `
 for (var i = 0; i < num; i++) {
   // code
@@ -276,7 +276,7 @@ arr.asMap().forEach((i, item) {
 }
 
 const functions = {
-  "JavaScript": [
+  "javascript": [
     `
 function func(param) {
   return param;
@@ -284,7 +284,7 @@ function func(param) {
 
 const func = (param) => param;`,
   ],
-  "PHP": [
+  "php": [
     `
 function func($param) {
   return $param;
@@ -292,7 +292,7 @@ function func($param) {
 
 $func = fn($param) => $param;`,
   ],
-  "Python": [
+  "python": [
     `
 def func(param):
   return param
@@ -300,7 +300,7 @@ def func(param):
 
 lambda param: param expr`,
   ],
-  "CSharp": [
+  "csharp": [
     `
 object Func(object param)
 {
@@ -310,7 +310,7 @@ object Func(object param)
 // expression-bodied
 object Func(object prm) => prm;`,
   ],
-  "Dart": [
+  "dart": [
     `
 dynamic func(dynamic param) {
   return param;
@@ -322,7 +322,7 @@ dynamic func(dynamic prm) => prm;`,
 }
 
 const classes = {
-  "JavaScript": [
+  "javascript": [
     `
 class CName {
   constructor(p1, p2) {
@@ -336,7 +336,7 @@ class CName {
 
 const c1 = new CName("a", "b");`,
   ],
-  "PHP": [
+  "php": [
     `
 class CName {
   public $p1;
@@ -354,7 +354,7 @@ class CName {
 
 $c1 = new CName("a", "b");`,
   ],
-  "Python": [
+  "python": [
     `
 class CName:
     def __init__(self, p1, p2):
@@ -366,7 +366,7 @@ class CName:
 
 c1 = CName("a", "b")`,
   ],
-  "CSharp": [
+  "csharp": [
     `
 class CName
 {
@@ -387,7 +387,7 @@ class CName
 
 var c1 = new CName("a", "b");`,
   ],
-  "Dart": [
+  "dart": [
     `
 class CName {
   String p1;

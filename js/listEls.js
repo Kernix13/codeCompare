@@ -3,7 +3,7 @@
 // The selected languages values are saved to LS, but the Primary is saving the select option text value
 // This is a bad file name
 const vars = {
-  "JavaScript": [
+  "javascript": [
     'let varName = value;',
     'const PHI = 1.618;',
     'null',
@@ -18,7 +18,7 @@ const vars = {
     '// single line',
     '/* multi-line */',
   ],
-  "PHP": [
+  "php": [
     '$varName = value;',
     'define("PHI", 1.618);',
     'null',
@@ -33,7 +33,7 @@ const vars = {
     '// single line',
     '/* multi-line */',
   ],
-  "Python": [
+  "python": [
     'var_name = value',
     'PHI = 1.618',
     'None',
@@ -48,7 +48,7 @@ const vars = {
     '# single line',
     '""" multi-line """',
   ],
-  "CSharp": [
+  "csharp": [
     'var varName = value;',
     'const double PHI = 1.618;',
     'null',
@@ -63,7 +63,7 @@ const vars = {
     '// single line',
     '/* multi-line */',
   ],
-  "Dart": [
+  "dart": [
     'var varName = value;',
     'final PHI = 1.618;',
     'null',
@@ -81,7 +81,7 @@ const vars = {
 }
 
 const numbers = {
-  "JavaScript": [
+  "javascript": [
     'Infinity',
     'NaN',
     'Math.min(...nums)',
@@ -96,7 +96,7 @@ const numbers = {
     '+= -= *= /=',
     'num++',
   ],
-  "PHP": [
+  "php": [
     'INF',
     '-',
     'min($a, $b)',
@@ -111,7 +111,7 @@ const numbers = {
     '+= -= *= /=',
     '$num++',
   ],
-  "Python": [
+  "python": [
     'float("inf")',
     'float("nan")',
     'min(a, b)',
@@ -126,7 +126,7 @@ const numbers = {
     '+= -= *= /=',
     'num += 1',
   ],
-  "CSharp": [
+  "csharp": [
     'double.PositiveInfinity',
     'double.NaN',
     'Math.Min(a, b)',
@@ -141,7 +141,7 @@ const numbers = {
     '+= -= *= /=',
     'num++;',
   ],
-  "Dart": [
+  "dart": [
     'double.infinity',
     'double.nan',
     'n.reduce((a, b) => a < b ? a : b)',
@@ -159,7 +159,7 @@ const numbers = {
 }
 
 const strings = {
-  "JavaScript": [
+  "javascript": [
     '`Hello ${name}`',
     'str.length',
     'str[i]',
@@ -180,7 +180,7 @@ const strings = {
     'str.trim()',
     'String(num)',
   ],
-  "PHP": [
+  "php": [
     '"Hello {$name}"',
     'strlen($str)',
     '$str[$i]',
@@ -201,7 +201,7 @@ const strings = {
     'trim($text)',
     'strval($num)',
   ],
-  "Python": [
+  "python": [
     'f"Hello {name}"',
     'len(string)',
     'string[index]',
@@ -222,7 +222,7 @@ const strings = {
     'txt.strip()',
     'str(num)',
   ],
-  "CSharp": [
+  "csharp": [
     '$"Hello {name}"',
     'str.Length',
     'str[i]',
@@ -243,7 +243,7 @@ const strings = {
     'str.Trim()',
     'num.ToString()',
   ],
-  "Dart": [
+  "dart": [
     '"Hello $name"',
     'str.length',
     'str[i]',
@@ -267,7 +267,7 @@ const strings = {
 }
 
 const arrays = {
-  "JavaScript": [
+  "javascript": [
     'arr.length',
     'arr.length = 0',
     'arr2 = [...arr1]',
@@ -294,7 +294,7 @@ const arrays = {
     '-',
     'arr.push(...arr2)',
   ],
-  "PHP": [
+  "php": [
     'count($arr)',
     '$arr = [];',
     '$arr2 = [...$arr1];',
@@ -321,7 +321,7 @@ const arrays = {
     '-',
     'array_merge($arr1, $arr2)',
   ],
-  "Python": [
+  "python": [
     'len(list_name)',
     'list1.clear()',
     'l2 = l1.copy(), l2 = l1[:]',
@@ -348,7 +348,7 @@ const arrays = {
     'list1.remove(x)',
     'list1.extend(list2)',
   ],
-  "CSharp": [
+  "csharp": [
     'list1.Length or list1.Count',
     'list1.Clear()',
     'var list2 = new List<T>(list1)',
@@ -375,7 +375,7 @@ const arrays = {
     'list1.Remove(x)',
     'list1.AddRange(list2)',
   ],
-  "Dart": [
+  "dart": [
     'list1.length',
     'list1.clear()',
     'list2 = [...list1]',
@@ -405,7 +405,7 @@ const arrays = {
 }
 
 const objects = {
-  "JavaScript": [
+  "javascript": [
     'const obj = { key: val };',
     'obj.key; | obj["key"];',
     'obj["key"] = val',
@@ -416,7 +416,7 @@ const objects = {
     'Object.values(obj);',
     'obj3 = {...obj1, ...obj2}',
   ],
-  "PHP": [
+  "php": [
     '$arr = ["key" => $val];',
     '$arr["key"];',
     '$arr["key"] = val;',
@@ -427,7 +427,7 @@ const objects = {
     'array_values($arr);',
     '$arr3 = $arr1 + $arr2;',
   ],
-  "Python": [
+  "python": [
     'dict1 = {"key": val}',
     'dict1["key"]',
     'dict1["key"] = val',
@@ -438,7 +438,7 @@ const objects = {
     'dict1.values()',
     'dict3 = {**dict1, **dict2}',
   ],
-  "CSharp": [
+  "csharp": [
     '--too long--',
     'dict1["key"]',
     'dict1["key"] = val;',
@@ -449,7 +449,7 @@ const objects = {
     'dict1.Values',
     '--too long--',
   ],
-  "Dart": [
+  "dart": [
     '--too long--',
     'map1["key"]',
     'map1["key"] = val',
@@ -464,7 +464,7 @@ const objects = {
 
 // This one needs work
 const uniques = {
-  "JavaScript": [
+  "javascript": [
     'console.dir',
     'Number(str)',
     'padEnd',
@@ -477,7 +477,7 @@ const uniques = {
     'findIndex',
     '',
   ],
-  "PHP": [
+  "php": [
     'var_dump',
     'intval',
     'substr_count',
@@ -490,7 +490,7 @@ const uniques = {
     '',
     '',
   ],
-  "Python": [
+  "python": [
     'input()',
     '10 // 3',
     'range(start, end)',
@@ -507,7 +507,7 @@ const uniques = {
     '[expr for item in list if cond]',
     'tuple1 + tuple2',
   ],
-  "CSharp": [
+  "csharp": [
     '',
     '',
     '',
@@ -520,7 +520,7 @@ const uniques = {
     '',
     '',
   ],
-  "Dart": [
+  "dart": [
     '',
     '',
     '',
