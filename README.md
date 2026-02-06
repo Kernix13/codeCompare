@@ -16,8 +16,30 @@ Built with **HTML, CSS, JavaScript, and Prism.js**, the project focuses on visua
 
 The project emphasizes **mental model translation** — helping developers recognize how the same concepts appear in different environments.
 
-> **Note (as of 2/1/2026)**  
-> The layout and comparison structure are in place. Syntax comparison sections are functional and dynamically generated. Full implementation examples are still a work in progress. The project currently demonstrates UI structure, styling, and partial dynamic behavior, with expanded examples to be added.
+> **Note (as of 2/6/2026)**  
+> The layout and core comparison structure are in place. Syntax sections are dynamically generated on `compare.html`.
+>
+> Full implementation examples (`details.html`) and the `frameworks.html` page are still in progress. The current version focuses on UI structure, styling, and core comparison behavior, with expanded examples planned.
+
+## Getting Started
+
+1. Clone this repo
+
+```sh
+git clone https://github.com/Kernix13/codeCompare.git
+
+# Change into project directory
+cd codeCompare
+```
+
+2. Open `compare.html` in your browser or serve the project locally using your preferred development server (e.g., VS Code Live Server).
+
+## How to Use
+
+1. Select your primary language (the one you know best).
+2. Select 1–3 languages you want to compare.
+3. Click Compare.
+4. View the side-by-side syntax comparison grid to explore differences and similarities.
 
 ---
 
