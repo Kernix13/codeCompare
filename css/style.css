@@ -168,7 +168,9 @@ ol,
   gap: 1rem;
 }
 
-.grid-2, .grid-3, .grid-4 {
+.grid-2,
+.grid-3,
+.grid-4 {
   display: grid;
   gap: 1rem;
   margin-bottom: 1rem;
@@ -176,27 +178,25 @@ ol,
 
 .grid-2 {
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
 }
+
 .grid-3 {
   grid-template-columns: 1fr 1fr 1fr;
 }
+
 .grid-4 {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.grid-2 > *{
-  border: 1px solid #888;
-  padding: 1rem 4rem; 
-  /* width: 75%; */
-}
-.grid-3 > *, .grid-4 > * {
+.grid-2>*,
+.grid-3>*,
+.grid-4>* {
   border: 1px solid #888;
   padding: 1rem;
 }
 
-.primary, .secondary {
+.primary,
+.secondary {
   background-color: hsl(210, 80%, 99%);
 }
 
@@ -225,12 +225,14 @@ fieldset {
   flex-direction: column;
   gap: 0.35rem;
 }
+
 .check {
   display: flex;
   gap: 0.35rem;
 }
 
-.form-group legend, .primary-lang {
+.form-group legend,
+.primary-lang {
   font-weight: 600;
   margin-bottom: 0.25rem;
 }
