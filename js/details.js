@@ -5,11 +5,11 @@
   4. Function/Method select list selection (I'm uncertain if this form element makes sense. but once Array for example is selected, this will auto-populate with Push, Pop, Map, For Each, Split, etc - the top ones)
   5. Form button submit - renders the page elements
   - The only other user action would be to open the docs sub-menu - I have moved that logic to menu.js 
-  - Another possible user function would be a copy on hover action for the code blocks but that is a stretch goal
+  - Another possible user function would be a copy button on hover for the code blocks but that is a stretch goal
 */
 
 /**
- * DOM ELEMENTS
+ * SELECT DOM ELEMENTS
  */
 const detailsForm = document.getElementById('details-form');
 const primaryRadios = document.querySelectorAll(
@@ -22,7 +22,7 @@ const dataTypeSelect = document.getElementById('data-type');
 const methodsSelect = document.getElementById('methods');
 const h1 = document.getElementById('details-heading'); // Remove this?
 
-// Make sure these keys do not conflict with existing keys
+// Double-check to make sure these keys do not conflict with existing keys
 const state = {
   primary: '',
   secondary: '',
@@ -31,7 +31,7 @@ const state = {
 };
 
 /**
- * * FUNCTIONS
+ * * GLOBAL FUNCTIONS
  */
 function setLocalStorage(key, val) {
 	return localStorage.setItem(key, JSON.stringify(val));
