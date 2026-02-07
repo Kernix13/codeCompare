@@ -96,7 +96,7 @@ h3 {
 
 /* Header, headings, container */
 header {
-  padding: 1rem 0;
+  padding: 1rem;
   border-bottom: 2px solid var(--primary-muted-3);
 }
 
@@ -136,6 +136,18 @@ pre {
   font-size: 1.125rem;
 }
 
+footer {
+  background-color: #2d2d3f;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 2rem;
+  padding: 2rem 0 1rem;
+}
+footer h2 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
 /*  
 code {
   color: #fefefe;
@@ -154,7 +166,7 @@ ol,
 /* Components */
 .wrapper {
   width: 97%;
-  margin: 0 auto 2rem;
+  margin: 0 auto;
 }
 
 .header-flex {
@@ -162,10 +174,28 @@ ol,
   justify-content: space-between;
 }
 
-.nav-flex {
+.main-nav {
   display: flex;
   list-style: none;
-  gap: 1rem;
+  gap: 0.5rem;
+}
+
+.nav-item > a {
+  text-decoration: none;
+  border: 1px solid transparent;
+  padding: 0.25rem 0.5rem;
+  transition: border 300ms ease;
+}
+
+.nav-item > a:hover {
+  border: 1px solid rgb(26, 26, 155);
+}
+
+/* I need to display: block on #docs-nav on click in JS */
+.sub-nav {
+  display: none;
+  list-style: none;
+  margin-top: 0.5rem;
 }
 
 .grid-2,
@@ -271,4 +301,8 @@ button:disabled {
 
 .red {
   color: red;
+}
+
+h3 > code.heading {
+  font-size: 1.25rem;
 }

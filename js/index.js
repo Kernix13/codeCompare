@@ -18,7 +18,13 @@ const PRISM_LANG = {
   csharp: 'csharp',
   dart: 'javascript' // Dart fallback
 };
-
+const titleMap = {
+  vars: 'Variables + Miscellaneous',
+  numbers: 'Numbers',
+  strings: 'Strings',
+  arrays: 'Arrays',
+  objects: 'Objects'
+};
 const state = { primary: '', checkedLangs: [], heading: '' };
 const listData = { vars,  numbers, strings, arrays, objects };
 const preData = { conditionals, loops, functions, classes };
@@ -158,24 +164,11 @@ function initHomePage() {
 
   // Render ol > li sections
   for (const [id, data] of Object.entries(listData)) {
-    const titleMap = {
-      vars: 'Variables + Miscellaneous',
-      numbers: 'Numbers',
-      strings: 'Strings',
-      arrays: 'Arrays/Lists',
-      objects: 'Objects/Dictionaries'
-    };
     createLiSection(data, id, titleMap[id]);
   }
 
   // Render pre sections
   for (const [id, data] of Object.entries(preData)) {
-    const titleMap = {
-      conditionals: 'Conditionals',
-      loops: 'Loops',
-      functions: 'Functions',
-      classes: 'Classes'
-    };
     createLiSection(data, id, titleMap[id]);
   }
 }
@@ -225,24 +218,11 @@ function handleLanguageFormSubmit(e) {
 
   // Render ol > li sections
   for (const [id, data] of Object.entries(listData)) {
-    const titleMap = {
-      vars: 'Variables + Miscellaneous',
-      numbers: 'Numbers',
-      strings: 'Strings',
-      arrays: 'Arrays',
-      objects: 'Objects'
-    };
     createLiSection(data, id, titleMap[id]);
   }
 
   // Render pre sections
   for (const [id, data] of Object.entries(preData)) {
-    const titleMap = {
-      conditionals: 'Conditionals',
-      loops: 'Loops',
-      functions: 'Functions',
-      classes: 'Classes'
-    };
     createLiSection(data, id, titleMap[id]);
   }
 

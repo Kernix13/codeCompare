@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code In-Depth</title>
-  <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/prism.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -14,11 +14,18 @@
     <div class="wrapper header-flex">
       <div class="logo">codeCompare</div>
       <nav>
-        <ul class="nav-flex">
-          <li><a href="./compare.html">Compare</a></li>
-          <li><a href="./details.html">In Depth</a></li>
-          <li><a href="./frameworks.html">Frameworks</a></li>
-          <li><a href="./docs/python.md">python.md</a></li>
+        <ul class="main-nav">
+          <li class="nav-item"><a href="./compare.html">Compare</a></li>
+          <li class="nav-item"><a href="./details.html">In Depth</a></li>
+          <li class="nav-item"><a href="./frameworks.html">Frameworks</a></li>
+          <li class="nav-item" id="docs-nav"><a href="#">Docs ↓</a>
+            <ul class="sub-nav">
+              <li><a href="./docs/language.example.md">Example</a></li>
+              <li><a href="./docs/csharp.md">CSharp</a></li>
+              <li><a href="./docs/javascript.md">JavaScript</a></li>
+              <li><a href="./docs/python.md">Python</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
@@ -100,9 +107,9 @@
     <div class="grid-2">
       <div class="primary">
         <h2>JavaScript</h2>
-        <h3><code>.push(value)</code></h3>
+        <h3><code class="language-js heading">arr.push(value)</code></h3>
         <pre><code class="language-js">
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
 let evenSquares = [];
 
 for (let i = 0; i < numbers.length; i++) { 
@@ -116,9 +123,9 @@ for (let i = 0; i < numbers.length; i++) {
       <div class="secondary">
         <h2>Python</h2>
         <!-- https://www.php.net/manual/en/ref.array.php -->
-        <h3><code>.append(value)</code></h3>
+        <h3><code class="language-python heading">list.append(value)</code></h3>
         <pre><code class="language-python">
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
 even_squares = []
 
 for num in numbers:
@@ -131,7 +138,12 @@ for num in numbers:
 
   </main>
 
-  <footer class="wrapper">Footer text here</footer>
+  <footer>
+    <div class="wrapper">
+      <h2>codeCompare</h2>
+      <p>&copy; 2026</p>
+    </div>
+  </footer>
   <script src="./js/prism.js"></script>
 </body>
 

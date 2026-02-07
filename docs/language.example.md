@@ -7,7 +7,7 @@ last_updated: YYYY-MM-DD
 official_docs: https://example.com
 ---
 
-<!-- use this for markdown - Markdown Preview Plus:
+<!-- Use this for viewing markdown in the browser -> Markdown Preview Plus:
    https://chromewebstore.google.com/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl
  -->
 
@@ -58,8 +58,8 @@ There is no required heading structure. Organize your notes in a way that feels 
 
 - Grouping by data type, (e.g. all list methods, all string methods in one place)
 - Grouping by concept, (functions, scope, arguments, async behavior, etc.)
-- Grouping by “things I forget”, (edge cases, defaults, implicit behavior)
-- Grouping by language-specific features, (things that don’t exist elsewhere or behave differently)
+- Grouping by "things I forget", (edge cases, defaults, implicit behavior)
+- Grouping by language-specific features, (things that don't exist elsewhere or behave differently)
 
 Keep entries short, concise, and example-driven.
 
