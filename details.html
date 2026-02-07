@@ -33,9 +33,9 @@
 
   <main class="wrapper">
     <!-- FORM -->
-    <form class="language-form" id="languageForm">
+    <form class="language-form" id="details-form">
 
-      <fieldset class="form-group radio-group">
+      <fieldset class="form-group primary-radio-group">
         <legend>Primary Language</legend>
 
         <input type="radio" name="primaryLang" value="JavaScript" id="primary-js" checked>
@@ -54,7 +54,7 @@
         <label for="primary-dart" class="radio">Dart</label>
       </fieldset>
 
-      <fieldset class="form-group radio-group">
+      <fieldset class="form-group secondary-radio-group">
         <legend>Compare with</legend>
 
         <input type="radio" name="comparisonLangs" value="JavaScript" id="js">
@@ -74,8 +74,8 @@
       </fieldset>
 
       <fieldset class="form-group select">
-        <label for="primaryLang" class="primary-lang">Data Type</label>
-        <select id="primaryLang" name="primaryLang" required>
+        <label for="data-type" class="primary-lang">Data Type</label>
+        <select id="data-type" name="data-type" required>
           <option value="">--- Select ---</option>
           <option value="number">Number</option>
           <option value="string">String</option>
@@ -86,8 +86,8 @@
       </fieldset>
 
       <fieldset class="form-group select">
-        <label for="primaryLang" class="primary-lang">Function/Method</label>
-        <select id="primaryLang" name="primaryLang" required>
+        <label for="methods" class="primary-lang">Function/Method</label>
+        <select id="methods" name="methods" required>
           <option value="">--- Select ---</option>
           <option value="push" selected>Push/Append</option>
           <option value="pop">Pop</option>
@@ -97,10 +97,10 @@
         </select>
       </fieldset>
 
-      <button type="submit" class="details-submit" disabled>Compare</button>
+      <button type="submit" class="details-submit">Compare</button>
     </form>
 
-    <h1>In Depth code comparisons</h1>
+    <h1 id="details-heading">In Depth code comparisons</h1>
     <p><em>Hard coded example</em></p>
 
     <!-- pre elements sections -->
@@ -145,6 +145,7 @@ for num in numbers:
     </div>
   </footer>
   <script src="./js/menu.js"></script>
+  <script src="./js/details.js"></script>
   <script src="./js/prism.js"></script>
 </body>
 
