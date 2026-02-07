@@ -256,7 +256,7 @@ ol,
 }
 
 /* Home page form */
-.language-form {
+.language-form, .frameworks-form {
   display: flex;
   align-items: flex-end;
   gap: 1.5rem;

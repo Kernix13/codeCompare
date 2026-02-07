@@ -20,12 +20,12 @@ const secondaryRadios = document.querySelectorAll(
 );
 const dataTypeSelect = document.getElementById('data-type');
 const methodsSelect = document.getElementById('methods');
-const h1 = document.getElementById('details-heading'); // Remove this?
+const h1 = document.getElementById('details-heading');
 
 // Double-check to make sure these keys do not conflict with existing keys
 const state = {
-  primary: '',
-  secondary: '',
+  primaryDetails: '',
+  secondaryDetails: '',
   dataType: '',
   method: ''
 };

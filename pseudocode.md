@@ -7,7 +7,7 @@ Create pseudocode for remaining pages
 1. DOMContentLoaded
 
 - check local storage for state keys
-- if state keys do not exist -> set to empty strings
+- if state keys do not exist -> set to empty strings (`state` variable)
 - if state keys exist
   - add `checked` to the radio buttons for primary and secondary
   - add `selected` to the select list options for data types and methods
@@ -21,6 +21,16 @@ Create pseudocode for remaining pages
 
 5. Methods selection
 
-6. For msubmit
+6. Form submit
 
 ## frameworks.html
+
+1. DOMContentLoaded
+
+-
+
+2. Primary radio buttons
+
+3. Secondary radio buttons
+
+4. Form submit

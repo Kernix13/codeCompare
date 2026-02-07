@@ -33,9 +33,9 @@
 
   <main class="wrapper">
     <!-- FORM -->
-    <form class="language-form" id="languageForm">
+    <form class="frameworks-form" id="frameworks-form">
 
-      <fieldset class="form-group check">
+      <fieldset class="form-group primary-radio-group">
         <!-- Consider front-end only here... -->
         <legend>Primary framework</legend>
 
@@ -61,35 +61,35 @@
         <label for="aspnet" class="radio">ASP.NET</label>
       </fieldset>
 
-      <fieldset class="form-group check">
+      <fieldset class="form-group secondary-radio-group">
         <legend>Compare with</legend>
 
-        <input type="radio" name="comparisonFW" value="JavaScript" id="js">
-        <label for="js" class="radio">React</label>
+        <input type="radio" name="comparisonFW" value="React" id="react2">
+        <label for="react2" class="radio">React</label>
 
-        <input type="radio" name="comparisonFW" value="Python" id="python" checked>
-        <label for="python" class="radio">Vue</label>
+        <input type="radio" name="comparisonFW" value="Vue" id="vue2" checked>
+        <label for="vue2" class="radio">Vue</label>
 
-        <input type="radio" name="comparisonFW" value="PHP" id="php">
-        <label for="php" class="radio">Svelte</label>
+        <input type="radio" name="comparisonFW" value="Svelte" id="svelte2">
+        <label for="svelte2" class="radio">Svelte</label>
 
-        <input type="radio" name="comparisonFW" value="CSharp" id="csharp">
-        <label for="csharp" class="radio">Angular</label>
+        <input type="radio" name="comparisonFW" value="Angular" id="angular2">
+        <label for="angular2" class="radio">Angular</label>
 
-        <input type="radio" name="comparisonFW" value="Dart" id="dart">
-        <label for="dart" class="radio">Django</label>
+        <input type="radio" name="comparisonFW" value="Django" id="django2">
+        <label for="django2" class="radio">Django</label>
 
-        <input type="radio" name="comparisonFW" value="Dart" id="dart">
-        <label for="dart" class="radio">Laravel</label>
+        <input type="radio" name="comparisonFW" value="Laravel" id="laravel2">
+        <label for="laravel2" class="radio">Laravel</label>
 
-        <input type="radio" name="comparisonFW" value="Dart" id="dart">
-        <label for="dart" class="radio">ASP.NET</label>
+        <input type="radio" name="comparisonFW" value="ASPNET" id="aspnet2">
+        <label for="aspnet2" class="radio">ASP.NET</label>
       </fieldset>
 
       <button type="submit" class="btn-submit" disabled>Compare</button>
     </form>
 
-    <h1>Compare React to Vue.js</h1>
+    <h1 id="frameworks-heading">Compare React to Vue.js</h1>
     <p><em>Hard coded examples</em></p>
 
     <!-- Start -->
@@ -214,6 +214,7 @@ createApp(App).use(router).mount('#app')
   </footer>
 
   <script src="./js/menu.js"></script>
+  <script src="./js/frameworks.js"></script>
   <script src="./js/prism.js"></script>
 </body>
 

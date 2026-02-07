@@ -237,6 +237,205 @@ This project aims to:
 6. Create an issue for [Markdown Preview Plus](https://github.com/volca/markdown-preview). Anchor links are still not working and frontmatter is not displaying correctly. He said he fixed the same-page anchor link issue but it still is not working.
 7. ???
 
+## For Developers
+
+The languages and frameworks in the forms on all 3 pages are specific to myself, and even they will change over time. If you want to use this project for yourself, then you will most likely want to customize the language choices.
+
+Right now, this project uses HTML + CSS + JavaScript but that may change in the future. If you develope using different languages, then you may not know what you need to change. Here are code blocks you will need to change.
+
+### compare.html
+
+Form elements - look for the comment with `LANGUAGE SELECTION FORM`
+
+1. Primary language select element: make changes to the `<option>` elements
+2. Comparison languages check boxes: make changes to the `<input>` element and its associated `<label>` element
+
+```html
+<!-- LANGUAGE SELECTION FORM -->
+<form class="language-form" id="languageForm">
+  <fieldset class="form-group select">
+    <label for="primaryLang" class="primary-lang">Primary language</label>
+    <select id="primaryLang" name="primaryLang" required>
+      <option value="">--- Select ---</option>
+      <option value="language1">Language1</option>
+      <option value="language2">Language2</option>
+      <!-- Add an option for each language, change the value for each -->
+    </select>
+  </fieldset>
+
+  <fieldset class="form-group check">
+    <legend>Compare with</legend>
+
+    <input type="checkbox" name="secondaryLang" value="lang1" id="lang1" />
+    <label for="lang1" class="checkbox">Language1</label>
+
+    <input type="checkbox" name="secondaryLang" value="lang2" id="lang2" />
+    <label for="lang2" class="checkbox">Language2</label>
+
+    <!-- Add an input for each language, change value & id -->
+    <!-- Add a label for each language, change for to match input id -->
+  </fieldset>
+
+  <button type="submit" class="btn-submit">Compare</button>
+</form>
+```
+
+3. Section elements: make changes to the `<section>` elements if you want to customize the output. The `id` is the same as the variable names in `listEls.js` and `preEls.js`.
+
+```html
+<!-- ol > li elements sections -->
+<section id="vars"></section>
+<section id="numbers"></section>
+<section id="strings"></section>
+<section id="arrays"></section>
+<section id="objects"></section>
+
+<!-- pre elements sections -->
+<section id="conditionals"></section>
+<section id="loops"></section>
+<section id="functions"></section>
+<section id="classes"></section>
+```
+
+4. Script elements: add or rename JavaScript files (`<script>` tags at bootom of page).
+
+```html
+<script src="./js/menu.js"></script>
+<script src="./js/listEls.js"></script>
+<script src="./js/preEls.js"></script>
+<script src="./js/index.js"></script>
+<script src="./js/prism.js"></script>
+```
+
+5. `js/listEls.js`: You will want to add snippets for each `<li>` element output to the page. For other languages, you need to match them up perfectly.
+6. `js/preEls.js`: Make sure the template literal code starts at the edge of the editor.
+
+```js
+const vars = {
+  "javascript": [
+    'let varName = value;',
+    'const PHI = 1.618;',
+    'null',
+    'true, false', // etc.
+  "language2": [
+    'code item1',
+    'code item2',
+    'code item3',
+    'code item4', // etc
+  ],
+  // add more list items then languages below here
+}
+
+// preEls.js
+const conditionals = {
+  "javascript": [
+    `
+/* if, else if, else */
+if (condition) {
+  // code
+} else if (condition2) {
+  // code
+} else {
+  // code
+}`, // more code below here
+  ],
+  "python": [
+    `
+""" if, elif, else """
+if condition:
+  # code
+elif condition2:
+  # code
+else:
+  # code
+`, // more code below here
+  ],
+} // add your next language here
+```
+
+### details.html
+
+1. Edit the `<input>` and `<label>` elements for the fieldset with the class of `primary-radio-group`
+2. Edit the `<input>` and `<label>` elements for the fieldset with the class of `secondary-radio-group`
+3. Edit the `<option>` element for Data Types and Methods select lists
+
+```html
+<form class="language-form" id="details-form">
+  <fieldset class="form-group primary-radio-group">
+    <legend>Primary Language</legend>
+
+    <input
+      type="radio"
+      name="primaryLang"
+      value="lang1"
+      id="primary-lang1"
+      checked
+    />
+    <label for="primary-lang1" class="radio">Language 1</label>
+    <!-- Add more input and label elements for each language -->
+  </fieldset>
+
+  <fieldset class="form-group secondary-radio-group">
+    <legend>Compare with</legend>
+
+    <input type="radio" name="secondaryLang" value="lang1" id="lang1" />
+    <label for="lang1" class="radio">Language1</label>
+    <!-- Add more input and label elements for the other languages -->
+  </fieldset>
+
+  <fieldset class="form-group select">
+    <label for="data-type" class="primary-lang">Data Type</label>
+    <select id="data-type" name="data-type" required>
+      <option value="">--- Select ---</option>
+      <option value="number">Number</option>
+      <!-- add other data types in option elements below here -->
+    </select>
+  </fieldset>
+
+  <fieldset class="form-group select">
+    <label for="methods" class="primary-lang">Function/Method</label>
+    <select id="methods" name="methods" required>
+      <option value="">--- Select ---</option>
+      <option value="pop">Pop</option>
+      <!-- add other methods in option elements below here -->
+    </select>
+  </fieldset>
+
+  <button type="submit" class="details-submit">Compare</button>
+</form>
+```
+
+4. The data JavaScript file has not been created as of 2/7/2026.
+
+### frameworks.html
+
+1. For Primary & Secondary frameworks, change the name, value and id attributes in the input element, and the for element in the label element.
+
+```html
+<fieldset class="form-group check">
+  <legend>Primary framework</legend>
+
+  <input type="radio" name="primaryFW" value="react" id="react">
+  <label for="react" class="radio">React</label>
+
+  <!-- add input and label elements for each framework -->
+</fieldset>
+
+<fieldset class="form-group check">
+  <legend>Compare with</legend>
+
+  <input type="radio" name="secondaryFW" value="react" id="react">
+  <label for="react" class="radio">React</label>
+
+  <!-- add input and label elements for each framework -->
+</fieldset>
+
+<button type="submit" class="btn-submit" disabled>Compare</button>
+</form>
+```
+
+5. The data JavaScript file has not been created as of 2/7/2026.
+
 ---
 
 ## Contributing
