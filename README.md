@@ -63,7 +63,7 @@ cd codeCompare
 │   ├── listEls.js           # Data file for compare.html list items
 │   ├── preEls.js            # Data file for compare.html pre items
 │   └── prism.js
-├── index.html               # Language syntax comparisons
+├── compare.html             # Language syntax comparisons
 ├── frameworks.html          # Framework & tooling comparisons
 └── details.html             # Method & Pattern Comparisons (WIP)
 ```

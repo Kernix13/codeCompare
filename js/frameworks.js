@@ -25,6 +25,7 @@ const state = {
 /**
  * * GLOBAL FUNCTIONS
  */
+// 1. Set local storage for primary, secondary & h1 text
 function setLocalStorage(key, val) {
 	return localStorage.setItem(key, JSON.stringify(val));
 }
