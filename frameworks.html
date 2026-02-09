@@ -99,8 +99,8 @@
         <h3>Project Setup & Run Commands</h3>
 
         <ol>
-          <li><code class="custom-js">npm create vite@latest my-react-app</code></li>
-          <li><code>npm install</code></li>
+          <li><code class="language-sh">npm create vite@latest my-react-app</code></li>
+          <li><code class="custom-js">npm install</code></li>
           <li><code class="custom-js">npm run dev</code></li>
           <li><code class="custom-js">npm run build</code></li>
           <li><code class="custom-js">npm run preview</code></li>
@@ -111,12 +111,37 @@
         <h2>Vue</h2>
         <h3>Project Setup & Run Commands</h3>
         <ol>
-          <li><code class="custom-js">npm create vite@latest my-vue-app</code></li>
-          <li><code>npm install</code></li>
+          <li><code class="language-sh">npm create vite@latest my-vue-app</code></li>
+          <li><code class="custom-js">npm install</code></li>
           <li><code class="custom-js">npm run dev</code></li>
           <li><code class="custom-js">npm run build</code></li>
           <li><code class="custom-js">npm run preview</code></li>
           <li><code class="custom-js">npm install vue-router</code></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Props -->
+    <div class="grid-2">
+      <div class="primary">
+        <h2>React</h2>
+        <h3>Props</h3>
+
+        <ol>
+          <li><code class="language-js">&lt;Hero title="Title here" /&gt;</code></li>
+          <li><code class="language-js">const Hero = ({ title }) => {...}</code></li>
+          <li><code class="language-js">&lt;h1&gt;{ title }&lt;/h1&gt;</code></li>
+          <li><code class="language-js">???</code></li>
+        </ol>
+      </div>
+      <div class="secondary">
+        <h2>Vue</h2>
+        <h3>Props</h3>
+        <ol>
+          <li><code class="custom-js">???</code></li>
+          <li><code class="custom-js">???</code></li>
+          <li><code class="custom-js">???</code></li>
+          <li><code class="custom-js">???</code></li>
         </ol>
       </div>
     </div>
@@ -134,14 +159,8 @@ import {
   Route, 
   Link 
 } from "react-router-dom"
-
-function Home() {
-  return &lt;h1&gt;Home&lt;/h1&gt;
-}
-
-function About() {
-  return &lt;h1&gt;About&lt;/h1&gt;
-}
+import Home from './components/Home';
+import About from './components/About';
 
 export default function App() {
   return (
@@ -168,18 +187,19 @@ export default function App() {
 // router.js
 import { 
   createRouter, 
-  createWebHistory 
+  createMemoryHistory
 } from 'vue-router'
+import HomeView from './HomeView.vue'
+import AboutView from './AboutView.vue'
 
-const Home = { template: '&lt;h1&gt;Home&lt;/h1&gt;' }
-const About = { template: '&lt;h1&gt;About&lt;/h1&gt;' }
+const routes = [
+  { path: '/', component: HomeView },
+  { path: '/about', component: AboutView },
+]
 
 export const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    { path: '/', component: Home },
-    { path: '/about', component: About }
-  ]
+  history: createMemoryHistory(),
+  routes,
 })
 
 // main.js

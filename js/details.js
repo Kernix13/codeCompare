@@ -20,7 +20,6 @@ const secondaryRadios = document.querySelectorAll(
 const dataTypeSelect = document.getElementById('data-type');
 const h1 = document.getElementById('details-heading');
 
-// Double-check to make sure these keys do not conflict with existing keys
 const state = {
   primaryDetails: '',
   secondaryDetails: '',
@@ -73,6 +72,11 @@ function handleDetailsFormSubmit(e) {
   e.preventDefault();
   console.log('Form submit')
 }
+
+/**
+ * * HELPER FUNCTIONS
+ */
+// 1. ???
 
 /**
  * * EVENT LISTENERS
