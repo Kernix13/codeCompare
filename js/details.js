@@ -2,7 +2,8 @@
   1. Primary langauge radio button check
   2. "Compare with:" second language radio button check
   3. Data type select list selection (numbers, strings, etc.)
-  4. Form button submit - renders the page elements
+  4. Method select list selection (push, pop, etc.) ❓
+  5. Form button submit - renders the page elements
   - The only other user action would be to open the docs sub-menu - I have moved that logic to menu.js 
   - Another possible user function would be a copy button on hover for the code blocks but that is a stretch goal
 */
@@ -18,6 +19,7 @@ const secondaryRadios = document.querySelectorAll(
   'fieldset.secondary-radio-group input[type="radio"]'
 );
 const dataTypeSelect = document.getElementById('data-type');
+const methods = document.getElementById('methods');
 const h1 = document.getElementById('details-heading');
 
 const state = {
@@ -67,7 +69,14 @@ function handleDataTypeSelect(e) {
   console.log(e.target.value)
 }
 
-// 5. Form submit
+// 5. Data type select list change
+function handleMethodSelect(e) {
+  // e.target.selectedIndex
+  // e.target.options[e.target.selectedIndex].text
+  console.log(e.target.value)
+}
+
+// 6. Form submit
 function handleDetailsFormSubmit(e) {
   e.preventDefault();
   console.log('Form submit')
@@ -97,5 +106,8 @@ secondaryRadios.forEach(radio =>
 // 4. Select list for data type
 dataTypeSelect.addEventListener('change', handleDataTypeSelect);
 
-// 5. Form listener
+// 5. Select list for methods
+methods.addEventListener('change', handleMethodSelect);
+
+// 6. Form listener
 detailsForm.addEventListener('submit', handleDetailsFormSubmit);
