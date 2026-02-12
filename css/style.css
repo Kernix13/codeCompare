@@ -331,3 +331,8 @@ button:disabled {
 h3 > code.heading {
   font-size: 1.25rem;
 }
+
+#methods option:first-child {
+  font-weight: bold;
+  color: #555;
+}

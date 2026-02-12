@@ -19,14 +19,22 @@ const secondaryRadios = document.querySelectorAll(
   'fieldset.secondary-radio-group input[type="radio"]'
 );
 const dataTypeSelect = document.getElementById('data-type');
-const methods = document.getElementById('methods');
+const methodsSelect = document.getElementById('methods');
 const h1 = document.getElementById('details-heading');
 
-const state = {
-  primaryDetails: '',
-  secondaryDetails: '',
-  dataType: '',
-  method: ''
+const state = { 
+  detailsPrimary: '', 
+  detailsSecondary: '', 
+  dataType: '', 
+  method: '' ,
+  heading: ''
+};
+
+const languages = {
+  JavaScript,
+  PHP,
+  Python,
+  CSharp
 };
 
 /**
@@ -43,36 +51,110 @@ function getLocalStorage(key) {
 }
 
 /**
+ * * DOM ELEMENT FUNCTIONS
+ */
+// 1. ???
+
+/**
+ * * HELPER FUNCTIONS
+ */
+// 1. Create and addd Function/Method options into select#methods
+function createOptions() {
+  methodsSelect.textContent = '';
+  const primaryLang = getLocalStorage('details-primary'); // 'JavaScript'
+  const selectedDataType = getLocalStorage('data-type'); // 'Array
+  const langObj = languages[primaryLang];
+
+  // First option
+  const firstOption = document.createElement('option');
+  firstOption.textContent = 'ALL METHODS';
+  firstOption.value = '';
+  methodsSelect.append(firstOption);
+
+  if (langObj) {
+    langObj[selectedDataType].filter(Boolean).forEach(method => {
+      // console.log(method);
+      const option = document.createElement('option');
+      option.textContent = method;
+      option.value = method;
+      methodsSelect.append(option);
+    });
+  }
+  
+}
+
+/**
  * * FUNCTIONS FOR EVENT LISTENERS
  */
 // 1. On page visit
 function initDetailsPage() {
-  console.log('DOMContentLoaded')
+  console.log('DOMContentLoaded');
+  state.detailsPrimary = getLocalStorage('details-primary') || '';
+  state.detailsSecondary = getLocalStorage('details-secondary') || '';
+  state.dataType = getLocalStorage('data-type') || '';
+  state.method = getLocalStorage('method') || '';
+  state.heading = getLocalStorage('details-heading') || 'Choose a primary language and a secondary language';
+
+  h1.textContent = state.heading;
+
+  const firstOption = document.createElement('option');
+  firstOption.textContent = 'ALL METHODS'; 
+  firstOption.value = '';                
+  methodsSelect.appendChild(firstOption);
+
+  // Select data type and method on page load from localStorage
+  if (state.detailsPrimary) {
+    const selectedTypeIdx = getLocalStorage('type-selection') || '';
+    dataTypeSelect.options[selectedTypeIdx].selected = true;
+  }
+
+  createOptions(); // now methodsSelect.options exists
+
+  // 2. Select previously saved method
+  const selectedMethodIdx = getLocalStorage('method-selection');
+  if (selectedMethodIdx !== null && methodsSelect.options[selectedMethodIdx]) {
+    methodsSelect.options[selectedMethodIdx].selected = true;
+  }
+
 }
 
-// 2. Primary radio button check
+// 2. Primary language radio button check
 function handlePrimaryCheck(e) {
   if (!e.target.checked) return;
-  console.log(e.target.value)
+  console.log(e.target.value);
+  
+  state.detailsPrimary = e.target.value;
+  setLocalStorage('details-primary', state.detailsPrimary);
+
+  createOptions()
 }
 
-// 3. Secondary radio button check
+// 3. Secondary language radio button check
 function handleSecondaryCheck(e) {
   if (!e.target.checked) return;
-  console.log(e.target.value)
+  console.log(e.target.value);
+
+  state.detailsSecondary = e.target.value;
+  setLocalStorage('details-secondary', state.detailsSecondary);
 }
 
-// 4. Data type select list change
+// 4. Data type select list change  
 function handleDataTypeSelect(e) {
-  // e.target.selectedIndex
-  // e.target.options[e.target.selectedIndex].text
+  state.dataType = e.target.value;
   console.log(e.target.value)
+  setLocalStorage('data-type', state.dataType);
+
+  const select = document.querySelector('#methods');
+  select.innerHTML = '';
+
+  createOptions();
 }
 
 // 5. Data type select list change
 function handleMethodSelect(e) {
   // e.target.selectedIndex
   // e.target.options[e.target.selectedIndex].text
+  // I need to populate this list first
   console.log(e.target.value)
 }
 
@@ -80,12 +162,17 @@ function handleMethodSelect(e) {
 function handleDetailsFormSubmit(e) {
   e.preventDefault();
   console.log('Form submit')
-}
+  setLocalStorage('type-selection', dataTypeSelect.selectedIndex);
+  setLocalStorage('method-selection', methodsSelect.selectedIndex);
 
-/**
- * * HELPER FUNCTIONS
- */
-// 1. ???
+  state.detailsPrimary
+  const primaryDisplay = getLocalStorage('details-primary');
+  const secondaryDisplay = getLocalStorage('details-secondary');
+  state.heading = `Compare ${primaryDisplay} to ${secondaryDisplay}`;
+  h1.textContent = state.heading;
+
+  setLocalStorage('details-heading', state.heading);
+}
 
 /**
  * * EVENT LISTENERS
@@ -94,20 +181,29 @@ function handleDetailsFormSubmit(e) {
 document.addEventListener('DOMContentLoaded', initDetailsPage);
 
 // 2. Radio button check for user's primary language
-primaryRadios.forEach(radio =>
-  radio.addEventListener('change', handlePrimaryCheck)
-);
+primaryRadios.forEach(radio => {
+  radio.addEventListener('change', handlePrimaryCheck);
+
+  getLocalStorage('details-primary') === radio.value 
+    ? radio.checked = true 
+    : false;
+});
 
 // 3. Radio button check for user's language to compare to their primary
-secondaryRadios.forEach(radio =>
-  radio.addEventListener('change', handleSecondaryCheck)
-);
+secondaryRadios.forEach(radio => {
+  radio.addEventListener('change', handleSecondaryCheck);
+
+  getLocalStorage('details-secondary') === radio.value 
+    ? radio.checked = true 
+    : false;
+
+});
 
 // 4. Select list for data type
 dataTypeSelect.addEventListener('change', handleDataTypeSelect);
 
 // 5. Select list for methods
-methods.addEventListener('change', handleMethodSelect);
+methodsSelect.addEventListener('change', handleMethodSelect);
 
 // 6. Form listener
 detailsForm.addEventListener('submit', handleDetailsFormSubmit);

@@ -38,7 +38,7 @@
       <fieldset class="form-group primary-radio-group">
         <legend>Primary Language</legend>
 
-        <input type="radio" name="primaryLang" value="JavaScript" id="primary-js" checked>
+        <input type="radio" name="primaryLang" value="JavaScript" id="primary-js">
         <label for="primary-js" class="radio">JavaScript</label>
 
         <input type="radio" name="primaryLang" value="Python" id="primary-python">
@@ -50,27 +50,27 @@
         <input type="radio" name="primaryLang" value="CSharp" id="primary-csharp">
         <label for="primary-csharp" class="radio">C#</label>
 
-        <input type="radio" name="primaryLang" value="Dart" id="primary-dart">
-        <label for="primary-dart" class="radio">Dart</label>
+        <!-- <input type="radio" name="primaryLang" value="Dart" id="primary-dart">
+        <label for="primary-dart" class="radio">Dart</label> -->
       </fieldset>
 
       <fieldset class="form-group secondary-radio-group">
         <legend>Compare with</legend>
 
-        <input type="radio" name="primaryLang" value="JavaScript" id="js">
+        <input type="radio" name="secondaryLang" value="JavaScript" id="js">
         <label for="js" class="radio">JavaScript</label>
 
-        <input type="radio" name="primaryLang" value="Python" id="python" checked>
+        <input type="radio" name="secondaryLang" value="Python" id="python">
         <label for="python" class="radio">Python</label>
 
-        <input type="radio" name="primaryLang" value="PHP" id="php">
+        <input type="radio" name="secondaryLang" value="PHP" id="php">
         <label for="php" class="radio">PHP</label>
 
-        <input type="radio" name="primaryLang" value="CSharp" id="csharp">
+        <input type="radio" name="secondaryLang" value="CSharp" id="csharp">
         <label for="csharp" class="radio">C#</label>
 
-        <input type="radio" name="primaryLang" value="Dart" id="dart">
-        <label for="dart" class="radio">Dart</label>
+        <!-- <input type="radio" name="secondaryLang" value="Dart" id="dart">
+        <label for="dart" class="radio">Dart</label> -->
       </fieldset>
 
       <fieldset class="form-group select">
@@ -79,28 +79,21 @@
           <option value="">--- Select ---</option>
           <option value="number">Number</option>
           <option value="string">String</option>
-          <option value="array" selected>Array/List</option>
+          <option value="array">Array/List</option>
           <option value="object">Object/Dict</option>
-          <option value="class">Class</option>
+          <option value="class">Class*</option>
         </select>
       </fieldset>
 
       <fieldset class="form-group select">
         <label for="methods" class="primary-lang">Function/Method</label>
-        <select id="methods" name="methods" required>
-          <option value="">--- Select ---</option>
-          <option value="push" selected>Push/Append</option>
-          <option value="pop">Pop</option>
-          <option value="map">Map</option>
-          <option value="foreach">For Each</option>
-          <option value="???">etc.</option>
-        </select>
+        <select id="methods" name="methods"></select>
       </fieldset>
 
       <button type="submit" class="details-submit">Compare</button>
     </form>
 
-    <h1 id="details-heading">In Depth JavaScript to Python comparisons</h1>
+    <h1 id="details-heading"></h1>
     <p><em>Hard coded example</em></p>
 
     <!-- pre elements sections section 1 -->
@@ -538,6 +531,7 @@ def unique_values(lst):
     </div>
   </footer>
   <script src="./js/menu.js"></script>
+  <script src="./js/data/detailsPreEls.js"></script>
   <script src="./js/details.js"></script>
   <script src="./js/prism.js"></script>
 </body>
