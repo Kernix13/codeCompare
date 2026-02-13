@@ -38,19 +38,6 @@ const languages = {
 };
 
 /**
- * * GLOBAL FUNCTIONS
- */
-// 1. Set local storage for primary, secondary & h1 text
-function setLocalStorage(key, val) {
-	return localStorage.setItem(key, JSON.stringify(val));
-}
-
-// 2. Get local storage for primary, secondary & h1 text
-function getLocalStorage(key) {
-	return JSON.parse(localStorage.getItem(key));
-}
-
-/**
  * * DOM ELEMENT FUNCTIONS
  */
 // 1. ???

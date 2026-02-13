@@ -30,19 +30,6 @@ const listData = { vars,  numbers, strings, arrays, objects };
 const preData = { conditionals, loops, functions, classes };
 
 /**
- * * LOCAL STORAGE FUNCTIONS
- */
-// 1. Set local storage for form selections and for H1 text
-function setLocalStorage(key, val) {
-	return localStorage.setItem(key, JSON.stringify(val));
-}
-
-// 2. Get local storage for primary, secondary & h1 text
-function getLocalStorage(key) {
-	return JSON.parse(localStorage.getItem(key));
-}
-
-/**
  * * DOM ELEMENT FUNCTIONS
  */
 // 1. Create container and add content for the 5 ol > li sections
