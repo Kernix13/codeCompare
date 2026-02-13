@@ -17,9 +17,20 @@ const secondaryRadios = document.querySelectorAll(
 );
 const h1 = document.getElementById('frameworks-heading'); 
 
+const frameworks = {
+  React,
+  Vue,
+  Svelte,
+  Angular,
+  Django,
+  Laravel,
+  ASP
+};
+
 const state = {
   primaryFW: '',
-  secondaryFW: ''
+  secondaryFW: '',
+  heading: ''
 };
 
 /**
@@ -28,24 +39,44 @@ const state = {
 // 1. On page visit
 function initFrameworksPage() {
   console.log('DOMContentLoaded')
+  state.primaryFW = getLocalStorage('primary-fw') || '';
+  state.secondaryFW = getLocalStorage('secondary-fw') || '';
+  state.heading = getLocalStorage('fw-heading') || 'Choose a primary framework and a secondary framework';
+
+  h1.textContent = state.heading;
+  
 }
 
 // 2. Primary radio button check
 function handlePrimaryCheck(e) {
   if (!e.target.checked) return;
   console.log(e.target.value)
+
+  state.primaryFW = e.target.value;
+  setLocalStorage('primary-fw', state.primaryFW);
 }
 
 // 3. Secondary radio button check
 function handleSecondaryCheck(e) {
   if (!e.target.checked) return;
-  console.log(e.target.value)
+  console.log(e.target.value);
+
+  state.secondaryFW = e.target.value;
+  setLocalStorage('secondary-fw', state.secondaryFW);
 }
 
 // 4. Form submit
 function handleFrameworksFormSubmit(e) {
   e.preventDefault();
-  console.log('Form submit')
+  console.log(e)
+
+  state.detailsPrimary
+  const primaryFramewrok = getLocalStorage('primary-fw');
+  const secondaryFramewrok = getLocalStorage('secondary-fw');
+  state.heading = `Compare ${primaryFramewrok} to ${secondaryFramewrok}`;
+  h1.textContent = state.heading;
+
+  setLocalStorage('fw-heading', state.heading);
 }
 
 /**
@@ -55,14 +86,20 @@ function handleFrameworksFormSubmit(e) {
 document.addEventListener('DOMContentLoaded', initFrameworksPage);
 
 // 2. Radio button check for user's primary language
-primaryRadios.forEach(radio =>
-  radio.addEventListener('change', handlePrimaryCheck)
-);
+primaryRadios.forEach(radio => {
+  radio.addEventListener('change', handlePrimaryCheck);
+  getLocalStorage('primary-fw') === radio.value 
+    ? radio.checked = true 
+    : false;
+});
 
 // 3. Radio button check for user's language to compare to their primary
-secondaryRadios.forEach(radio =>
-  radio.addEventListener('change', handleSecondaryCheck)
-);
+secondaryRadios.forEach(radio => {
+  radio.addEventListener('change', handleSecondaryCheck);
+  getLocalStorage('secondary-fw') === radio.value 
+    ? radio.checked = true 
+    : false;
+});
 
 // 4. form listener
 frameworksForm.addEventListener('submit', handleFrameworksFormSubmit);

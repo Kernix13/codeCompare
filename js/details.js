@@ -148,7 +148,7 @@ function handleMethodSelect(e) {
 // 6. Form submit
 function handleDetailsFormSubmit(e) {
   e.preventDefault();
-  console.log('Form submit')
+  
   setLocalStorage('type-selection', dataTypeSelect.selectedIndex);
   setLocalStorage('method-selection', methodsSelect.selectedIndex);
 
