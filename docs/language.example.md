@@ -11,6 +11,10 @@ official_docs: https://example.com
    https://chromewebstore.google.com/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl
  -->
 
+ <li><a href="./../index.html">Compare</a></li>
+ <li><a href="./../details.html">In Depth</a></li>
+ <li><a href="./../frameworks.html">Frameworks</a></li>
+
 # Language Name — Reference Notes
 
 A concise, **best-of reference** for Language Name.
