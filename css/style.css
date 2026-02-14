@@ -328,7 +328,7 @@ button:disabled {
   color: red;
 }
 
-h3 > code.heading {
+h3 > code.keywords {
   font-size: 1.25rem;
 }
 

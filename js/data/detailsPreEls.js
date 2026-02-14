@@ -9,9 +9,14 @@ const JavaScript = {
     'floor', 
     'random', 
     'sqrt', 
-    'pow', 
-    'parseInt', 
-    'parseFloat'
+    'pow',
+    'round',
+    'String',
+    'toFixed',
+    'toPrecision',
+    'toString',
+    'isInteger',
+    'isNaN'
   ],
   'string': [
     'startsWith', 
@@ -22,7 +27,12 @@ const JavaScript = {
     'split', 
     'replace str', 
     'replace Regex', 
-    'trim'
+    'trim',
+    'parseInt', 
+    'parseFloat',
+    'Number',
+    'for loop',
+    'spread operator'
   ],
   'array': [
     'join', 
@@ -34,7 +44,6 @@ const JavaScript = {
     'forEach', 
     'map', 
     'slice', 
-    'Array.from',
     'push', 
     'unshift', 
     'pop', 
@@ -42,15 +51,17 @@ const JavaScript = {
     'reverse', 
     'sort', 
     'splice', 
-    '', 
-    ''
+    'for of loop',
+    'spread operator',
   ],
   'object': [
     'delete', 
     'hasOwnProperty', 
     'entries', 
     'keys', 
-    'values'
+    'values',
+    'for in loop',
+    'spread operator',
   ],
   'class': ['constructor', 'method']
 };
@@ -224,48 +235,185 @@ const detailsPre = {
     "number": [
       {
         "keywords": [],
-        "code": []
+        "code": ``
       },
       {
-        "keywords": [],
-        "code": []
+        "keywords": ["test"],
+        "code": `false`
       },
     ],  
     "string": [
       {
         "keywords": [],
-        "code": []
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
       },
     ],  
     "array": [
       {
-        "keywords": [],
-        "code": []
+        "keywords": ["concat", "spread operator"],
+        "code": `
+function mergeArrays(arr1, arr2) {
+  return [...arr1, ...arr2];
+}
+        `
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
       },
     ],  
     "object": [
       {
         "keywords": [],
-        "code": []
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
       },
     ],  
   },
   "Python": {
-    "number": [],
-    "string": [],
-    "array": [],
-    "object": [],
+    "number": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `False`
+      },
+    ],
+    "string": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `False`
+      },
+    ],
+    "array": [
+      {
+        "keywords": ["'concat' (+)"],
+        "code": `
+def merge_lists(list1, list2):
+    return list1 + list2
+        `
+      },
+      {
+        "keywords": ["test"],
+        "code": `False`
+      },
+    ],
+    "object": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `False`
+      },
+    ],
   },
   "PHP": {
-    "number": [],
-    "string": [],
-    "array": [],
-    "object": [],
+    "number": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
+      },
+    ],
+    "string": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
+      },
+    ],
+    "array": [
+      {
+        "keywords": ["array_merge"],
+        "code": `
+function merge_arrays($arr1, $arr2) {
+    return array_merge($arr1, $arr2);
+}
+        `
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
+      },
+    ],
+    "object": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
+      },
+    ],
   },
   "CSharp": {
-    "number": [],
-    "string": [],
-    "array": [],
-    "object": [],
+    "number": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
+      },
+    ],
+    "string": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
+      },
+    ],
+    "array": [
+      {
+        "keywords": ["Concat", "ToArray"],
+        "code": `
+public class ArrayUtils {
+    public static int[] MergeArrays(int[] arr1, int[] arr2) {
+        return arr1.Concat(arr2).ToArray();
+    }
+}
+        `
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
+      },
+    ],
+    "object": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+      {
+        "keywords": ["test"],
+        "code": `false`
+      },
+    ],
   }
 }

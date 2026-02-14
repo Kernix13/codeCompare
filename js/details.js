@@ -194,3 +194,20 @@ methodsSelect.addEventListener('change', handleMethodSelect);
 
 // 6. Form listener
 detailsForm.addEventListener('submit', handleDetailsFormSubmit);
+
+/* 
+ * * Starting the process to output the detailsPre blocks
+ * Right now I only have keywords and a code block for one array/list block
+*/
+const detailsPrimary = getLocalStorage('details-primary');
+const detailsSecondary = getLocalStorage('details-secondary');
+const dataType = getLocalStorage('data-type'); // current 'array'
+
+detailsPre[detailsPrimary][dataType].forEach(item => {
+  console.log(item.keywords.join(', '));
+});
+
+detailsPre[detailsSecondary][dataType].forEach(item => {
+  console.log(item.keywords.join(', '));
+});
+
