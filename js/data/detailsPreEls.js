@@ -215,6 +215,57 @@ const CSharp = {
 /* NEXT: create pre code blocks
   1. by language
   2. by data type
-  3. by method
+  3. by method? or just use keywords?
   - Not sure how to structure the data
 */
+
+const detailsPre = {
+  "JavaScript": {
+    "number": [
+      {
+        "keywords": [],
+        "code": []
+      },
+      {
+        "keywords": [],
+        "code": []
+      },
+    ],  
+    "string": [
+      {
+        "keywords": [],
+        "code": []
+      },
+    ],  
+    "array": [
+      {
+        "keywords": [],
+        "code": []
+      },
+    ],  
+    "object": [
+      {
+        "keywords": [],
+        "code": []
+      },
+    ],  
+  },
+  "Python": {
+    "number": [],
+    "string": [],
+    "array": [],
+    "object": [],
+  },
+  "PHP": {
+    "number": [],
+    "string": [],
+    "array": [],
+    "object": [],
+  },
+  "CSharp": {
+    "number": [],
+    "string": [],
+    "array": [],
+    "object": [],
+  }
+}

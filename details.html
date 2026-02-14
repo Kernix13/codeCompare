@@ -100,14 +100,14 @@
     <div class="grid-2">
       <div class="primary">
         <h2>JavaScript</h2>
-        <h3><code class="language-js heading">arr.push(value)</code></h3>
+        <h3><code class="language-js heading">for of, arr.push(value)</code></h3>
         <pre><code class="language-js">
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
 let evenSquares = [];
 
-for (let i = 0; i < numbers.length; i++) { 
-  if (numbers[i] % 2 === 0) { 
-  evenSquares.push(numbers[i] ** 2); 
+for (const num of numbers) {
+  if (num % 2 === 0) { 
+  evenSquares.push(num ** 2); 
   } 
 }
           </code>
@@ -116,7 +116,7 @@ for (let i = 0; i < numbers.length; i++) {
       <div class="secondary">
         <h2>Python</h2>
         <!-- https://www.php.net/manual/en/ref.array.php -->
-        <h3><code class="language-python heading">list.append(value)</code></h3>
+        <h3><code class="language-python heading">for in, list.append(value)</code></h3>
         <pre><code class="language-python">
 numbers = [1, 2, 3, 4, 5, 6, 7, 8]
 even_squares = []

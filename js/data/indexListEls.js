@@ -420,6 +420,7 @@ const objects = {
     'Object.keys(obj);',
     'Object.values(obj);',
     'obj3 = {...obj1, ...obj2}',
+    'const {name, email} = userObj;'
   ],
   "php": [
     '$arr = ["key" => $val];',
@@ -431,6 +432,7 @@ const objects = {
     'array_keys($arr);',
     'array_values($arr);',
     '$arr3 = $arr1 + $arr2;',
+    '["name" => $name, "email" => $email] = $user;'
   ],
   "python": [
     'dict1 = {"key": val}',
@@ -442,9 +444,10 @@ const objects = {
     'dict1.keys()',
     'dict1.values()',
     'dict3 = {**dict1, **dict2}',
+    'name = user["name"] | email = user["email"]'
   ],
   "csharp": [
-    '--too long--',
+    'new Dictionary<string, object> { ["key"] = val };',
     'dict1["key"]',
     'dict1["key"] = val;',
     'dict1.Remove("key");',
@@ -453,6 +456,7 @@ const objects = {
     'dict1.Keys',
     'dict1.Values',
     '--too long--',
+    'N/A'
   ],
   "dart": [
     '--too long--',
@@ -464,6 +468,7 @@ const objects = {
     'map1.keys.toList()',
     'map1.values.toList()',
     'var map3 = {...map1, ...map2};',
+    ''
   ],
 }
 
