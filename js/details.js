@@ -74,7 +74,6 @@ function renderlanguageColumns(methodIdx = 0) {
   });
 }
 
-// move this into the form submit listener when done
 renderlanguageColumns();
 
 // 3. Create the elements and content for each column
@@ -82,7 +81,7 @@ function createLanguageColumn(arr, language, el) {
 
   arr.forEach(item => {
 
-    const keywords = item.keywords.join(', ');
+    const keywords = item.keywords.join(', ') || "";
     const preContent = item.code;
 
     const h2 = document.createElement('h2');
@@ -103,10 +102,7 @@ function createLanguageColumn(arr, language, el) {
   return el;
 }
 
-/**
- * * HELPER FUNCTIONS
- */
-// 1. Create and addd Function/Method options into select#methods
+// 4. Create and addd Function/Method options into select#methods
 function createOptions() {
   methodsSelect.textContent = '';
   const primaryLang = getLocalStorage('details-primary'); // 'JavaScript'
@@ -221,6 +217,10 @@ function handleDetailsFormSubmit(e) {
   h1.textContent = state.heading;
 
   setLocalStorage('details-heading', state.heading);
+  renderlanguageColumns();
+
+  // Highlight code blocks with Prism
+  Prism.highlightAll();
 }
 
 /**
@@ -257,20 +257,7 @@ methodsSelect.addEventListener('change', handleMethodSelect);
 // 6. Form listener
 detailsForm.addEventListener('submit', handleDetailsFormSubmit);
 
-/* 
- * * Starting the process to output the detailsPre blocks
- * Right now I only have keywords and a code block for one array/list block
-*/
-const detailsPrimary = getLocalStorage('details-primary');
-const detailsSecondary = getLocalStorage('details-secondary');
-const dataType = getLocalStorage('data-type'); // current 'array'
 
-// const keywords = detailsPre[detailsPrimary][dataType].map(item => item.keywords).join(', ');
-// console.log(keywords)
-// const code = detailsPre[detailsPrimary][dataType].map(item => item.code);
-// console.log(code)
 
-// detailsPre[detailsSecondary][dataType].forEach(item => {
-//   console.log(item.keywords.join(', '));
-// });
+
 

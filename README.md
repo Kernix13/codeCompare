@@ -21,6 +21,11 @@ The project emphasizes **mental model translation** — helping developers recog
 >
 > Full implementation examples (`details.html`) and the `frameworks.html` page are still in progress. The current version focuses on UI structure, styling, and core comparison behavior, with expanded examples planned.
 
+## To-Do
+
+1. **IMPORTANT**: The length of the array for each data type has to be the same in each language object or the app breaks. I need to fix that.
+2. I need to change the data types to match primary language, e.g. "Array" to "List" for Python.
+
 ## Getting Started
 
 1. Clone this repo
@@ -437,10 +442,6 @@ else:
 5. The data JavaScript file has not been created as of 2/7/2026.
 
 ---
-
-## To-Do
-
-1. I need to change the data types to match primary language, e.g. "Array" to "List" for Python.
 
 ## Contributing
 

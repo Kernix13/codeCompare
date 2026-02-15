@@ -244,7 +244,7 @@ if (typeof value === 'string') {
         `
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],  
@@ -276,7 +276,7 @@ function reverseString(str) {
         `
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],  
@@ -336,7 +336,7 @@ function uniqueValues(array) {
         `
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],  
@@ -350,13 +350,13 @@ function combineObjects(obj1, obj2) {
         `
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],  
     "class": [
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ]
@@ -373,7 +373,7 @@ if isinstance(value, str):
         `
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],
@@ -402,7 +402,7 @@ def reverse_string(s):
         `
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],
@@ -453,7 +453,7 @@ def unique_values(lst):
         `
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],
@@ -466,13 +466,13 @@ def combine_dicts(dict1, dict2):
         `
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],
     "class": [
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ]
@@ -480,21 +480,29 @@ def combine_dicts(dict1, dict2):
   "PHP": {
     "number": [
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],
     "string": [
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
       {
-        "keywords": [],
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
         "code": ``
       },
     ],
@@ -508,23 +516,39 @@ function merge_arrays($arr1, $arr2) {
         `
       },
       {
-        "keywords": [],
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
         "code": ``
       },
     ],
     "object": [
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],
     "class": [
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ]
@@ -532,21 +556,29 @@ function merge_arrays($arr1, $arr2) {
   "CSharp": {
     "number": [
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],
     "string": [
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
       {
-        "keywords": [],
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
         "code": ``
       },
     ],
@@ -562,23 +594,39 @@ public class ArrayUtils {
         `
       },
       {
-        "keywords": [],
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
         "code": ``
       },
     ],
     "object": [
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ],
     "class": [
       {
-        "keywords": [],
+        "keywords": [""],
         "code": ``
       },
     ]
