@@ -11,26 +11,26 @@ const JavaScript = {
     'sqrt', 
     'pow',
     'round',
-    'String',
     'toFixed',
     'toPrecision',
-    'toString',
+    'parseInt', 
+    'parseFloat',
+    'Number',
     'isInteger',
-    'isNaN'
+    'isNaN',
+    'toString'
   ],
   'string': [
+    'slice', 
+    'split', 
+    'replace (str)', 
+    'replace (regex)', 
+    'match', 
+    'trim',
     'startsWith', 
     'endsWith', 
     'includes', 
     'indexOf', 
-    'slice', 
-    'split', 
-    'replace str', 
-    'replace Regex', 
-    'trim',
-    'parseInt', 
-    'parseFloat',
-    'Number',
     'for loop',
     'spread operator'
   ],
@@ -48,11 +48,11 @@ const JavaScript = {
     'unshift', 
     'pop', 
     'shift', 
-    'reverse', 
     'sort', 
+    'reverse', 
     'splice', 
     'for of loop',
-    'spread operator',
+    'spread operator'
   ],
   'object': [
     'delete', 
@@ -61,7 +61,7 @@ const JavaScript = {
     'keys', 
     'values',
     'for in loop',
-    'spread operator',
+    'spread operator'
   ],
   'class': ['constructor', 'method']
 };
@@ -234,27 +234,55 @@ const detailsPre = {
   "JavaScript": {
     "number": [
       {
-        "keywords": [],
-        "code": ``
+        "keywords": ["typeof", "parseInt"],
+        "code": `
+let value = '123';
+
+if (typeof value === 'string') {
+  value = parseInt(value);
+}
+        `
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": [],
+        "code": ``
       },
     ],  
     "string": [
       {
-        "keywords": [],
-        "code": ``
+        "keywords": ["toLowerCase", "split", "join"],
+        "code": `
+const title = 'This is a Blog Post Title';
+function slugify(str) {
+  return str.toLowerCase().split(' ').join('-');
+}
+// 'this-is-a-blog-post-title'
+        `
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": ["toUpperCase", "slice"],
+        "code": `
+function capitalize(word) {
+  return word[0].toUpperCase() + word.slice(1);
+}
+        `
+      },
+      {
+        "keywords": ["split", "reverse", "join"],
+        "code": `
+function reverseString(str) {
+  return str.split('').reverse().join('');
+}
+        `
+      },
+      {
+        "keywords": [],
+        "code": ``
       },
     ],  
     "array": [
       {
-        "keywords": ["concat", "spread operator"],
+        "keywords": ["'concat'", "spread operator"],
         "code": `
 function mergeArrays(arr1, arr2) {
   return [...arr1, ...arr2];
@@ -262,40 +290,120 @@ function mergeArrays(arr1, arr2) {
         `
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": ["for of", "push", "filter", "map"],
+        "code": `
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+let evenSquares = [];
+
+// Option 1
+for (const num of numbers) {
+  if (num % 2 === 0) {
+    evenSquares.push(num ** 2);
+  }
+}
+
+// Option 2:
+const evenSquares = numbers
+  .filter(num => num % 2 === 0)
+  .map(num => num ** 2);
+        `
+      },
+      {
+        "keywords": ["reduce", "ternary"],
+        "code": `
+function countOccurrences(array, value) {
+  return array.reduce((count, val) => {
+    return val === value ? count + 1 : count;
+  }, 0);
+}
+countOccurrences([1, 2, 3, 4, 1, 2, 1], 1); // 3
+        `
+      },
+      {
+        "keywords": ["spread operator"],
+        "code": `
+function stringToArray(str) {
+  return [...str];
+}
+        `
+      },
+      {
+        "keywords": ["spread operator", "Set"],
+        "code": `
+function uniqueValues(array) {
+  return [...new Set(array)];
+}
+        `
+      },
+      {
+        "keywords": [],
+        "code": ``
       },
     ],  
     "object": [
       {
+        "keywords": ["spread operator"],
+        "code": `
+function combineObjects(obj1, obj2) {
+  return { ...obj1, ...obj2 };
+}
+        `
+      },
+      {
         "keywords": [],
         "code": ``
       },
-      {
-        "keywords": ["test"],
-        "code": `false`
-      },
     ],  
+    "class": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+    ]
   },
   "Python": {
     "number": [
       {
-        "keywords": [],
-        "code": ``
+        "keywords": ["isinstance", "int"],
+        "code": `
+value = '123'
+
+if isinstance(value, str):
+  value = int(value)
+        `
       },
       {
-        "keywords": ["test"],
-        "code": `False`
+        "keywords": [],
+        "code": ``
       },
     ],
     "string": [
       {
-        "keywords": [],
-        "code": ``
+        "keywords": ["join", "lower", "split"],
+        "code": `
+title = "This is a Blog Post Title"
+def slugify(text):
+  return '-'.join(text.lower().split(' '))
+# 'this-is-a-blog-post-title'
+        `
       },
       {
-        "keywords": ["test"],
-        "code": `False`
+        "keywords": ["upper", "slice"],
+        "code": `
+def capitalize(word):
+  return word[0].upper() + word[1:]
+        `
+      },
+      {
+        "keywords": ["slice", "reverse"],
+        "code": `
+def reverse_string(s):
+  return s[::-1]
+        `
+      },
+      {
+        "keywords": [],
+        "code": ``
       },
     ],
     "array": [
@@ -307,20 +415,67 @@ def merge_lists(list1, list2):
         `
       },
       {
-        "keywords": ["test"],
-        "code": `False`
+        "keywords": ["for in", "append"],
+        "code": `
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+even_squares = []
+
+# Option 1
+for num in numbers:
+  if num % 2 == 0:
+    even_squares.append(num ** 2)
+
+# Option 2
+        `
       },
-    ],
-    "object": [
+      {
+        "keywords": ["sum", "generator expression"],
+        "code": `
+def count_occurrences(array, value):
+  return sum(1 if val == value else 0 for val in array)
+
+count_occurrences([1, 2, 3, 4, 1, 2, 1], 1) # 3
+# This one is problematic - sum is a number function in Python
+        `
+      },
+      {
+        "keywords": ["list"],
+        "code": `
+def string_to_list(s):
+  return list(s)
+        `
+      },
+      {
+        "keywords": ["list", "set"],
+        "code": `
+def unique_values(lst):
+  return list(set(lst))
+        `
+      },
       {
         "keywords": [],
         "code": ``
       },
+    ],
+    "object": [
       {
-        "keywords": ["test"],
-        "code": `False`
+        "keywords": ["dictionary unpacking"],
+        "code": `
+def combine_dicts(dict1, dict2):
+  return {**dict1, **dict2}
+        `
+      },
+      {
+        "keywords": [],
+        "code": ``
       },
     ],
+    "class": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+    ]
   },
   "PHP": {
     "number": [
@@ -329,8 +484,8 @@ def merge_lists(list1, list2):
         "code": ``
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": [],
+        "code": ``
       },
     ],
     "string": [
@@ -339,8 +494,8 @@ def merge_lists(list1, list2):
         "code": ``
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": [],
+        "code": ``
       },
     ],
     "array": [
@@ -353,8 +508,8 @@ function merge_arrays($arr1, $arr2) {
         `
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": [],
+        "code": ``
       },
     ],
     "object": [
@@ -363,10 +518,16 @@ function merge_arrays($arr1, $arr2) {
         "code": ``
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": [],
+        "code": ``
       },
     ],
+    "class": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+    ]
   },
   "CSharp": {
     "number": [
@@ -375,8 +536,8 @@ function merge_arrays($arr1, $arr2) {
         "code": ``
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": [],
+        "code": ``
       },
     ],
     "string": [
@@ -385,8 +546,8 @@ function merge_arrays($arr1, $arr2) {
         "code": ``
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": [],
+        "code": ``
       },
     ],
     "array": [
@@ -401,8 +562,8 @@ public class ArrayUtils {
         `
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": [],
+        "code": ``
       },
     ],
     "object": [
@@ -411,9 +572,15 @@ public class ArrayUtils {
         "code": ``
       },
       {
-        "keywords": ["test"],
-        "code": `false`
+        "keywords": [],
+        "code": ``
       },
     ],
+    "class": [
+      {
+        "keywords": [],
+        "code": ``
+      },
+    ]
   }
 }

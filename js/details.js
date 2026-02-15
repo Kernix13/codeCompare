@@ -1,16 +1,5 @@
-/* User actions: 
-  1. Primary langauge radio button check
-  2. "Compare with:" second language radio button check
-  3. Data type select list selection (numbers, strings, etc.)
-  4. Method select list selection (push, pop, etc.) ❓
-  5. Form button submit - renders the page elements
-  - The only other user action would be to open the docs sub-menu - I have moved that logic to menu.js 
-  - Another possible user function would be a copy button on hover for the code blocks but that is a stretch goal
-*/
+"use strict";
 
-/**
- * SELECT DOM ELEMENTS
- */
 const detailsForm = document.getElementById('details-form');
 const primaryRadios = document.querySelectorAll(
   'fieldset.primary-radio-group input[type="radio"]'
@@ -21,6 +10,7 @@ const secondaryRadios = document.querySelectorAll(
 const dataTypeSelect = document.getElementById('data-type');
 const methodsSelect = document.getElementById('methods');
 const h1 = document.getElementById('details-heading');
+const compareDetails = document.getElementById('compare-details');
 
 const state = { 
   detailsPrimary: '', 
@@ -40,7 +30,78 @@ const languages = {
 /**
  * * DOM ELEMENT FUNCTIONS
  */
-// 1. ???
+// 1. Create the column for each section and language
+function createColumn(type) {
+  const div = document.createElement('div');
+  div.className = type;
+  return div;
+}
+
+// 2. Render language & keywords headings, and pre blocks
+function renderlanguageColumns(methodIdx = 0) {
+  const primaryLang = getLocalStorage('details-primary');
+  const secondaryLang = getLocalStorage('details-secondary');
+  const dataType = getLocalStorage('data-type');
+  // This needs to be moved in the form submit listener
+  const method = getLocalStorage('method-selection');
+  console.log('method-selection:', method);   
+
+  const arrPrimary = detailsPre[primaryLang][dataType];
+  const arrSecondary = detailsPre[secondaryLang][dataType];
+
+  compareDetails.innerHTML = '';
+
+  if (method > 0) {
+    // code here to return only code blocks tthat have the method name in the keywords array
+  }
+
+  arrPrimary.forEach((_, i) => {
+
+    const grid = document.createElement('div');
+    grid.className = 'grid-2';
+
+    const primaryDiv = createColumn('primary');
+    const secondaryDiv = createColumn('secondary');
+
+    // Render primary block
+    createLanguageColumn([arrPrimary[i]], primaryLang, primaryDiv);
+
+    // Render secondary block
+    createLanguageColumn([arrSecondary[i]], secondaryLang, secondaryDiv);
+
+    grid.append(primaryDiv, secondaryDiv);
+    compareDetails.append(grid);
+  });
+}
+
+// move this into the form submit listener when done
+renderlanguageColumns();
+
+// 3. Create the elements and content for each column
+function createLanguageColumn(arr, language, el) {
+
+  arr.forEach(item => {
+
+    const keywords = item.keywords.join(', ');
+    const preContent = item.code;
+
+    const h2 = document.createElement('h2');
+    h2.textContent = language;
+
+    const h3 = document.createElement('h3');
+    h3.textContent = keywords;
+
+    const pre = document.createElement('pre');
+    const code = document.createElement('code');
+    code.className = `language-${language.toLowerCase()}`;
+    code.textContent = preContent;
+
+    pre.append(code);
+    el.append(h2, h3, pre);
+  });
+
+  return el;
+}
 
 /**
  * * HELPER FUNCTIONS
@@ -155,7 +216,8 @@ function handleDetailsFormSubmit(e) {
   state.detailsPrimary
   const primaryDisplay = getLocalStorage('details-primary');
   const secondaryDisplay = getLocalStorage('details-secondary');
-  state.heading = `Compare ${primaryDisplay} to ${secondaryDisplay}`;
+  const dataType = getLocalStorage('data-type');
+  state.heading = `Compare ${primaryDisplay} to ${secondaryDisplay} (${dataType})`;
   h1.textContent = state.heading;
 
   setLocalStorage('details-heading', state.heading);
@@ -203,11 +265,12 @@ const detailsPrimary = getLocalStorage('details-primary');
 const detailsSecondary = getLocalStorage('details-secondary');
 const dataType = getLocalStorage('data-type'); // current 'array'
 
-detailsPre[detailsPrimary][dataType].forEach(item => {
-  console.log(item.keywords.join(', '));
-});
+// const keywords = detailsPre[detailsPrimary][dataType].map(item => item.keywords).join(', ');
+// console.log(keywords)
+// const code = detailsPre[detailsPrimary][dataType].map(item => item.code);
+// console.log(code)
 
-detailsPre[detailsSecondary][dataType].forEach(item => {
-  console.log(item.keywords.join(', '));
-});
+// detailsPre[detailsSecondary][dataType].forEach(item => {
+//   console.log(item.keywords.join(', '));
+// });
 

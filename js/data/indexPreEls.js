@@ -31,11 +31,11 @@ switch (value) {
     `
 /* if, else if, else */
 if ($condition) {
-    // code
-  } else if ($condition2) {
-    // code
-  } else {
-    // code
+  // code
+} else if ($condition2) {
+  // code
+} else {
+  // code
 }
 
 // ternary

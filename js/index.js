@@ -1,5 +1,14 @@
 "use strict";
 
+/*
+  REFACTOR:
+  - createLiSection + 
+  - renderLanguageColumn + 
+  - createColumn + 
+  - renderList & renderList 
+  -> that whole pattern is confusing
+*/
+
 const languageForm = document.getElementById('languageForm');
 const select = document.getElementById('primaryLang');
 const h1 = document.getElementById('heading');
@@ -69,6 +78,7 @@ function createColumn(type) {
   div.className = type;
   return div;
 }
+console.log(createColumn('primary'))
 
 // 3. Create headings and render content
 function renderLanguageColumn({ data, language, title, sectionEl, gridEl, columnEl }) {
