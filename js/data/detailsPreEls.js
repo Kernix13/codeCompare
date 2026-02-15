@@ -226,8 +226,6 @@ const CSharp = {
 /* NEXT: create pre code blocks
   1. by language
   2. by data type
-  3. by method? or just use keywords?
-  - Not sure how to structure the data
 */
 
 const detailsPre = {
@@ -356,6 +354,26 @@ function combineObjects(obj1, obj2) {
     ],  
     "class": [
       {
+        "keywords": ["constructor", "this"],
+        "code": `
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+const user = new User("Alice");
+        `
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
         "keywords": [""],
         "code": ``
       },
@@ -472,6 +490,24 @@ def combine_dicts(dict1, dict2):
     ],
     "class": [
       {
+        "keywords": ["__init__", "self"],
+        "code": `
+class User:
+    def __init__(self, name):
+        self.name = name
+
+user = User("Alice")
+        `
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
         "keywords": [""],
         "code": ``
       },
@@ -480,8 +516,14 @@ def combine_dicts(dict1, dict2):
   "PHP": {
     "number": [
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["is_string", "(int)"],
+        "code": `
+$value = '123';
+
+if (is_string($value)) {
+    $value = (int)$value;
+}
+        `
       },
       {
         "keywords": [""],
@@ -490,16 +532,30 @@ def combine_dicts(dict1, dict2):
     ],
     "string": [
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["implode", "explode", "strtolower"],
+        "code": `
+$title = 'This is a Blog Post Title';
+function slugify($str) {
+    return implode('-', explode(' ', strtolower($str)));
+}
+// 'this-is-a-blog-post-title'
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["strtoupper", "substr"],
+        "code": `
+function capitalize($word) {
+    return strtoupper($word[0]) . substr($word, 1);
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["implode", "array_reverse", "str_split"],
+        "code": `
+function reverseString($str) {
+    return implode('', array_reverse(str_split($str)));
+}
+        `
       },
       {
         "keywords": [""],
@@ -516,20 +572,44 @@ function merge_arrays($arr1, $arr2) {
         `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["forech", "[] append"],
+        "code": `
+$numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+$even_squares = [];
+
+foreach ($numbers as $num) {
+    if ($num % 2 == 0) {
+        $even_squares[] = $num ** 2;
+    }
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["array_reduce", "ternary"],
+        "code": `
+function countOccurrences($array, $value) {
+    return array_reduce($array, function($count, $val) use ($value) {
+        return $val === $value ? $count + 1 : $count;
+    }, 0);
+}
+countOccurrences([1, 2, 3, 4, 1, 2, 1], 1); // 3
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["str_split"],
+        "code": `
+function stringToArray($str) {
+    return str_split($str);
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["array_values", "array_unique"],
+        "code": `
+function uniqueValues($array) {
+    return array_values(array_unique($array));
+}
+        `
       },
       {
         "keywords": [""],
@@ -538,8 +618,12 @@ function merge_arrays($arr1, $arr2) {
     ],
     "object": [
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["(object)", "array_merge", "(array)"],
+        "code": `
+function combineObjects($obj1, $obj2) {
+    return (object) array_merge((array)$obj1, (array)$obj2);
+}
+        `
       },
       {
         "keywords": [""],
@@ -547,6 +631,28 @@ function merge_arrays($arr1, $arr2) {
       },
     ],
     "class": [
+      {
+        "keywords": ["__construct", "public", "$this"],
+        "code": `
+class User {
+    public $name;
+
+    public function __construct($name) {
+        $this->name = $name;
+    }
+}
+
+$user = new User("Alice");
+        `
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
       {
         "keywords": [""],
         "code": ``
@@ -556,8 +662,15 @@ function merge_arrays($arr1, $arr2) {
   "CSharp": {
     "number": [
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["is", "int.Parse", "ToString"],
+        "code": `
+string value = "123";
+
+if (value is string)
+{
+    value = int.Parse(value).ToString();
+}
+        `
       },
       {
         "keywords": [""],
@@ -566,16 +679,33 @@ function merge_arrays($arr1, $arr2) {
     ],
     "string": [
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["string.Join", "str.ToLower", "Split"],
+        "code": `
+string title = "This is a Blog Post Title";
+public static string Slugify(string str)
+{
+    return string.Join("-", str.ToLower().Split(' '));
+}
+// "this-is-a-blog-post-title"
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["char.ToUpper", "Substring"],
+        "code": `
+public static string Capitalize(string word)
+{
+    return char.ToUpper(word[0]) + word.Substring(1);
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["new string()", "Reverse", "ToArray"],
+        "code": `
+public static string ReverseString(string str)
+{
+    return new string(str.Reverse().ToArray());
+}
+        `
       },
       {
         "keywords": [""],
@@ -594,20 +724,51 @@ public class ArrayUtils {
         `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["new List", "foreach", "Add"],
+        "code": `
+int[] numbers = {1,2,3,4,5,6,7,8};
+List<int> evenSquares = new List<int>();
+
+foreach (int num in numbers) 
+{
+    if (num % 2 == 0) 
+    {
+        evenSquares.Add(num * num);
+    }
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["Aggregate", "ternary"],
+        "code": `
+using System.Linq;
+
+public static int CountOccurrences(int[] array, int value)
+{
+    return array.Aggregate(0, (count, val) => val == value ? count + 1 : count);
+}
+CountOccurrences(new int[] {1, 2, 3, 4, 1, 2, 1}, 1); // 3
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["ToCharArray"],
+        "code": `
+public static char[] StringToArray(string str)
+{
+    return str.ToCharArray();
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["Distinct", "ToArray"],
+        "code": `
+using System.Linq;
+
+public static int[] UniqueValues(int[] array)
+{
+    return array.Distinct().ToArray();
+}
+        `
       },
       {
         "keywords": [""],
@@ -616,8 +777,19 @@ public class ArrayUtils {
     ],
     "object": [
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["Concat", "ToDictionary"],
+        "code": `
+using System.Collections.Generic;
+using System.Linq;
+
+public static Dictionary<string, object> CombineObjects(
+    Dictionary<string, object> obj1,
+    Dictionary<string, object> obj2)
+{
+    return obj1.Concat(obj2)
+               .ToDictionary(pair => pair.Key, pair => pair.Value);
+}
+        `
       },
       {
         "keywords": [""],
@@ -625,6 +797,30 @@ public class ArrayUtils {
       },
     ],
     "class": [
+      {
+        "keywords": ["public", "constructor"],
+        "code": `
+public class User
+{
+    public string Name;
+
+    public User(string name)
+    {
+        Name = name;
+    }
+}
+
+User user = new User("Alice");
+        `
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
       {
         "keywords": [""],
         "code": ``

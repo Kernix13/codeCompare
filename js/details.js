@@ -81,7 +81,7 @@ function createLanguageColumn(arr, language, el) {
 
   arr.forEach(item => {
 
-    const keywords = item.keywords.join(', ') || "";
+    const keywords = item.keywords.join(', ');
     const preContent = item.code;
 
     const h2 = document.createElement('h2');
