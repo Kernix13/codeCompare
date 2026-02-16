@@ -52,7 +52,6 @@ const JavaScript = {
     'spread operator'
   ],
   'object': [
-    'delete', 
     'hasOwnProperty', 
     'entries', 
     'keys', 
@@ -489,6 +488,23 @@ function combineObjects(obj1, obj2) {
         `
       },
       {
+        "keywords": ["for in", "hasOwnProperty", "Object.keys", "Object.values", "Object.entries"],
+        "code": `
+const order = { apples: 3, oranges: 5, bananas: 2 };
+let total = 0;
+
+for (const key in order) {
+  if (order.hasOwnProperty(key)) {
+    total += order[key];
+  }
+}
+
+const keys = Object.keys(order);
+const values = Object.values(order);
+const entries = Object.entries(order);
+        `
+      },
+      {
         "keywords": [""],
         "code": ``
       },
@@ -530,7 +546,7 @@ const user = new User("Luna", "luna@email.com", "abc123");
         `
       },
       {
-        "keywords": [""],
+        "keywords": [],
         "code": ``
       },
       {
@@ -795,6 +811,20 @@ def combine_dicts(dict1, dict2):
         `
       },
       {
+        "keywords": ["for", "keys", "values", "items"],
+        "code": `
+order = {"apples": 3, "oranges": 5, "bananas": 2}
+total = 0
+
+for key in order:
+  total += order[key]
+
+keys = order.keys()
+values = order.values()
+entries = order.items()
+        `
+      },
+      {
         "keywords": [""],
         "code": ``
       },
@@ -830,7 +860,7 @@ user = User("Luna", "luna@email.com", "abc123")
         `
       },
       {
-        "keywords": [""],
+        "keywords": [],
         "code": ``
       },
       {
@@ -1101,6 +1131,24 @@ rsort($temperatures);      // descending
         "code": `
 function combineObjects($obj1, $obj2) {
     return (object) array_merge((array)$obj1, (array)$obj2);
+}
+        `
+      },
+      {
+        "keywords": ["foreach", "array_keys", "array_values"],
+        "code": `
+$order = ["apples" => 3, "oranges" => 5, "bananas" => 2];
+$total = 0;
+
+foreach ($order as $key => $value) {
+  $total += $value;
+}
+
+$keys = array_keys($order);
+$values = array_values($order);
+$entries = [];
+foreach ($order as $key => $value) {
+  $entries[] = [$key, $value];
 }
         `
       },
@@ -1459,6 +1507,21 @@ public static Dictionary<string, object> CombineObjects(
     return obj1.Concat(obj2)
                .ToDictionary(pair => pair.Key, pair => pair.Value);
 }
+        `
+      },
+      {
+        "keywords": ["foreach", "Keys", "Values", "ToList"],
+        "code": `
+var order = new Dictionary<string, int> {{"apples", 3}, {"oranges", 5}, {"bananas", 2}};
+int total = 0;
+
+foreach (var kvp in order) {
+  total += kvp.Value;
+}
+
+var keys = order.Keys;
+var values = order.Values;
+var entries = order.ToList();
         `
       },
       {
