@@ -431,6 +431,50 @@ function uniqueValues(array) {
         `
       },
       {
+        "keywords": ["includes", "indexOf"],
+        "code": `
+const status = ["pending", "approved", "denied"];
+
+const hasApproved = status.includes("approved");
+const deniedIndex = status.indexOf("denied");
+        `
+      },
+      {
+        "keywords": ["forEach"],
+        "code": `
+let total = 0;
+items.forEach((item) => {
+  total += item;
+})
+        `
+      },
+      {
+        "keywords": ["slice"],
+        "code": `
+const numbers = [10, 20, 30, 40, 50];
+
+const middleNumbers = numbers.slice(1, 4);
+        `
+      },
+      {
+        "keywords": ["push", "pop"],
+        "code": `
+const scores = [85, 90, 75]
+
+scores.push(95)
+const lastScore = scores.pop()
+        `
+      },
+      {
+        "keywords": ["sort"],
+        "code": `
+const temperatures = [72, 65, 88, 90, 75];
+
+temperatures.sort((a, b) => a - b);  // ascending
+temperatures.sort((a, b) => b - a);  // descending
+        `
+      },
+      {
         "keywords": [""],
         "code": ``
       },
@@ -692,6 +736,49 @@ def string_to_list(s):
         "code": `
 def unique_values(lst):
   return list(set(lst))
+        `
+      },
+      {
+        "keywords": ["in", "index"],
+        "code": `
+status = ["pending", "approved", "denied"]
+
+has_approved = "approved" in status
+denied_index = status.index("denied")
+        `
+      },
+      {
+        "keywords": ["for"],
+        "code": `
+total = 0
+for item in items:
+  total += item
+        `
+      },
+      {
+        "keywords": ["slice"],
+        "code": `
+numbers = [10, 20, 30, 40, 50]
+
+middle_numbers = numbers[1:4]
+        `
+      },
+      {
+        "keywords": ["append", "pop"],
+        "code": `
+scores = [85, 90, 75]
+
+scores.append(95)
+last_score = scores.pop()
+        `
+      },
+      {
+        "keywords": ["sort"],
+        "code": `
+temperatures = [72, 65, 88, 90, 75]
+
+temperatures.sort()              # ascending
+temperatures.sort(reverse=True)  # descending
         `
       },
       {
@@ -957,6 +1044,50 @@ function stringToArray($str) {
 function uniqueValues($array) {
     return array_values(array_unique($array));
 }
+        `
+      },
+      {
+        "keywords": ["in_array", "array_search"],
+        "code": `
+$status = ["pending", "approved", "denied"];
+
+$hasApproved = in_array("approved", $status);
+$deniedIndex = array_search("denied", $status);
+        `
+      },
+      {
+        "keywords": ["foreach"],
+        "code": `
+$total = 0;
+foreach ($items as $item) {
+  $total += $item;
+}
+        `
+      },
+      {
+        "keywords": ["array_slice"],
+        "code": `
+$numbers = [10, 20, 30, 40, 50];
+
+$middle_numbers = array_slice($numbers, 1, 3);
+        `
+      },
+      {
+        "keywords": ["array_push", "array_pop"],
+        "code": `
+$scores = [85, 90, 75];
+
+array_push($scores, 95);
+$lastScore = array_pop($scores);
+        `
+      },
+      {
+        "keywords": ["sort", "rsort"],
+        "code": `
+$temperatures = [72, 65, 88, 90, 75];
+
+sort($temperatures);       // ascending
+rsort($temperatures);      // descending
         `
       },
       {
@@ -1262,6 +1393,51 @@ public static int[] UniqueValues(int[] array)
 {
     return array.Distinct().ToArray();
 }
+        `
+      },
+      {
+        "keywords": ["Contains", "IndexOf"],
+        "code": `
+List<string> status = new List<string> { "pending", "approved", "denied" };
+
+bool hasApproved = status.Contains("approved");
+int deniedIndex = status.IndexOf("denied");
+        `
+      },
+      {
+        "keywords": ["ForEach"],
+        "code": `
+int total = 0;
+items.ForEach(item => {
+  total += item;
+});
+        `
+      },
+      {
+        "keywords": ["Slice"],
+        "code": `
+int[] numbers = {10, 20, 30, 40, 50};
+
+int[] middleNumbers = numbers[1..4];
+        `
+      },
+      {
+        "keywords": ["Add", "RemoveAt"],
+        "code": `
+List<int> scores = new List<int> {85, 90, 75};
+
+scores.Add(95);
+int lastScore = scores[scores.Count - 1];
+scores.RemoveAt(scores.Count - 1);
+        `
+      },
+      {
+        "keywords": ["Sort", "CompareTo"],
+        "code": `
+List<int> temperatures = new List<int> {72, 65, 88, 90, 75};
+
+temperatures.Sort();                        // ascending
+temperatures.Sort((a, b) => b.CompareTo(a)); // descending
         `
       },
       {
