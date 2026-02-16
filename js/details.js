@@ -42,9 +42,13 @@ function renderlanguageColumns(methodIdx = 0) {
   const primaryLang = getLocalStorage('details-primary');
   const secondaryLang = getLocalStorage('details-secondary');
   const dataType = getLocalStorage('data-type');
-  // This needs to be moved in the form submit listener
-  const method = getLocalStorage('method-selection');
-  console.log('method-selection:', method);   
+
+  if (!primaryLang || !secondaryLang || !dataType) {
+    console.warn('Cannot render: missing primary/secondary/dataType');
+    return; // skip rendering
+  }
+
+  const method = getLocalStorage('method-selection') ?? 0;
 
   const arrPrimary = detailsPre[primaryLang][dataType];
   const arrSecondary = detailsPre[secondaryLang][dataType];
@@ -56,25 +60,20 @@ function renderlanguageColumns(methodIdx = 0) {
   }
 
   arrPrimary.forEach((_, i) => {
-
     const grid = document.createElement('div');
     grid.className = 'grid-2';
 
     const primaryDiv = createColumn('primary');
     const secondaryDiv = createColumn('secondary');
 
-    // Render primary block
     createLanguageColumn([arrPrimary[i]], primaryLang, primaryDiv);
-
-    // Render secondary block
     createLanguageColumn([arrSecondary[i]], secondaryLang, secondaryDiv);
 
     grid.append(primaryDiv, secondaryDiv);
     compareDetails.append(grid);
   });
 }
-
-renderlanguageColumns();
+// renderlanguageColumns(); // line 75
 
 // 3. Create the elements and content for each column
 function createLanguageColumn(arr, language, el) {
@@ -105,39 +104,38 @@ function createLanguageColumn(arr, language, el) {
 // 4. Create and addd Function/Method options into select#methods
 function createOptions() {
   methodsSelect.textContent = '';
-  const primaryLang = getLocalStorage('details-primary'); // 'JavaScript'
-  const selectedDataType = getLocalStorage('data-type'); // 'Array
+  const primaryLang = getLocalStorage('details-primary');
+  const selectedDataType = getLocalStorage('data-type');
   const langObj = languages[primaryLang];
 
-  // First option
+  // First option (default)
   const firstOption = document.createElement('option');
   firstOption.textContent = 'ALL METHODS';
   firstOption.value = '';
   methodsSelect.append(firstOption);
 
-  if (langObj) {
-    langObj[selectedDataType].filter(Boolean).forEach(method => {
-      // console.log(method);
-      const option = document.createElement('option');
-      option.textContent = method;
-      option.value = method;
-      methodsSelect.append(option);
-    });
+  // Only populate if we have a valid data type
+  if (langObj && selectedDataType && langObj[selectedDataType]) {
+      langObj[selectedDataType].forEach(method => {
+          const option = document.createElement('option');
+          option.textContent = method;
+          option.value = method;
+          methodsSelect.append(option);
+      });
   }
-  
 }
+
 
 /**
  * * FUNCTIONS FOR EVENT LISTENERS
  */
 // 1. On page visit
 function initDetailsPage() {
-  console.log('DOMContentLoaded');
-  state.detailsPrimary = getLocalStorage('details-primary') || '';
-  state.detailsSecondary = getLocalStorage('details-secondary') || '';
-  state.dataType = getLocalStorage('data-type') || '';
-  state.method = getLocalStorage('method') || '';
-  state.heading = getLocalStorage('details-heading') || 'Choose a primary language and a secondary language';
+  state.detailsPrimary = getLocalStorage('details-primary') ?? '';
+  state.detailsSecondary = getLocalStorage('details-secondary') ?? '';
+  state.dataType = getLocalStorage('data-type') ?? '';
+  state.method = getLocalStorage('method') ?? '';
+  state.heading = getLocalStorage('details-heading') ?? 'Choose a primary language and a secondary language';
 
   h1.textContent = state.heading;
 
@@ -227,7 +225,12 @@ function handleDetailsFormSubmit(e) {
  * * EVENT LISTENERS
  */
 // 1. Load localStorage objects if they exist
-document.addEventListener('DOMContentLoaded', initDetailsPage);
+document.addEventListener('DOMContentLoaded', () => {
+  initDetailsPage();
+  if (state.detailsPrimary && state.detailsSecondary && state.dataType) {
+    renderlanguageColumns();
+  }
+});
 
 // 2. Radio button check for user's primary language
 primaryRadios.forEach(radio => {
