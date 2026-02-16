@@ -320,6 +320,57 @@ function reverseString(str) {
         `
       },
       {
+        "keywords": ["trim", "includes"],
+        "code": `
+let query = "   learn javascript basics   "
+
+query = query.trim()
+
+if (query.includes("javascript")) {
+  const isRelevant = true
+}
+        `
+      },
+      {
+        "keywords": ["indexOf"],
+        "code": `
+let sentence = "Learn JavaScript fundamentals"
+
+const position = sentence.indexOf("JavaScript")
+        `
+      },
+      {
+        "keywords": ["startsWith", "endsWith"],
+        "code": `
+const url = "https://example.com/image.jpg";
+
+if (url.startsWith("https") && url.endsWith(".jpg")) {
+  const valid = true;
+}
+        `
+      },
+      {
+        "keywords": ["trim", "replace", "regex"],
+        "code": `
+const input = "  hello___world  "
+
+const cleaned = input.trim().replace(/_+/g, " ")
+        `
+      },
+      {
+        "keywords": ["for loop", "includes"],
+        "code": `
+const text = "Hello World"
+
+let vowelCount = 0
+for (const char of text.toLowerCase()) {
+  if ("aeiou".includes(char)) {
+    vowelCount++
+  }
+}
+        `
+      },
+      {
         "keywords": [""],
         "code": ``
       },
@@ -545,6 +596,53 @@ def reverse_string(string):
         `
       },
       {
+        "keywords": ["strip", "in"],
+        "code": `
+query = "   learn python basics   "
+
+query = query.strip()
+
+if "python" in query:
+  is_relevant = True
+        `
+      },
+      {
+        "keywords": ["find"],
+        "code": `
+sentence = "Learn Python fundamentals"
+
+position = sentence.find("Python")
+        `
+      },
+      {
+        "keywords": ["startswith", "endswith"],
+        "code": `
+url = "https://example.com/image.jpg"
+
+if url.startswith("https") and url.endswith(".jpg"):
+  valid = True
+        `
+      },
+      {
+        "keywords": ["strip", "replace"],
+        "code": `
+input_value = "  hello___world  "
+
+cleaned = input_value.strip().replace("_", " ")
+        `
+      },
+      {
+        "keywords": ["for loop", "in"],
+        "code": `
+text = "Hello World"
+
+vowel_count = 0
+for char in text.lower():
+  if char in "aeiou":
+    vowel_count += 1
+        `
+      },
+      {
         "keywords": [""],
         "code": ``
       },
@@ -751,6 +849,59 @@ function capitalize($word) {
         "code": `
 function reverseString($str) {
     return implode('', array_reverse(str_split($str)));
+}
+        `
+      },
+      {
+        "keywords": ["trim", "str_contains"],
+        "code": `
+$query = "   learn php basics   ";
+
+$query = trim($query);
+
+if (str_contains($query, "php")) {
+  $isRelevant = true;
+}
+        `
+      },
+      {
+        "keywords": ["strpos"],
+        "code": `
+$sentence = "Learn PHP fundamentals";
+
+$position = strpos($sentence, "PHP");
+        `
+      },
+      {
+        "keywords": ["str_starts_with", "str_ends_with"],
+        "code": `
+$url = "https://example.com/image.jpg";
+
+if (str_starts_with($url, "https") && str_ends_with($url, ".jpg")) {
+  $valid = true;
+}
+        `
+      },
+      {
+        "keywords": ["trim", "str_replace"],
+        "code": `
+$input = "  hello___world  ";
+
+$cleaned = trim($input);
+$cleaned = str_replace("_", " ", $cleaned);
+        `
+      },
+      {
+        "keywords": ["for loop", "strpos"],
+        "code": `
+$text = "Hello World";
+
+$vowelCount = 0;
+for ($i = 0; $i < strlen($text); $i++) {
+  $char = strtolower($text[$i]);
+  if (strpos("aeiou", $char) !== false) {
+    $vowelCount++;
+  }
 }
         `
       },
@@ -996,6 +1147,57 @@ public static string Capitalize(string word)
 public static string ReverseString(string str)
 {
     return new string(str.Reverse().ToArray());
+}
+        `
+      },
+      {
+        "keywords": ["Trim", "Contains"],
+        "code": `
+string query = "   learn csharp basics   ";
+
+query = query.Trim();
+
+if (query.Contains("csharp")) {
+  bool isRelevant = true;
+}
+        `
+      },
+      {
+        "keywords": ["IndexOf"],
+        "code": `
+string sentence = "Learn CSharp fundamentals";
+
+int position = sentence.IndexOf("CSharp");
+        `
+      },
+      {
+        "keywords": ["StartsWith", "EndsWith"],
+        "code": `
+string url = "https://example.com/image.jpg";
+
+if (url.StartsWith("https") && url.EndsWith(".jpg")) {
+  bool valid = true;
+}
+        `
+      },
+      {
+        "keywords": ["Trim", "Replace"],
+        "code": `
+string input = "  hello___world  ";
+
+string cleaned = input.Trim().Replace("_", " ");
+        `
+      },
+      {
+        "keywords": ["foreach", "Contains"],
+        "code": `
+string text = "Hello World";
+
+int vowelCount = 0;
+foreach (char c in text.ToLower()) {
+  if ("aeiou".Contains(c)) {
+    vowelCount++;
+  }
 }
         `
       },
