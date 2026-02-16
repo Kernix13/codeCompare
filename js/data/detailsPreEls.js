@@ -18,21 +18,18 @@ const JavaScript = {
     'Number',
     'isInteger',
     'isNaN',
-    'toString'
   ],
   'string': [
     'slice', 
     'split', 
     'replace (str)', 
     'replace (regex)', 
-    'match', 
     'trim',
     'startsWith', 
     'endsWith', 
     'includes', 
     'indexOf', 
-    'for loop',
-    'spread operator'
+    'for loop'
   ],
   'array': [
     'join', 
@@ -234,20 +231,65 @@ if (typeof value === 'string') {
         `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["Math.floor", "Math.random"],
+        "code": `
+function generateRandomNumber(max) {
+  return Math.floor(Math.random() * max) + 1;
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["Math.PI", "Math.sqrt", "Math.round"],
+        "code": `
+function calculateRadius(area) {
+  const radius = Math.sqrt(area / Math.PI);
+  return Math.round(radius);
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["toFixed", "toPrecision"],
+        "code": `
+function formatPrice(price) {
+  return price.toFixed(2)
+}
+
+function formatPrice(price) {
+  return price.toPrecision(3)
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["Number", "isNaN", "isInteger", "parseFloat"],
+        "code": `
+let input = '19.99';
+
+let value = Number(input);
+
+if (!Number.isNaN(value) && Number.isInteger(value)) {
+  console.log('Valid whole number:', value);
+} else if (!Number.isNaN(value)) {
+  value = parseFloat(input);
+  console.log('Valid decimal number:', value);
+}
+        `
+      },
+      {
+        "keywords": ["Math.max", "Math.min", "spread operator"],
+        "code": `
+const scores = [72, 88, 94, 63];
+
+const highest = Math.max(...scores);
+const lowest = Math.min(...scores);
+        `
+      },
+      {
+        "keywords": ["Math.sqrt", "Math.pow"],
+        "code": `
+function calculateDiagonal(len, width) {
+  return Math.sqrt(Math.pow(len, 2) + Math.pow(width, 2))
+}
+        `
       },
     ],  
     "string": [
@@ -414,20 +456,63 @@ if isinstance(value, str):
         `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["random", "randint"],
+        "code": `
+import random
+def generate_random_number(max):
+    return random.randint(1, max)
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["math.sqrt", "round", "math.pi"],
+        "code": `
+import math
+
+def calculate_radius(area):
+  radius = math.sqrt(area / math.pi)
+  return round(radius)
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["round", "format"],
+        "code": `
+def format_price(price):
+  return f"{price:.2f}"
+
+def format_price(price):
+  return f"{price:.3g}"
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["float", "int", "is_integer"],
+        "code": `
+input_value = '19.99'
+
+try:
+  value = float(input_value)
+  if value.is_integer():
+    print('Valid whole number:', int(value))
+  else:
+    print('Valid decimal number:', value)
+except ValueError:
+  print('Invalid number')
+        `
+      },
+      {
+        "keywords": ["max", "min"],
+        "code": `
+scores = [72, 88, 94, 63]
+
+highest = max(scores)
+lowest = min(scores)
+        `
+      },
+      {
+        "keywords": ["**"],
+        "code": `
+def calculate_diagonal(len, width):
+  return (len ** 2 + width ** 2) ** 0.5
+        `
       },
     ],
     "string": [
@@ -582,20 +667,64 @@ if (is_string($value)) {
         `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["rand"],
+        "code": `
+function generateRandomNumber($max) {
+    return rand(1, $max);
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["sqrt", "pi", "round"],
+        "code": `
+function calculateRadius($area) {
+  $radius = sqrt($area / pi());
+  return round($radius);
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["number_format", "sprintf", "G"],
+        "code": `
+function formatPrice($price) {
+  return number_format($price, 2, '.', '')
+}
+
+function formatPrice($price) {
+  return sprintf('%.3G', $price)
+}
+        `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["floatval", "intval", "is_nan"],
+        "code": `
+$input = '19.99';
+
+$value = floatval($input);
+
+if (!is_nan($value) && intval($value) == $value) {
+  echo 'Valid whole number: ' . intval($value);
+} elseif (!is_nan($value)) {
+  echo 'Valid decimal number: ' . $value;
+}
+        `
+      },
+      {
+        "keywords": ["max", "min"],
+        "code": `
+$scores = [72, 88, 94, 63];
+
+$highest = max($scores);
+$lowest = min($scores);
+        `
+      },
+      {
+        "keywords": ["sqrt", "pow"],
+        "code": `
+function calculateDiagonal($len, $width) {
+  return sqrt(pow($len, 2) + pow($width, 2));
+}
+        `
       },
     ],
     "string": [
@@ -765,20 +894,79 @@ if (value is string)
         `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["Random.Next"],
+        "code": `
+using System;
+public static class Utils
+{
+    private static Random _random = new Random();
+
+    public static int GenerateRandomNumber(int max)
+    {
+        return _random.Next(1, max + 1);
+    }
+}
+        `
+      },
+      {
+        "keywords": ["Math.Sqrt", "Math.Round", "Math.PI"],
+        "code": `
+using System;
+
+public static class CircleUtils
+{
+  public static int CalculateRadius(double area)
+  {
+    double radius = Math.Sqrt(area / Math.PI);
+    return (int)Math.Round(radius);
+  }
+}
+        `
+      },
+      {
+        "keywords": ["ToString", "F2", "G3"],
+        "code": `
+public static string FormatPrice(double price) {
+  return price.ToString("F2")
+}
+
+public static string FormatPrice(double price) {
+  return price.ToString("G3")
+}
+        `
+      },
+      {
+        "keywords": ["double.TryParse", "int", "double"],
+        "code": `
+string input = "19.99";
+
+if (double.TryParse(input, out double value)) {
+  if (value % 1 == 0) {
+    Console.WriteLine("Valid whole number: " + (int)value);
+  } else {
+    Console.WriteLine("Valid decimal number: " + value);
+  }
+}
+        `
+      },
+      {
+        "keywords": ["Max", "Min", "System.Linq"],
+        "code": `
+using System.Linq;
+
+int[] scores = { 72, 88, 94, 63 };
+
+int highest = scores.Max();
+int lowest = scores.Min();
+        `
       },
       {
         "keywords": [""],
-        "code": ``
-      },
-      {
-        "keywords": [""],
-        "code": ``
-      },
-      {
-        "keywords": [""],
-        "code": ``
+        "code": `
+public static double CalcDiag(double len, double width) {
+  return Math.Sqrt(Math.Pow(len, 2) + Math.Pow(width, 2));
+}
+        `
       },
     ],
     "string": [
