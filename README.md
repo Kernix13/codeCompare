@@ -25,6 +25,7 @@ The project emphasizes **mental model translation** — helping developers recog
 
 1. **IMPORTANT**: The length of the array for each data type has to be the same in each language object or the app breaks. I need to fix that.
 2. I need to change the data types to match primary language, e.g. "Array" to "List" for Python.
+3. The docs drop-down menu is causing horizontal scrolling - either shrink the entire menu font size (it looks too big anyway) or position the drop-down differently
 
 ## Getting Started
 

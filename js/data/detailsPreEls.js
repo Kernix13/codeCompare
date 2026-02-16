@@ -237,6 +237,18 @@ if (typeof value === 'string') {
         "keywords": [""],
         "code": ``
       },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
     ],  
     "string": [
       {
@@ -354,12 +366,31 @@ class User {
   }
 }
 
-const user = new User("Alice");
+const user = new User("Luna");
         `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["constructor", "this", "'methods'"],
+        "code": `
+class User {
+  constructor(username, email, password) {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.profileImage = null;
+  }
+
+  uploadProfileImage(imagePath) {
+    this.profileImage = imagePath;
+  }
+
+  displayInfo() {
+    return \`Username: \${this.username}, Email: \${this.email}\`;
+  }
+}
+
+const user = new User("Luna", "luna@email.com", "abc123");
+        `
       },
       {
         "keywords": [""],
@@ -386,6 +417,18 @@ if isinstance(value, str):
         "keywords": [""],
         "code": ``
       },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
     ],
     "string": [
       {
@@ -407,8 +450,13 @@ def capitalize(word):
       {
         "keywords": ["slice", "reverse"],
         "code": `
-def reverse_string(s):
-  return s[::-1]
+# Option 1
+def reverse_string(string):
+  return string[::-1]
+
+# Option 2 (.reverse() is another option)
+def reverse_string(string):
+  return string.sort(reverse=True)
         `
       },
       {
@@ -445,7 +493,8 @@ def count_occurrences(array, value):
   return sum(1 if val == value else 0 for val in array)
 
 count_occurrences([1, 2, 3, 4, 1, 2, 1], 1) # 3
-# This one is problematic - sum is a number function in Python
+# This one is problematic:
+# sum() is a number function in Python
         `
       },
       {
@@ -488,12 +537,27 @@ class User:
     def __init__(self, name):
         self.name = name
 
-user = User("Alice")
+user = User("Luna")
         `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["def", "__init__", "self"],
+        "code": `
+class User:
+    def __init__(self, username, email, password):
+        self.username = username
+        self.email = email
+        self.password = password
+        self.profile_image = None
+
+    def upload_profile_image(self, image_path):
+        self.profile_image = image_path
+
+    def display_info(self):
+        return f"Username: {self.username}, Email: {self.email}"
+
+user = User("Luna", "luna@email.com", "abc123")
+        `
       },
       {
         "keywords": [""],
@@ -516,6 +580,18 @@ if (is_string($value)) {
     $value = (int)$value;
 }
         `
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
       },
       {
         "keywords": [""],
@@ -634,12 +710,36 @@ class User {
     }
 }
 
-$user = new User("Alice");
+$user = new User("Luna");
         `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["public", "__construct", "$this", "'methods'"],
+        "code": `
+class User {
+    public $username;
+    public $email;
+    public $password;
+    public $profileImage;
+
+    public function __construct($username, $email, $password) {
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
+        $this->profileImage = null;
+    }
+
+    public function uploadProfileImage($imagePath) {
+        $this->profileImage = $imagePath;
+    }
+
+    public function displayInfo() {
+        return "Username: " . $this->username . ", Email: " . $this->email;
+    }
+}
+
+$user = new User("Luna", "luna@email.com", "abc123");
+        `
       },
       {
         "keywords": [""],
@@ -663,6 +763,18 @@ if (value is string)
     value = int.Parse(value).ToString();
 }
         `
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
+      },
+      {
+        "keywords": [""],
+        "code": ``
       },
       {
         "keywords": [""],
@@ -790,24 +902,52 @@ public static Dictionary<string, object> CombineObjects(
     ],
     "class": [
       {
-        "keywords": ["public", "constructor"],
+        "keywords": ["public", "constructor", "new"],
         "code": `
 public class User
 {
     public string Name;
 
-    public User(string name)
+    public User(string name) // <-- Constructor
     {
         Name = name;
     }
 }
 
-User user = new User("Alice");
+User user = new User("Luna");
         `
       },
       {
-        "keywords": [""],
-        "code": ``
+        "keywords": ["public", "constructor", "new", "'methods'"],
+        "code": `
+public class User
+{
+    public string Username;
+    public string Email;
+    public string Password;
+    public string ProfileImage;
+
+    public User(string username, string email, string password)
+    {
+        Username = username;
+        Email = email;
+        Password = password;
+        ProfileImage = null;
+    }
+
+    public void UploadProfileImage(string imagePath)
+    {
+        ProfileImage = imagePath;
+    }
+
+    public string DisplayInfo()
+    {
+        return $"Username: {Username}, Email: {Email}";
+    }
+}
+
+User user = new User("Luna", "luna@email.com", "abc123");
+        `
       },
       {
         "keywords": [""],
