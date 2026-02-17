@@ -125,6 +125,16 @@ function createOptions() {
   }
 }
 
+// 5. Get data types length by language
+function getDataTypeLen() {
+  console.log(detailsPre["JavaScript"]["number"].length); // 7
+  console.log(detailsPre["JavaScript"]["string"].length); // 9
+  console.log(detailsPre["JavaScript"]["array"].length); // 11
+  console.log(detailsPre["JavaScript"]["object"].length); // 3
+  console.log(detailsPre["JavaScript"]["class"].length); // 4
+  console.log(detailsPre["JavaScript"]["api"].length); // 4
+}
+getDataTypeLen()
 
 /**
  * * FUNCTIONS FOR EVENT LISTENERS

@@ -59,7 +59,14 @@ const JavaScript = {
     'for in loop',
     'spread operator'
   ],
-  'class': ['constructor', 'method']
+  'class': ['constructor', 'method'],
+  'api': [
+    'Basic Fetch',
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE'
+  ]
 };
 
 const Python = {
@@ -108,7 +115,14 @@ const Python = {
     'keys', 
     'values'
   ],
-  'class': ['constructor', 'method']
+  'class': ['constructor', 'method'],
+  'api': [
+    'Basic Fetch',
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE'
+  ]
 };
 
 const PHP = {
@@ -157,7 +171,14 @@ const PHP = {
     'array_keys', 
     'array_values'
   ],
-  'class': ['constructor', 'method']
+  'class': ['constructor', 'method'],
+  'api': [
+    'Basic Fetch',
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE'
+  ]
 };
 
 const CSharp = {
@@ -208,12 +229,27 @@ const CSharp = {
     'Keys', 
     'Values'
   ],
-  'class': ['constructor', 'method']
+  'class': ['constructor', 'method'],
+  'api': [
+    'Basic Fetch',
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE'
+  ]
 };
 
 /* NEXT: create pre code blocks
   1. by language
   2. by data type
+  "language": {
+    "data-type": [
+      {
+        "keywords": [],
+        "code": ``
+      }
+    ]
+  }
 */
 
 const detailsPre = {
@@ -369,10 +405,6 @@ for (const char of text.toLowerCase()) {
 }
         `
       },
-      {
-        "keywords": [""],
-        "code": ``
-      },
     ],  
     "array": [
       {
@@ -473,10 +505,6 @@ temperatures.sort((a, b) => a - b);  // ascending
 temperatures.sort((a, b) => b - a);  // descending
         `
       },
-      {
-        "keywords": [""],
-        "code": ``
-      },
     ],  
     "object": [
       {
@@ -503,10 +531,6 @@ const keys = Object.keys(order);
 const values = Object.values(order);
 const entries = Object.entries(order);
         `
-      },
-      {
-        "keywords": [""],
-        "code": ``
       },
     ],  
     "class": [
@@ -545,14 +569,34 @@ class User {
 const user = new User("Luna", "luna@email.com", "abc123");
         `
       },
+    ],
+    "api": [
       {
-        "keywords": [],
-        "code": ``
-      },
-      {
-        "keywords": [""],
-        "code": ``
-      },
+        "keywords": ["fetch", "async/await", "try/catch", "json"],
+        "code": `
+const DOMAIN = 'https://example.com';
+
+async function fetchData(endpoint) {
+	try {
+		const response = await fetch(DOMAIN + endpoint);
+
+		if (!response.ok) {
+			throw new Error(\`Response status: \${response.status}\`);
+		}
+
+		const data = await response.json();
+
+		console.log(data);
+		return data;
+	} catch (err) {
+		console.error(err);
+		return null;
+	}
+}
+
+fetchData('/some_endpoint_here');
+        `
+      }
     ]
   },
   "Python": {
@@ -702,10 +746,6 @@ for char in text.lower():
     vowel_count += 1
         `
       },
-      {
-        "keywords": [""],
-        "code": ``
-      },
     ],
     "array": [
       {
@@ -797,10 +837,6 @@ temperatures.sort()              # ascending
 temperatures.sort(reverse=True)  # descending
         `
       },
-      {
-        "keywords": [""],
-        "code": ``
-      },
     ],
     "object": [
       {
@@ -823,10 +859,6 @@ keys = order.keys()
 values = order.values()
 entries = order.items()
         `
-      },
-      {
-        "keywords": [""],
-        "code": ``
       },
     ],
     "class": [
@@ -859,14 +891,27 @@ class User:
 user = User("Luna", "luna@email.com", "abc123")
         `
       },
+    ],
+    "api": [
       {
-        "keywords": [],
-        "code": ``
-      },
-      {
-        "keywords": [""],
-        "code": ``
-      },
+        "keywords": ["requests", "get", "json", "try", "except"],
+        "code": `
+import requests
+
+def fetch_data(endpoint):
+  try:
+    response = requests.get(f'https://example.com{endpoint}')
+    response.raise_for_status()  # raises HTTPError for bad responses
+    data = response.json()
+    print(data)
+    return data
+  except requests.RequestException as err:
+    print(err)
+    return None
+
+fetch_data('/some_endpoint_here')
+        `
+      }
     ]
   },
   "PHP": {
@@ -1022,10 +1067,6 @@ for ($i = 0; $i < strlen($text); $i++) {
 }
         `
       },
-      {
-        "keywords": [""],
-        "code": ``
-      },
     ],
     "array": [
       {
@@ -1120,10 +1161,6 @@ sort($temperatures);       // ascending
 rsort($temperatures);      // descending
         `
       },
-      {
-        "keywords": [""],
-        "code": ``
-      },
     ],
     "object": [
       {
@@ -1151,10 +1188,6 @@ foreach ($order as $key => $value) {
   $entries[] = [$key, $value];
 }
         `
-      },
-      {
-        "keywords": [""],
-        "code": ``
       },
     ],
     "class": [
@@ -1200,14 +1233,41 @@ class User {
 $user = new User("Luna", "luna@email.com", "abc123");
         `
       },
+    ],
+    "api": [
       {
-        "keywords": [""],
-        "code": ``
-      },
-      {
-        "keywords": [""],
-        "code": ``
-      },
+        "keywords": ["file_get_contents", "stream_context_create", "print_r", "json_decode", "Exception", "try/catch"],
+        "code": `
+function fetchData($endpoint) {
+  $url = 'https://example.com' . $endpoint;
+
+  $options = [
+    "http" => [
+      "method" => "GET",
+      "header" => "Accept: application/json\r\n"
+    ]
+  ];
+
+  $context = stream_context_create($options);
+
+  try {
+    $response = file_get_contents($url, false, $context);
+    if ($response === false) {
+      throw new Exception("Error fetching data");
+    }
+
+    $data = json_decode($response, true);
+    print_r($data);
+    return $data;
+  } catch (Exception $e) {
+    echo $e->getMessage();
+    return null;
+  }
+}
+
+fetchData('/some_endpoint_here');
+        `
+      }
     ]
   },
   "CSharp": {
@@ -1291,7 +1351,7 @@ int lowest = scores.Min();
         `
       },
       {
-        "keywords": [""],
+        "keywords": ["Math.Sqrt", "Math.Pow"],
         "code": `
 public static double CalcDiag(double len, double width) {
   return Math.Sqrt(Math.Pow(len, 2) + Math.Pow(width, 2));
@@ -1379,10 +1439,6 @@ foreach (char c in text.ToLower()) {
   }
 }
         `
-      },
-      {
-        "keywords": [""],
-        "code": ``
       },
     ],
     "array": [
@@ -1488,10 +1544,6 @@ temperatures.Sort();                        // ascending
 temperatures.Sort((a, b) => b.CompareTo(a)); // descending
         `
       },
-      {
-        "keywords": [""],
-        "code": ``
-      },
     ],
     "object": [
       {
@@ -1523,10 +1575,6 @@ var keys = order.Keys;
 var values = order.Values;
 var entries = order.ToList();
         `
-      },
-      {
-        "keywords": [""],
-        "code": ``
       },
     ],
     "class": [
@@ -1578,14 +1626,47 @@ public class User
 User user = new User("Luna", "luna@email.com", "abc123");
         `
       },
+    ],
+    "api": [
       {
-        "keywords": [""],
-        "code": ``
-      },
-      {
-        "keywords": [""],
-        "code": ``
-      },
+        "keywords": ["HttpClient", "GetAsync", "await", "async", "try", "catch", "json"],
+        "code": `
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Text.Json;
+
+class Program
+{
+  private static readonly HttpClient client = new HttpClient();
+
+  static async Task<JsonElement?> FetchData(string endpoint)
+  {
+    try
+    {
+      var response = await client.GetAsync("https://example.com" + endpoint);
+      response.EnsureSuccessStatusCode();
+      
+      var jsonString = await response.Content.ReadAsStringAsync();
+      var data = JsonSerializer.Deserialize<JsonElement>(jsonString);
+
+      Console.WriteLine(data);
+      return data;
+    }
+    catch (Exception ex)
+    {
+      Console.WriteLine(ex.Message);
+      return null;
+    }
+  }
+
+  static async Task Main(string[] args)
+  {
+    await FetchData("/some_endpoint_here");
+  }
+}
+        `
+      }
     ]
   }
 }
