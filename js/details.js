@@ -27,6 +27,8 @@ const languages = {
   CSharp
 };
 
+const structures = ["number", "string", "array", "object", "class", "api"]
+
 /**
  * * DOM ELEMENT FUNCTIONS
  */
@@ -117,24 +119,53 @@ function createOptions() {
   // Only populate if we have a valid data type
   if (langObj && selectedDataType && langObj[selectedDataType]) {
       langObj[selectedDataType].forEach(method => {
-          const option = document.createElement('option');
-          option.textContent = method;
-          option.value = method;
-          methodsSelect.append(option);
+
+        const count = getMethodUseCount(method);
+
+        const option = document.createElement('option');
+        option.textContent = `${method} (${count})`;
+        option.value = method;
+        
+        methodsSelect.append(option);
       });
   }
 }
 
-// 5. Get data types length by language
-function getDataTypeLen() {
-  console.log(detailsPre["JavaScript"]["number"].length); // 7
-  console.log(detailsPre["JavaScript"]["string"].length); // 9
-  console.log(detailsPre["JavaScript"]["array"].length); // 11
-  console.log(detailsPre["JavaScript"]["object"].length); // 3
-  console.log(detailsPre["JavaScript"]["class"].length); // 4
-  console.log(detailsPre["JavaScript"]["api"].length); // 4
+// 5. Get the count of how many times the methods occurs in "keywords"
+// function getMthodUseCount() {
+//   const primaryLang = getLocalStorage('details-primary'); // 'JavaScript'
+//   const selectedDataType = getLocalStorage('data-type'); // number
+//   const method = getLocalStorage('method-selection'); // 1
+//   const langObjMethod = languages[primaryLang][selectedDataType];
+//   const typeObjects = detailsPre[primaryLang][selectedDataType];
+  
+//   typeObjects.forEach(item => {
+//     console.log(item.keywords); // each keywords array
+//   })
+
+//   console.log(selectedDataType, method, langObjMethod[method]); // number 1 Math.max -> should be Math.min
+//   console.log(typeObjects.length); // 7
+// }
+// getMthodUseCount()
+
+function getMethodUseCount(methodName) {
+  const primaryLang = getLocalStorage('details-primary');
+  const selectedDataType = getLocalStorage('data-type');
+
+  const typeObjects = detailsPre[primaryLang][selectedDataType];
+
+  if (!typeObjects) return 0;
+
+  let count = 0;
+
+  typeObjects.forEach(item => {
+    if (item.keywords.includes(methodName)) {
+      count++;
+    }
+  });
+
+  return count;
 }
-getDataTypeLen()
 
 /**
  * * FUNCTIONS FOR EVENT LISTENERS
@@ -178,7 +209,7 @@ function handlePrimaryCheck(e) {
   state.detailsPrimary = e.target.value;
   setLocalStorage('details-primary', state.detailsPrimary);
 
-  createOptions()
+  // createOptions()
 }
 
 // 3. Secondary language radio button check
@@ -215,7 +246,7 @@ function handleDetailsFormSubmit(e) {
   e.preventDefault();
   
   setLocalStorage('type-selection', dataTypeSelect.selectedIndex);
-  setLocalStorage('method-selection', methodsSelect.selectedIndex);
+  setLocalStorage('method-selection', methodsSelect.value);
 
   state.detailsPrimary
   const primaryDisplay = getLocalStorage('details-primary');

@@ -3,14 +3,14 @@
 */
 
 const JavaScript = {
-  'number': [
-    'min', 
-    'max', 
-    'floor', 
-    'random', 
-    'sqrt', 
-    'pow',
-    'round',
+  "number": [
+    'Math.min', 
+    'Math.max', 
+    'Math.floor', 
+    'Math.random', 
+    'Math.sqrt', 
+    'Math.pow',
+    'Math.round',
     'toFixed',
     'toPrecision',
     'parseInt', 
@@ -572,20 +572,18 @@ const user = new User("Luna", "luna@email.com", "abc123");
     ],
     "api": [
       {
-        "keywords": ["fetch", "async/await", "try/catch", "json"],
+        "keywords": ["Basic Fetch"],
         "code": `
 const DOMAIN = 'https://example.com';
 
 async function fetchData(endpoint) {
 	try {
 		const response = await fetch(DOMAIN + endpoint);
-
 		if (!response.ok) {
 			throw new Error(\`Response status: \${response.status}\`);
 		}
 
 		const data = await response.json();
-
 		console.log(data);
 		return data;
 	} catch (err) {
@@ -894,7 +892,7 @@ user = User("Luna", "luna@email.com", "abc123")
     ],
     "api": [
       {
-        "keywords": ["requests", "get", "json", "try", "except"],
+        "keywords": ["Basic Fetch"],
         "code": `
 import requests
 
@@ -1236,7 +1234,7 @@ $user = new User("Luna", "luna@email.com", "abc123");
     ],
     "api": [
       {
-        "keywords": ["file_get_contents", "stream_context_create", "print_r", "json_decode", "Exception", "try/catch"],
+        "keywords": ["Basic Fetch"],
         "code": `
 function fetchData($endpoint) {
   $url = 'https://example.com' . $endpoint;
@@ -1629,7 +1627,7 @@ User user = new User("Luna", "luna@email.com", "abc123");
     ],
     "api": [
       {
-        "keywords": ["HttpClient", "GetAsync", "await", "async", "try", "catch", "json"],
+        "keywords": ["Basic Fetch", "json"],
         "code": `
 using System;
 using System.Net.Http;
