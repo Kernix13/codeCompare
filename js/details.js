@@ -124,6 +124,7 @@ function createLanguageColumn(arr, language, el) {
 // 4. Create and addd Function/Method options into select#methods
 function createOptions() {
   methodsSelect.textContent = '';
+  setLocalStorage('method-selection', '');
   const primaryLang = getLocalStorage('details-primary');
   const selectedDataType = getLocalStorage('data-type');
   const langObj = languages[primaryLang];
@@ -211,7 +212,7 @@ function handlePrimaryCheck(e) {
   state.detailsPrimary = e.target.value;
   setLocalStorage('details-primary', state.detailsPrimary);
 
-  // createOptions()
+  createOptions();
 }
 
 // 3. Secondary language radio button check
