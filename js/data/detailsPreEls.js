@@ -97,7 +97,7 @@ const Python = {
     'List comprehension', 
     'in operator', 
     'index', 
-    'Slice syntax', 
+    'slice', 
     'list',
     'append', 
     'insert', 

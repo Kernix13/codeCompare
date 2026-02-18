@@ -44,43 +44,61 @@ function renderlanguageColumns(methodIdx = 0) {
   const primaryLang = getLocalStorage('details-primary');
   const secondaryLang = getLocalStorage('details-secondary');
   const dataType = getLocalStorage('data-type');
+  const selectedMethod = getLocalStorage('method-selection');
 
   if (!primaryLang || !secondaryLang || !dataType) {
     console.warn('Cannot render: missing primary/secondary/dataType');
     return; // skip rendering
   }
 
-  const method = getLocalStorage('method-selection') ?? 0;
+  let arrPrimary = detailsPre[primaryLang][dataType];
+  let arrSecondary = detailsPre[secondaryLang][dataType];
 
-  const arrPrimary = detailsPre[primaryLang][dataType];
-  const arrSecondary = detailsPre[secondaryLang][dataType];
+  
 
-  compareDetails.innerHTML = '';
+  compareDetails.innerHTML = ''; 
 
-  if (method > 0) {
-    // code here to return only code blocks tthat have the method name in the keywords array
+
+  const matchingIndexes = [];
+
+  arrPrimary.forEach((item, i) => {
+    if (!selectedMethod || item.keywords.includes(selectedMethod)) {
+      matchingIndexes.push(i);
+    }
+  });
+
+  if (selectedMethod && matchingIndexes.length === 0) {
+    const msg = document.createElement('p');
+    msg.textContent = `No examples for ${selectedMethod} to show.`;
+    compareDetails.append(msg);
+    return;
   }
 
-  arrPrimary.forEach((_, i) => {
+  matchingIndexes.forEach((i) => {
+
+    const primaryItem = arrPrimary[i];
+    const secondaryItem = arrSecondary[i];
+
     const grid = document.createElement('div');
     grid.className = 'grid-2';
 
     const primaryDiv = createColumn('primary');
     const secondaryDiv = createColumn('secondary');
 
-    createLanguageColumn([arrPrimary[i]], primaryLang, primaryDiv);
-    createLanguageColumn([arrSecondary[i]], secondaryLang, secondaryDiv);
+    createLanguageColumn([primaryItem], primaryLang, primaryDiv);
+    createLanguageColumn([secondaryItem], secondaryLang, secondaryDiv);
 
     grid.append(primaryDiv, secondaryDiv);
     compareDetails.append(grid);
   });
 }
-// renderlanguageColumns(); // line 75
 
 // 3. Create the elements and content for each column
 function createLanguageColumn(arr, language, el) {
 
   arr.forEach(item => {
+
+    if (!item) return;
 
     const keywords = item.keywords.join(', ');
     const preContent = item.code;
@@ -132,22 +150,6 @@ function createOptions() {
 }
 
 // 5. Get the count of how many times the methods occurs in "keywords"
-// function getMthodUseCount() {
-//   const primaryLang = getLocalStorage('details-primary'); // 'JavaScript'
-//   const selectedDataType = getLocalStorage('data-type'); // number
-//   const method = getLocalStorage('method-selection'); // 1
-//   const langObjMethod = languages[primaryLang][selectedDataType];
-//   const typeObjects = detailsPre[primaryLang][selectedDataType];
-  
-//   typeObjects.forEach(item => {
-//     console.log(item.keywords); // each keywords array
-//   })
-
-//   console.log(selectedDataType, method, langObjMethod[method]); // number 1 Math.max -> should be Math.min
-//   console.log(typeObjects.length); // 7
-// }
-// getMthodUseCount()
-
 function getMethodUseCount(methodName) {
   const primaryLang = getLocalStorage('details-primary');
   const selectedDataType = getLocalStorage('data-type');
@@ -194,9 +196,9 @@ function initDetailsPage() {
   createOptions(); // now methodsSelect.options exists
 
   // 2. Select previously saved method
-  const selectedMethodIdx = getLocalStorage('method-selection');
-  if (selectedMethodIdx !== null && methodsSelect.options[selectedMethodIdx]) {
-    methodsSelect.options[selectedMethodIdx].selected = true;
+  const selectedMethod = getLocalStorage('method-selection');
+  if (selectedMethod !== null && methodsSelect.options[selectedMethod]) {
+    methodsSelect.options[selectedMethod].selected = true;
   }
 
 }
@@ -233,12 +235,10 @@ function handleDataTypeSelect(e) {
   createOptions();
 }
 
-// 5. Data type select list change
+// 5. Method select list change
 function handleMethodSelect(e) {
-  // e.target.selectedIndex
-  // e.target.options[e.target.selectedIndex].text
-  // I need to populate this list first
-  console.log(e.target.value)
+  const selectedMethod = e.target.value;
+  setLocalStorage('method-selection', selectedMethod);
 }
 
 // 6. Form submit
@@ -246,7 +246,6 @@ function handleDetailsFormSubmit(e) {
   e.preventDefault();
   
   setLocalStorage('type-selection', dataTypeSelect.selectedIndex);
-  setLocalStorage('method-selection', methodsSelect.value);
 
   state.detailsPrimary
   const primaryDisplay = getLocalStorage('details-primary');
