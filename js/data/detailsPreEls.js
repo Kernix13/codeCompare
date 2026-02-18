@@ -199,24 +199,28 @@ const CSharp = {
     'IndexOf', 
     'Substring', 
     'Split', 
+    'Join', 
     'str.Replace', 
     'Regex.Replace', 'Trim'
   ],
   'array': [
     'Join', 
-    'Concat().ToList()', 
-    'Where().ToList()', 
+    'Concat', 
+    'ToList', 
+    'ToArray', 
+    'Where', 
     'Aggregate', 
     'Contains', 
     'IndexOf', 
     'ForEach', 
-    'Select().ToList()', 
+    'Select', 
+    'Skip', 
     'GetRange', 
     'List',
     'Add', 
+    'Take', 
     'Insert', 
     'RemoveAt', 
-    '', 
     'Reverse', 
     'Sort', '', 
     'AddRange', 
@@ -405,6 +409,16 @@ for (const char of text.toLowerCase()) {
 }
         `
       },
+      {
+        "keywords": ['slice'],
+        "code": `
+const text = 'HelloWorld';
+const result = text.slice(5); // "World"
+
+const text = 'HelloWorld';
+const result = text.slice(0, 5); // "Hello"
+        `
+      }
     ],  
     "array": [
       {
@@ -505,6 +519,24 @@ temperatures.sort((a, b) => a - b);  // ascending
 temperatures.sort((a, b) => b - a);  // descending
         `
       },
+      {
+        "keywords": ['slice'],
+        "code": `
+// Assume array of temperatures
+const result = temps.slice(2);
+
+const result = temps.slice(0, 5);
+        `
+      },
+      {
+        "keywords": ['map', 'filter'],
+        "code": `
+// Celsius to Fahrenheit conversion for temps variable
+const result = temps.map(c => (c * 9/5) + 32);
+
+const result = temps.filter(t => t <= 32);
+        `
+      }
     ],  
     "object": [
       {
@@ -744,6 +776,16 @@ for char in text.lower():
     vowel_count += 1
         `
       },
+      {
+        "keywords": ['slice'],
+        "code": `
+text = "HelloWorld"
+result = text[5:] # "World"
+
+text = "HelloWorld"
+result = text[:5] # "Hello"
+        `
+      }
     ],
     "array": [
       {
@@ -835,6 +877,24 @@ temperatures.sort()              # ascending
 temperatures.sort(reverse=True)  # descending
         `
       },
+      {
+        "keywords": ['slice'],
+        "code": `
+# Assume list of temperatures
+result = temps[2:]
+
+result = temps[:5]
+        `
+      },
+      {
+        "keywords": ['List comprehension'],
+        "code": `
+# Celsius to Fahrenheit conversion for temps variable
+result = [(c * 9/5) + 32 for c in temps]
+
+result = [t for t in temps if t <= 32]
+        `
+      }
     ],
     "object": [
       {
@@ -1065,6 +1125,16 @@ for ($i = 0; $i < strlen($text); $i++) {
 }
         `
       },
+      {
+        "keywords": ['substr'],
+        "code": `
+$text = "HelloWorld";
+$result = substr($text, 5); // "World"
+
+$text = "HelloWorld";
+$result = substr($text, 0, 5); // "Hello"
+        `
+      }
     ],
     "array": [
       {
@@ -1159,6 +1229,26 @@ sort($temperatures);       // ascending
 rsort($temperatures);      // descending
         `
       },
+      {
+        "keywords": ['array_slice'],
+        "code": `
+// Assume array of temperatures
+$result = array_slice($temps, 2);
+
+$result = array_slice($temps, 0, 5);
+        `
+      },
+      {
+        "keywords": ['array_map', 'fn', 'array_values', 'array_filter'],
+        "code": `
+// Celsius to Fahrenheit conversion for temps variable
+$result = array_map(fn($c) => ($c * 9/5) + 32, $temps);
+
+$result = array_values(
+    array_filter($temps, fn($t) => $t <= 32)
+);
+        `
+      }
     ],
     "object": [
       {
@@ -1438,6 +1528,16 @@ foreach (char c in text.ToLower()) {
 }
         `
       },
+      {
+        "keywords": ['Substring'],
+        "code": `
+string text = "HelloWorld";
+string result = text.Substring(5); // "World"
+
+string text = "HelloWorld";
+string result = text.Substring(0, 5); // "Hello"
+        `
+      }
     ],
     "array": [
       {
@@ -1542,6 +1642,24 @@ temperatures.Sort();                        // ascending
 temperatures.Sort((a, b) => b.CompareTo(a)); // descending
         `
       },
+      {
+        "keywords": ['Skip', 'ToList', 'Take'],
+        "code": `
+// Assume list of temperatures
+var result = temps.Skip(2).ToList();
+
+var result = temps.Take(5).ToList();
+        `
+      },
+      {
+        "keywords": ['Select', 'ToList', 'Where'],
+        "code": `
+// Celsius to Fahrenheit conversion for temps variable
+var result = temps.Select(c => (c * 9/5) + 32).ToList();
+
+var result = temps.Where(t => t <= 32).ToList();
+        `
+      }
     ],
     "object": [
       {
