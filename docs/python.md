@@ -1,9 +1,9 @@
 ---
-language: Python <br>
-slug: python <br>
-type: reference <br>
-level: beginner–intermediate <br>
-last_updated: 2026-01-05 <br>
+language: Python
+slug: python
+type: reference
+level: beginner–intermediate
+last_updated: 2026-01-05
 official_docs: https://docs.python.org/3/
 ---
 

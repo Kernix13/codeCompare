@@ -1,3 +1,12 @@
+---
+language: React
+slug: react
+type: reference
+level: beginner–intermediate
+last_updated: 2026-02-19
+official_docs: https://react.dev/reference/react
+---
+
 # React setup
 
 ## Level 1 – High-Level Flow (Framework Agnostic)

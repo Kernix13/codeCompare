@@ -1,9 +1,9 @@
 ---
-language: C# <br>
-slug: csharp <br>
-type: reference <br>
-level: beginner–intermediate <br>
-last_updated: 2026-01-05 <br>
+language: C#
+slug: csharp
+type: reference
+level: beginner–intermediate
+last_updated: 2026-01-05
 official_docs: https://learn.microsoft.com/en-us/dotnet/csharp/
 ---
 

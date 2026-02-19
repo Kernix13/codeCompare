@@ -1,9 +1,9 @@
 ---
-language: JavaScript <br>
-slug: javascript <br>
-type: reference <br>
-level: beginner–intermediate <br>
-last_updated: 2026-02-07 <br>
+language: JavaScript
+slug: javascript
+type: reference
+level: beginner–intermediate
+last_updated: 2026-02-07
 official_docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 ---
 
