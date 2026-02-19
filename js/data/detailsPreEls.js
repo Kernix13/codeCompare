@@ -87,6 +87,7 @@ const Python = {
     'find', 
     'slice', 
     'split', 
+    'capitalize', 
     'replace', 
     're.sub', 
     'strip'
@@ -418,6 +419,17 @@ const result = text.slice(5); // "World"
 const text = 'HelloWorld';
 const result = text.slice(0, 5); // "Hello"
         `
+      },
+      {
+        "keywords": ["split", "map", "toUpperCase", "slice", "join"],
+        "code": `
+function capitalize(str) {
+  return str
+    .split(" ")
+    .map(word => word[0].toUpperCase() + word.slice(1))
+    .join(" ")
+}
+        `
       }
     ],  
     "array": [
@@ -713,8 +725,8 @@ def slugify(text):
       {
         "keywords": ["upper", "slice"],
         "code": `
-def capitalize(word):
-  return word[0].upper() + word[1:]
+def capitalize(string):
+    return " ".join(word.capitalize() for word in string.split(" "))
         `
       },
       {
@@ -784,6 +796,13 @@ result = text[5:] # "World"
 
 text = "HelloWorld"
 result = text[:5] # "Hello"
+        `
+      },
+      {
+        "keywords": ["join", "split", "capitalize"],
+        "code": `
+def capitalize(string):
+    return " ".join((string.split(" "))).capitalize()
         `
       }
     ],
@@ -1133,6 +1152,18 @@ $result = substr($text, 5); // "World"
 
 $text = "HelloWorld";
 $result = substr($text, 0, 5); // "Hello"
+        `
+      },
+      {
+        "keywords": ["explode", "array_map", "ucfirst", "implode"],
+        "code": `
+function capitalize($str) {
+    $words = explode(" ", $str);
+    $capitalizedWords = array_map(function($word) {
+        return ucfirst($word);
+    }, $words);
+    return implode(" ", $capitalizedWords);
+}
         `
       }
     ],
@@ -1536,6 +1567,17 @@ string result = text.Substring(5); // "World"
 
 string text = "HelloWorld";
 string result = text.Substring(0, 5); // "Hello"
+        `
+      },
+      {
+        "keywords": ["Join", "Split", "Select", "ToUpper", "Substring"],
+        "code": `
+static string Capitalize(string str)
+{
+  return string.Join(" ", str
+    .Split(' ')
+    .Select(word => char.ToUpper(word[0]) + word.Substring(1)));
+}
         `
       }
     ],
