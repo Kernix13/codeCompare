@@ -15,6 +15,31 @@ official_docs: https://docs.python.org/3/
 
 The majority of these notes are from Colt's Steels's The Modern Python3 Bootcamp: 36 sections, 378 lectures, 30 hours
 
+## Table of Contents
+
+1. [Basics and miscellaneous](#basics-and-miscellaneous)
+1. [Section 10 Looping in Python](#section-10-looping-in-python)
+1. [Section 12 Lists](#section-12-lists)
+   1. [List Methods](#list-methods)
+   1. [List Slicing](#list-slicing)
+1. [](#)
+1. [](#)
+1. [](#)
+   1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+1. [](#)
+
 ## Basics and miscellaneous
 
 ```sh
@@ -31,9 +56,6 @@ python filename.py
 - Integer (floor) division: `//` → `10 // 3 = 3`
 - Print on the same line: `print("text", end=" ")`
 - Combine text and numbers in one output using a comma: `print("Age:", age)`
-
-## Section 7-9
-
 - Variable naming: **snake_case** & lowercase
 - Constants: `CAPITAL_SNAKE_CASE`
 - Classes: `UpperCamelCase` / `PascalCase`
@@ -93,7 +115,7 @@ print(txt[2:])  # Slice to end
 - Binary types: `bytes`, `bytearray`, `memoryview`
 - None type: `NoneType`
 
-## 10 Section Looping in Python
+## Section 10 Looping in Python
 
 - `for` loop: `for item in iterable:`
 - `break`: exit loop immediately
