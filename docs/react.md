@@ -17,14 +17,12 @@ official_docs: https://react.dev/reference/react
 
 1. Create project
 2. Clean starter code
-3. Create components folder
-4. Add components files in components folder
-5. Import components
-6. Structure layout
-7. Add reactive state
-8. Add side effects
-9. Style
-10. Run app
+3. Create components folder and add components files in components folder
+4. Import components
+5. Structure layout and add state
+6. Add side effects
+7. Style
+8. Run app
 
 ---
 
@@ -62,6 +60,18 @@ official_docs: https://react.dev/reference/react
 - Confirm app loads in browser
   - Stop server when finished testing
 
+```sh
+# Create React project using Vite
+npm create vite@latest
+# Install dependencies
+npm install
+# Run development server
+npm run dev
+
+# Stop development server
+# CTRL + C
+```
+
 ### 2. Clean starter code
 
 - In `src/` remove unwanted files
@@ -93,6 +103,18 @@ official_docs: https://react.dev/reference/react
   - return basic JSX markup
   - export the component as default
 
+```jsx
+const Header = () => {
+  return (
+    <header>
+      <h1>Page title</h1>
+    </header>
+  );
+};
+
+export default Header;
+```
+
 ### 4. Import and Structure Components in App.jsx
 
 `App` holds state. `App` passes state to `Header` or `MainContent` via props.
@@ -113,7 +135,7 @@ official_docs: https://react.dev/reference/react
 
 > The button example is weak but will do for now.
 
-### 5. Structure layout in App.jsx
+### 5. Structure layout and add state
 
 For a real-world best-practice minimal app, the button should live inside the child component (MainContent) and the updater function is passed down as a prop from App. That way you demonstrate proper data flow and functional patterns, not just a toy example.
 
@@ -130,26 +152,233 @@ For a real-world best-practice minimal app, the button should live inside the ch
 - Return JSX layout
   - `<Header />`, `<MainContent />`, `<Footer />`
 
+```jsx
+import { useState } from 'react';
+import Header from './components/Header';
+import MainContent from './components/MainContent';
+import Footer from './components/Footer';
+
+const App = () => {
+  const [count, setCount] = useState(0);
+  const incrementCount = () => setCount(count + 1);
+
+  return (
+    <>
+      <Header />
+      <MainContent count={count} onIncrement={incrementCount} />
+      <Footer />
+    </>
+  );
+};
+```
+
 Props are passed down to child components. Destructure in child:
 
-- `function MainContent({ count, onIncrement })`
+```jsx
+const MainContent = ({ count, onIncrement }) => {
+  return (
+    <main>
+      <h2>Counter Example</h2>
+      <p>Current Count: {count}</p>
+      <button onClick={onIncrement}>Increment</button>
+    </main>
+  );
+};
 
-### 6. Add reactive state
+export default MainContent;
+```
 
-### 7. Add side effects
+**NOTE**:
 
-### 8. Style
+- State updates trigger re-render
+- State should live in the closest common parent
+- Avoid duplicating state in multiple components
 
-### 9. Run app
+Add reactive state
+
+- Use `useState` to create reactive data
+- Never modify state directly
+- Pass state to child components via props
+- Pass updater functions when children need to change parent state
+
+### 6. Add side effects (optional)
+
+Only include this if your app requires:
+
+- Data fetching
+- Subscriptions
+- Timers
+- DOM manipulation
+
+Steps:
+
+- Import `useEffect` from react
+- Add `useEffect` inside component
+- Provide dependency array
+  - `[]` → runs once on mount
+  - `[count]` → runs when count changes
+
+**NOTE**:
+
+- Do not use `useEffect` unless necessary
+- Avoid using it for simple derived values
+- Keep effects focused and predictable
+
+### 7. Style
+
+Use `index.css` for global styles. Create component-specific CSS files or use CSS modules.
+
+- Import CSS file where needed
+  - import `'./App.css'`
+- Apply `className` to JSX elements
+
+**NOTE**:
+
+- Prefer modular styles for larger apps
+- Avoid inline styles except for dynamic values
+
+### 8. Run app
+
+- Start development server
+  - `npm run dev`
+- Open browser at provided local URL
 
 ---
 
 ## Level 3 – Add Routing (Optional Layer)
 
+### 1. Install React Router
+
+```sh
+npm install react-router-dom
+```
+
+### 2. Wrap App with BrowserRouter
+
+Open main.jsx.
+
+- Import `BrowserRouter`
+- Wrap `<App />` with it
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+);
+```
+
+### 3. Create Page Components
+
+- Create a new `pages/` folder inside `src/`
+- Inside `pages/` create:
+  - `Home.jsx`
+  - `About.jsx`
+
+Step 1 — Delete MainContent.jsx
+
+- Remove MainContent.jsx
+- Remove its import from App.jsx
+
+Step 2 — Move Counter Logic Into Home.jsx
+
+- Home.jsx now becomes:
+
+```jsx
+import { useState } from 'react';
+
+const Home = () => {
+  const [count, setCount] = useState(0);
+
+  const incrementCount = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <main>
+      <h2>Home Page</h2>
+      <p>Current Count: {count}</p>
+      <button onClick={incrementCount}>Increment</button>
+    </main>
+  );
+};
+
+export default Home;
+```
+
+### 4. Define Routes in App.jsx
+
+- Import routing components
+  - Routes
+  - Route
+- Import page components
+
+```jsx
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import About from './pages/About';
+
+const App = () => {
+  return (
+    <>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+
+      <Footer />
+    </>
+  );
+};
+
+export default App;
+```
+
+NOTE: When routing is introduced, page components replace a single MainContent component. State can now live inside individual pages instead of the top-level App component.
+
+### 5. Add Navigation Links
+
+Update Header.jsx.
+
+- Import Link from router
+- Replace anchor tags with Link
+
+```jsx
+import { Link } from 'react-router-dom';
+
+const Header = () => {
+  return (
+    <header>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
+```
+
 ---
 
 ## Level 4 – Add Express Backend (Optional Layer)
 
+ADD LATER...
+
 ---
 
 ## Level 5 – Add Database (Optional Layer)
+
+ADD LATER...
