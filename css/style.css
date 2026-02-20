@@ -220,8 +220,12 @@ ol,
   padding: 0.5rem 0 0.5rem 0.5rem;
   background: #fbfdfe;
   border: 1px solid #d0d7df;
-  min-width: 150px;
+  min-width: 100px;
   z-index: 1000;
+}
+
+.sub-nav-item {
+  font-size: 1rem;
 }
 
 .sub-nav-item > a {

@@ -7,6 +7,10 @@ last_updated: 2026-02-19
 official_docs: https://react.dev/reference/react
 ---
 
+<li><a href="./../index.html">Compare</a></li>
+<li><a href="./../details.html">In Depth</a></li>
+<li><a href="./../frameworks.html">Frameworks</a></li>
+
 # React setup
 
 ## Level 1 – High-Level Flow (Framework Agnostic)
