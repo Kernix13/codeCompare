@@ -33,7 +33,7 @@
 - `var_dump` vs `getType()` (but you have to echo it out)
 - String Concatenation: `$fullName = $firstName . ' ' . $lastName;`
 - Implicit: String to Integer conversion | Int to String | Boolean to Int |
-- Explicit: `(string)` | `(int)` | `(bool)` |
+- Explicit (type conversion): `(string)` | `(int)` | `(bool)` |
 - any string is `true` and an empty string is `false` - truthy/falsy
 - Arithmetic Operators: `+ - * / %`
 - Assignment Operator: `+=` and `-=` and `*=` and `/=`

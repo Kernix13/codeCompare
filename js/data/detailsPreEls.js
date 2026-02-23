@@ -145,6 +145,8 @@ const PHP = {
     'substr', 
     'explode', 
     'str_replace', 
+    'str_split', 
+    'strrev', 
     'preg_replace', 
     'trim'
   ],
@@ -153,6 +155,7 @@ const PHP = {
     'array_merge', 
     'array_filter', 
     'array_reduce', 
+    'array_sum', 
     'in_array', 
     'array_search', 
     'foreach', 
@@ -214,8 +217,10 @@ const CSharp = {
     'Contains', 
     'IndexOf', 
     'ForEach', 
+    'foraach', 
     'Select', 
     'Skip', 
+    'Sum', 
     'GetRange', 
     'List',
     'Add', 
@@ -1089,6 +1094,10 @@ function capitalize($word) {
 function reverseString($str) {
     return implode('', array_reverse(str_split($str)));
 }
+    
+function reverseString($str) {
+    return strrev($str);
+}
         `
       },
       {
@@ -1177,7 +1186,7 @@ function merge_arrays($arr1, $arr2) {
         `
       },
       {
-        "keywords": ["forech", "[] append"],
+        "keywords": ["foreach", "[] append"],
         "code": `
 $numbers = [1, 2, 3, 4, 5, 6, 7, 8];
 $even_squares = [];
@@ -1392,13 +1401,13 @@ fetchData('/some_endpoint_here');
   "CSharp": {
     "number": [
       {
-        "keywords": ["is", "int.Parse", "ToString"],
+        "keywords": ["is", "int.Parse"],
         "code": `
 string value = "123";
 
 if (value is string)
 {
-    value = int.Parse(value).ToString();
+    value = int.Parse(value);
 }
         `
       },
@@ -1505,6 +1514,13 @@ public static string Capitalize(string word)
 public static string ReverseString(string str)
 {
     return new string(str.Reverse().ToArray());
+}
+
+public static string ReverseString(string str)
+{
+    char[] chars = str.ToCharArray();
+    Array.Reverse(chars);
+    return new string(chars);
 }
         `
       },

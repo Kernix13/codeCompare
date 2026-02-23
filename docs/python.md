@@ -1536,4 +1536,54 @@ res = pattern.findall('text here or a variable holding the text')
 
 ## Section 35 Python + SQL
 
-## Section 36 Massive section of challenges
+```sh
+sqlite3
+sqlite
+# CTRL + d
+# .quit
+```
+
+```sql
+-- to run a .sql file
+.read filename.sql
+```
+
+- cursor: a temp workspace for sql commands
+- you need double quotes around the sql statements or triple single quotes to break into other lines
+- `(?)`
+- .connect()
+- .cursor()
+- .execute()
+- .commit()
+- .close()
+- .executemany()
+- .fetchone()
+- .fetchall()
+
+```sh
+.tables
+.schema tableName
+```
+
+```py
+import sqlite3
+
+# open the connection to the DB and create the DB - conn is common var name
+connection = sqlite3.connect("my_friends.db")
+
+# 1. create cursor object - c is common var name
+cursor = connection.cursor()
+
+# 2. execute some sql - create a table
+cursor.execute("CREATE TABLE friends (first_name TEXT, last_name TEXT, closeness INTEGER);")
+
+data = ("Steve", "Perry", 9)
+query = "INSERT INTO friends VALUES (?,?,?)"
+cursor.execute(query, data)
+
+# 3. commit changes
+connection.commit()
+
+# 4. Close the connection when done
+connection.close()
+```
