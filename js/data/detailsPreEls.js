@@ -77,6 +77,7 @@ const Python = {
   'number': [
     'min', 
     'max', 
+    'sum',
     'floor', 
     'random', 
     'sqrt', 
