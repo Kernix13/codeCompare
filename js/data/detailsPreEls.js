@@ -746,10 +746,10 @@ def slugify(text):
         `
       },
       {
-        "keywords": ["upper", "slice"],
+        "keywords": ["capitalize"],
         "code": `
-def capitalize(string):
-    return " ".join(word.capitalize() for word in string.split(" "))
+def capitalize(word):
+    return word.capitalize()
         `
       },
       {
