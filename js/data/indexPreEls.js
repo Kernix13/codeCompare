@@ -11,7 +11,11 @@ if (condition) {
   // code
 }
 
-// ternary
+// Single-line if
+if (!condition) return;
+if (!condition) continue;
+
+// Ternary
 compare ? ifTrue : ifFalse
 
 // switch statement
@@ -38,7 +42,11 @@ if ($condition) {
   // code
 }
 
-// ternary
+// Single-line if
+if (!$condition) return;
+if (!$condition) continue;
+
+// Ternary
 $compare ? $ifTrue : $ifFalse;
 
 // switch statement
@@ -65,7 +73,13 @@ else:
   # code
 
 
-# ternary (reversed)
+# Single-line if
+if not condition:
+  return
+if not condition:
+  continue
+
+# Ternary (reversed)
 ifTrue if condition else ifFalse
 
 # match/case
@@ -85,26 +99,25 @@ match value:
   "csharp": [
     `
 /* if, else if, else */
-if (condition)
-{
+if (condition) {
     // code
-}
-else if (condition2)
-{
+} else if (condition2) {
     // code
-}
-else
-{
+} else {
     // code
 }
 
-// ternary
-var res = 
-  compare ? ifTrue : ifFalse;
+// Single-line if
+if (!condition)
+  return;
+if (!condition)
+  continue;
+
+// Conditional operator
+compare ? ifTrue : ifFalse;
 
 // switch statement
-switch (value)
-{
+switch (value) {
     case "one":
         // code
         break;
@@ -222,30 +235,25 @@ for i, item in enumerate(arr):
   ],
   "csharp": [
     `
-for (int i = 0; i < num; i++)
-{
+for (int i = 0; i < num; i++) {
     // code
 }
 
-foreach (var item in arr)
-{
+foreach (var item in arr) {
     // code
 }
 
-foreach (var key in obj.Keys)
-{
+foreach (var key in obj.Keys) {
     // code
 }
 
 int num = 0;
-while (num < max)
-{
+while (num < max) {
     // code
     num++;
 }
 
-arr.ForEach((item) =>
-{
+arr.ForEach((item) => {
     // code
 });`,
   ],
@@ -282,6 +290,7 @@ function func(param) {
   return param;
 }
 
+// Arrow function
 const func = (param) => param;`,
   ],
   "php": [
@@ -290,6 +299,7 @@ function func($param) {
   return $param;
 }
 
+// Arrow function
 $func = fn($param) => $param;`,
   ],
   "python": [
@@ -298,17 +308,17 @@ def func(param):
   return param
 
 
+# Lambda function
 lambda param: param expr`,
   ],
   "csharp": [
     `
-object Func(object param)
-{
+object Func(object param) {
     return param;
 }
 
-// expression-bodied
-object Func(object prm) => prm;`,
+// Lambda expression
+Func<object, object> func = prm => prm;`,
   ],
   "dart": [
     `
@@ -368,21 +378,18 @@ c1 = CName("a", "b")`,
   ],
   "csharp": [
     `
-class CName
-{
-    public string P1;
-    public string P2;
+class CName {
+  public string P1;
+  public string P2;
 
-    public CName(string p1, string p2)
-    {
-        P1 = p1;
-        P2 = p2;
-    }
+  public CName(string p1, string p2) {
+      P1 = p1;
+      P2 = p2;
+  }
 
-    public string Method1()
-    {
-        return P1 + P2;
-    }
+  public string Method1() {
+      return P1 + P2;
+  }
 }
 
 var c1 = new CName("a", "b");`,

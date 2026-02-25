@@ -82,11 +82,8 @@ console.log(createColumn('primary'))
 
 // 3. Create headings and render content
 function renderLanguageColumn({ data, language, title, sectionEl, gridEl, columnEl }) {
-  const h2 = document.createElement('h2');
-  h2.textContent = DISPLAY_NAMES[language];
-
   const h3 = document.createElement('h3');
-  h3.textContent = title;
+  h3.textContent = DISPLAY_NAMES[language];
 
   sectionEl.append(gridEl);
   gridEl.append(columnEl);
@@ -94,19 +91,19 @@ function renderLanguageColumn({ data, language, title, sectionEl, gridEl, column
   const usesPre = [conditionals, loops, functions, classes].includes(data);
 
   if (!usesPre) {
-    renderList(data, language, columnEl, h2, h3);
+    renderList(data, language, columnEl, h3);
   } else {
-    renderPre(data, language, columnEl, h2, h3);
+    renderPre(data, language, columnEl, h3);
   }
 }
 
 // 4. Create ol and li elements and append to DOM
-function renderList(data, language, columnEl, h2, h3) {
+function renderList(data, language, columnEl, h3) {
   const prism = PRISM_LANG[language];
   if (!prism) return;
 
   const list = document.createElement('ol');
-  columnEl.append(h2, h3, list);
+  columnEl.append(h3, list);
 
   data[prism].forEach(item => {
     const li = document.createElement('li');
@@ -121,7 +118,7 @@ function renderList(data, language, columnEl, h2, h3) {
 }
 
 // 5. Create pre elements and append to DOM
-function renderPre(data, language, columnEl, h2, h3) {
+function renderPre(data, language, columnEl, h3) {
   const prism = PRISM_LANG[language];
   if (!prism) return;
 
@@ -131,7 +128,7 @@ function renderPre(data, language, columnEl, h2, h3) {
   code.textContent = data[language][0];
 
   pre.append(code);
-  columnEl.append(h2, h3, pre);
+  columnEl.append(h3, pre);
 }
 
 /**

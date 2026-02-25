@@ -100,6 +100,8 @@ const Python = {
     'any',
     'isdecimal',
     'isnumeric',
+    'isupper',
+    'islower',
     'count',
   ],
   'array': [

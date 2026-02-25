@@ -103,8 +103,11 @@ p {
 
 /* Header, headings, container */
 header {
-  padding: 1rem;
+  position: sticky;
+  top: 0;
+  padding: 1rem 0.5rem 1rem 0;
   border-bottom: 2px solid var(--primary-muted-3);
+  background-color: hsla(210, 80%, 96%, 0.9);
 }
 
 .logo {
@@ -114,7 +117,9 @@ header {
 
 h1 {
   font-weight: 600;
+  font-size: 2.625rem;
   margin: 3rem 0 2rem;
+  text-align: center;
 }
 
 h2 {
@@ -245,6 +250,20 @@ ol,
 
 #docs-nav.open .sub-nav {
   display: block;
+}
+
+.section-nav {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.section-title {
+  margin: 1rem 0;
+  padding-top: 4rem;
+  text-align: center;
+  font-size: 2.25rem;
 }
 
 .grid-2,
