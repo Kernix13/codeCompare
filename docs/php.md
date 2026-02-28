@@ -1,4 +1,17 @@
-# PHP basics
+---
+language: PHP
+slug: php
+type: reference
+level: beginner–intermediate
+last_updated: 2028-02-28
+official_docs: https://www.php.net/manual/en/index.php
+---
+
+<li><a href="./../index.html">Compare</a></li>
+<li><a href="./../details.html">In Depth</a></li>
+<li><a href="./../frameworks.html">Frameworks</a></li>
+
+# PHP notes
 
 ## basics
 
