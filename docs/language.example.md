@@ -7,8 +7,11 @@ last_updated: YYYY-MM-DD
 official_docs: https://example.com
 ---
 
-<!-- Use this for viewing markdown in the browser -> Markdown Preview Plus:
-   https://chromewebstore.google.com/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl
+<!--
+
+- You can preview markdown files in a web browser. I recommend the Chrome extension [Markdown Preview Plus](https://chromewebstore.google.com/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?pli=1).
+- I suggest choosing the theme called `ClearnessDarkLg`. You can then bookmark your "Best Of" notes for quick viewing.
+
  -->
 
 <li><a href="./../index.html">Compare</a></li>
