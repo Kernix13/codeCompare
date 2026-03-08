@@ -4,9 +4,7 @@ An interactive learning tool that helps developers understand new languages and 
 
 Built with **HTML, CSS, JavaScript, and Prism.js**, the project focuses on visual pattern recognition — showing how similar concepts are expressed across different ecosystems.
 
----
-
-## Overview
+## Project Overview
 
 **Code Comparison** is designed to help learners bridge knowledge between technologies. Instead of learning in isolation, users compare syntax, structure, tooling, and architectural patterns across:
 
@@ -21,15 +19,50 @@ The project emphasizes **mental model translation** — helping developers recog
 >
 > Full implementation examples (`details.html`) and the `frameworks.html` page are still in progress. The current version focuses on UI structure, styling, and core comparison behavior, with expanded examples planned.
 
-## To-Do
+---
 
-1. **IMPORTANT**: The length of the array for each data type has to be the same in each language object or the app breaks. I need to fix that.
-2. I need to change the data types to match primary language, e.g. "Array" to "List" for Python.
-3. The docs drop-down menu is causing horizontal scrolling - either shrink the entire menu font size (it looks too big anyway) or position the drop-down differently
+## Features
 
-## Getting Started
+### Home page
 
-1. Clone this repo
+1. User selects their primary language and a secondary language(s) to compare to their primary then submit the form
+2. List items are displayed for a row by row comparison
+   - Variables + Miscellaneous: showing things in common like syntax to define a variable or to log/print output.
+   - Sections for different data type that shows methods/functions in common
+3. Pre block comparisons
+   - Syntax comparison for loops, conditions, function, declaration, etc.
+
+### Details page
+
+1. User selects their primary language and 1 secondary language
+2. User can then select a specific data type
+3. USer can view all methods for that data type or choose a specific method/function
+4. After submitting the form, pre block comparison are shown to view the code for each language for various methods for that data type.
+
+### Frameworks page
+
+This page is under construction but will allow the user to compare 2 web frameworks.
+
+## Demo / Live Site
+
+Try the project here: https://compare-code.netlify.app/
+
+---
+
+## Technologies Used
+
+- HTML5
+- CSS3 (Flexbox & Grid layouts)
+- JavaScript (DOM manipulation & dynamic content generation)
+- [Prism.js](https://prismjs.com/) for syntax highlighting
+- Semantic `<code>` and `<pre>` elements for structured code display
+- `localStorage` to retain user selections between pages
+
+---
+
+## Installation
+
+Clone this repo:
 
 ```sh
 git clone https://github.com/Kernix13/codeCompare.git
@@ -38,14 +71,16 @@ git clone https://github.com/Kernix13/codeCompare.git
 cd codeCompare
 ```
 
-2. Open `compare.html` in your browser or serve the project locally using your preferred development server (e.g., VS Code Live Server).
+## Usage
 
-## How to Use
-
-1. Select your primary language (the one you know best).
-2. Select 1–3 languages you want to compare.
-3. Click Compare.
-4. View the side-by-side syntax comparison grid to explore differences and similarities.
+1. Open `index.html` with the VS Code extension **_Live Server_** which opens on port `5500`
+2. You can now interact with the project UI byt choosing the form elements that best fits your needs.
+   - Review side-by-side code to understand structural and conceptual differences
+3. To change the languages and code for each page & section, edit the files in `js/data`
+   - `indexListEls.js`: the list items for `index.js`
+   - `indexPreEls.js`: the pre elements for `index.js`
+   - `detailsPreEls.js`: the pre elements for `details.js`
+   - `frameworksPreEls.js`: the pre elements for `frameworks.js`
 
 ---
 
@@ -57,43 +92,32 @@ cd codeCompare
 ├── LICENSE
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
-├── .github/                 # GitHub workflows, issue templates
 ├── .gitignore
-├── docs/                    # Developer notes in Markdown
-│   └── language-example.md
-├── css/                     # Stylesheets
-│   ├── style.css
-│   └── prism.css
-├── js/                      # JavaScript logic and Prism
-│   ├── index.js             # Handles form values and comparison logic
-│   ├── listEls.js           # Data file for compare.html list items
-│   ├── preEls.js            # Data file for compare.html pre items
-│   └── prism.js
-├── compare.html             # Language syntax comparisons
-├── frameworks.html          # Framework & tooling comparisons
-└── details.html             # Method & Pattern Comparisons (WIP)
+├── .github/                   # GitHub workflows, issue templates
+├── details.html
+├── frameworks.html
+├── index.html
+├── css/
+├── docs/                      # Developer notes in Markdown
+├── js/
+│   ├── details.js             # Main file for details.html
+│   ├── frameworks.js          # Main file for frameworks.html
+│   ├── global.js              # File for globally used JavaScript
+│   ├── index.js               # Main file for index.html
+│   ├── prism.js               # File downloaded from for Prism.js
+│   ├── data/
+│   │   ├── detailsPreEls.js   # Main file for details.js
+│   │   ├── frameworkEls.js    # Main file for frameworks.js
+│   │   ├── indexListEls.js    # Main file for index.js
+│   │   └──indexPreEls.js      # Main file for index.js
 ```
 
----
+## Future Improvements / To-Do
 
-## Developer Notes Section (`/docs`)
-
-The project includes a `/docs` folder that contains personal learning notes in Markdown format.
-
-Example:
-
-- `docs/python.md` — Personal notes, references, and documentation links related to Python
-
-These files are linked within the site navigation and act as a lightweight developer knowledge base alongside the comparison tools.
-
-### Purpose
-
-This section allows:
-
-- Storing personal study notes
-- Linking to official documentation
-- Keeping framework or language-specific tips
-- Building a growing reference library while learning
+1. **IMPORTANT**: The length of the array for each data type has to be the same in each language object or the app breaks. I need to fix that.
+2. I need to change the data types to match primary language, e.g. "Array" to "List" for Python.
+3. The docs drop-down menu is causing horizontal scrolling - either shrink the entire menu font size (it looks too big anyway) or position the drop-down differently
+4. This project needs a database and a form to enter all t he code which means I need a server -> live deploy with a basck-end
 
 ### Future Direction
 
@@ -110,337 +134,13 @@ The `/docs` section is designed to expand into a customizable notes system where
 
 This makes the project not just a comparison tool, but also a structured learning workspace.
 
-## Features
-
-### Page 1 – Syntax Highlights (`index.html`)
-
-- Users select:
-  - **Primary language** (what they know best)
-  - **1–3 comparison languages**
-- Side-by-side column layout for syntax comparison.
-- Topics include:
-  - Numbers
-  - Strings
-  - Arrays
-  - Objects
-  - Conditionals
-  - Loops
-  - Functions
-  - Classes
-- Uses:
-  - Inline `<code>` for short syntax
-  - `<pre><code>` blocks for structural examples
-- Notes section highlights language-specific behaviors and unique features.
-
 ---
 
-### Page 2 – Method & Pattern Comparisons (`details.html`) — WIP
-
-This page will show complete working examples for real development tasks.
-
-Planned functionality:
-
-- Two language selection groups:
-  - **Primary language/framework**
-  - **Comparison language/framework**
-- Two specific selection groups:
-  - Data type
-  - Method/function to compare
-- Displays full code implementations for:
-  - Common methods or patterns
-  - Real-world tasks
-  - Equivalent logic across ecosystems
-
-This section is scaffolded and will expand as more examples are added.
-
----
-
-### Page 3 – Framework Comparisons (`frameworks.html`) — WIP
-
-Compares development tooling and architectural patterns across frameworks.
-
-#### Supported Framework Categories
-
-**Frontend Frameworks**
-
-- React
-- Vue
-- Svelte
-- Angular
-
-**Full-Stack Frameworks**
-
-- Django
-- Laravel
-- ASP.NET Core
-
-#### Comparison Topics Include
-
-- Project setup and CLI commands
-- Development server and build scripts
-- Routing/navigation structure
-- Component structure and rendering patterns
-- Framework-specific conventions
-
-Users select:
-
-- **Primary framework** (what they know best)
-- **Comparison framework** (what they want to learn)
-
-Frameworks are grouped by category to reinforce understanding of frontend vs full-stack roles while still allowing broad exploration.
-
----
-
-## Technologies Used
-
-- HTML5
-- CSS3 (Flexbox & Grid layouts)
-- JavaScript (DOM manipulation & dynamic content generation)
-- [Prism.js](https://prismjs.com/) for syntax highlighting
-- Semantic `<code>` and `<pre>` elements for structured code display
-- `localStorage` to retain user selections between pages
-
----
-
-## Usage
-
-1. Open the project in a browser.
-2. On **Syntax Highlights**, select a primary language and comparison languages.
-3. On **Framework Comparisons**, choose a primary framework and one to compare.
-4. On **Full Examples (WIP)**, explore implementation-level comparisons as features are added.
-5. Review side-by-side code to understand structural and conceptual differences.
-
----
-
-## Implementation Notes
-
-- Multi-line code uses `<pre><code>` for alignment and readability.
-- HTML characters such as `<` are escaped when rendering code examples.
-- Prism.js classes follow the `language-xxxx` convention.
-- List-based comparison sections may omit Prism classes for improved readability.
-- Framework options are grouped by category for clarity and future extensibility.
-
----
-
-## Project Goals
-
-This project aims to:
-
-- Help developers transition between languages and frameworks
-- Reinforce conceptual similarities across ecosystems
-- Teach tooling and architectural differences, not just syntax
-- Serve as both a learning resource and a portfolio project
-
----
-
-## To-Do
-
-1. Should I create a home page? Right now I do not have an `index.html` file.
-2. `compare.html` is 95%+ done - finish it.
-3. `details.html`: add a code block for 2 data types - try a good practical example of JavaScript `arr.filter`, and matching blocks for the other languages. Try a string or number method/function as well. I need to visualize how this page will look.
-4. `frameworks.html`: I need to split up front-end frameworks vs full-stack somehow in the form.
-5. Navigation: add a few more dummy `*.md` files then create a dropdown list for `/docs`. The sub-menu will have to be dynamic since each user will add their own files to that folder. And some users may not use it at all so have a defaault.md file
-6. Create an issue for [Markdown Preview Plus](https://github.com/volca/markdown-preview). Anchor links are still not working and frontmatter is not displaying correctly. He said he fixed the same-page anchor link issue but it still is not working.
-7. ???
-
-## For Developers
+## NOTE: For Developers
 
 The languages and frameworks in the forms on all 3 pages are specific to myself, and even they will change over time. If you want to use this project for yourself, then you will most likely want to customize the language choices.
 
 Right now, this project uses HTML + CSS + JavaScript but that may change in the future. If you develope using different languages, then you may not know what you need to change. Here are code blocks you will need to change.
-
-### compare.html
-
-Form elements - look for the comment with `LANGUAGE SELECTION FORM`
-
-1. Primary language select element: make changes to the `<option>` elements
-2. Comparison languages check boxes: make changes to the `<input>` element and its associated `<label>` element
-
-```html
-<!-- LANGUAGE SELECTION FORM -->
-<form class="language-form" id="languageForm">
-  <fieldset class="form-group select">
-    <label for="primaryLang" class="primary-lang">Primary language</label>
-    <select id="primaryLang" name="primaryLang" required>
-      <option value="">--- Select ---</option>
-      <option value="language1">Language1</option>
-      <option value="language2">Language2</option>
-      <!-- Add an option for each language, change the value for each -->
-    </select>
-  </fieldset>
-
-  <fieldset class="form-group check">
-    <legend>Compare with</legend>
-
-    <input type="checkbox" name="secondaryLang" value="lang1" id="lang1" />
-    <label for="lang1" class="checkbox">Language1</label>
-
-    <input type="checkbox" name="secondaryLang" value="lang2" id="lang2" />
-    <label for="lang2" class="checkbox">Language2</label>
-
-    <!-- Add an input for each language, change value & id -->
-    <!-- Add a label for each language, change for to match input id -->
-  </fieldset>
-
-  <button type="submit" class="btn-submit">Compare</button>
-</form>
-```
-
-3. Section elements: make changes to the `<section>` elements if you want to customize the output. The `id` is the same as the variable names in `listEls.js` and `preEls.js`.
-
-```html
-<!-- ol > li elements sections -->
-<section id="vars"></section>
-<section id="numbers"></section>
-<section id="strings"></section>
-<section id="arrays"></section>
-<section id="objects"></section>
-
-<!-- pre elements sections -->
-<section id="conditionals"></section>
-<section id="loops"></section>
-<section id="functions"></section>
-<section id="classes"></section>
-```
-
-4. Script elements: add or rename JavaScript files (`<script>` tags at bootom of page).
-
-```html
-<script src="./js/menu.js"></script>
-<script src="./js/listEls.js"></script>
-<script src="./js/preEls.js"></script>
-<script src="./js/index.js"></script>
-<script src="./js/prism.js"></script>
-```
-
-5. `js/listEls.js`: You will want to add snippets for each `<li>` element output to the page. For other languages, you need to match them up perfectly.
-6. `js/preEls.js`: Make sure the template literal code starts at the edge of the editor.
-
-```js
-const vars = {
-  "javascript": [
-    'let varName = value;',
-    'const PHI = 1.618;',
-    'null',
-    'true, false', // etc.
-  "language2": [
-    'code item1',
-    'code item2',
-    'code item3',
-    'code item4', // etc
-  ],
-  // add more list items then languages below here
-}
-
-// preEls.js
-const conditionals = {
-  "javascript": [
-    `
-/* if, else if, else */
-if (condition) {
-  // code
-} else if (condition2) {
-  // code
-} else {
-  // code
-}`, // more code below here
-  ],
-  "python": [
-    `
-""" if, elif, else """
-if condition:
-  # code
-elif condition2:
-  # code
-else:
-  # code
-`, // more code below here
-  ],
-} // add your next language here
-```
-
-### details.html
-
-1. Edit the `<input>` and `<label>` elements for the fieldset with the class of `primary-radio-group`
-2. Edit the `<input>` and `<label>` elements for the fieldset with the class of `secondary-radio-group`
-3. Edit the `<option>` element for Data Types and Methods select lists
-
-```html
-<form class="language-form" id="details-form">
-  <fieldset class="form-group primary-radio-group">
-    <legend>Primary Language</legend>
-
-    <input
-      type="radio"
-      name="primaryLang"
-      value="lang1"
-      id="primary-lang1"
-      checked
-    />
-    <label for="primary-lang1" class="radio">Language 1</label>
-    <!-- Add more input and label elements for each language -->
-  </fieldset>
-
-  <fieldset class="form-group secondary-radio-group">
-    <legend>Compare with</legend>
-
-    <input type="radio" name="secondaryLang" value="lang1" id="lang1" />
-    <label for="lang1" class="radio">Language1</label>
-    <!-- Add more input and label elements for the other languages -->
-  </fieldset>
-
-  <fieldset class="form-group select">
-    <label for="data-type" class="primary-lang">Data Type</label>
-    <select id="data-type" name="data-type" required>
-      <option value="">--- Select ---</option>
-      <option value="number">Number</option>
-      <!-- add other data types in option elements below here -->
-    </select>
-  </fieldset>
-
-  <fieldset class="form-group select">
-    <label for="methods" class="primary-lang">Function/Method</label>
-    <select id="methods" name="methods" required>
-      <option value="">--- Select ---</option>
-      <option value="pop">Pop</option>
-      <!-- add other methods in option elements below here -->
-    </select>
-  </fieldset>
-
-  <button type="submit" class="details-submit">Compare</button>
-</form>
-```
-
-4. The data JavaScript file has not been created as of 2/7/2026.
-
-### frameworks.html
-
-1. For Primary & Secondary frameworks, change the name, value and id attributes in the input element, and the for element in the label element.
-
-```html
-<fieldset class="form-group check">
-  <legend>Primary framework</legend>
-
-  <input type="radio" name="primaryFW" value="react" id="react">
-  <label for="react" class="radio">React</label>
-
-  <!-- add input and label elements for each framework -->
-</fieldset>
-
-<fieldset class="form-group check">
-  <legend>Compare with</legend>
-
-  <input type="radio" name="secondaryFW" value="react" id="react">
-  <label for="react" class="radio">React</label>
-
-  <!-- add input and label elements for each framework -->
-</fieldset>
-
-<button type="submit" class="btn-submit" disabled>Compare</button>
-</form>
-```
-
-5. The data JavaScript file has not been created as of 2/7/2026.
 
 ---
 
