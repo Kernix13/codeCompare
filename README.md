@@ -1,8 +1,12 @@
-# Code Comparison
+# codeCompare – Programming Language Syntax Comparison Tool
 
-An interactive learning tool that helps developers understand new languages and frameworks by comparing them side-by-side with technologies they already know.
+CodeCompare is a programming language syntax comparison tool that helps developers learn new languages faster by viewing code side-by-side with technologies they already know.
 
-Built with **HTML, CSS, JavaScript, and Prism.js**, the project focuses on visual pattern recognition — showing how similar concepts are expressed across different ecosystems.
+The project focuses on visual pattern recognition, showing how common programming concepts — such as functions, loops, conditionals, and data types — are written across different languages and frameworks.
+
+Built with HTML, CSS, JavaScript, and Prism.js, it provides a quick reference for comparing syntax between ecosystems.
+
+<div align="center"><img alt="Programming language syntax comparison view for 3 languages" src="./assets/programming-language-syntax-comparison.webp" /></div>
 
 ## Project Overview
 
@@ -62,9 +66,8 @@ Try the project here: https://compare-code.netlify.app/
 
 ## Installation
 
-Clone this repo:
-
 ```sh
+# Clone this repo
 git clone https://github.com/Kernix13/codeCompare.git
 
 # Change into project directory
@@ -86,7 +89,7 @@ cd codeCompare
 
 ## Project Structure
 
-```py
+```sh
 /
 ├── README.md
 ├── LICENSE
