@@ -4,9 +4,7 @@
 <li><a href="./../details.html">In Depth</a></li>
 <li><a href="./../frameworks.html">Frameworks</a></li>
 
-<br>
-
-Important notes and code snippets for Jupyter Notebooks, Pandas, Matplotlib, and Seaborn
+## Notebooks & Pandas notes and snippets
 
 - A - add cell above | B - add cell below
 - D + D - delete selected cell
@@ -179,4 +177,24 @@ titanic.pclass.value_counts().sort_index().plot(kind="bar")
 countries.loc["Greece"]
 # add square brackets to return a dataframe instead of a series
 countries.loc[["Greece"]]
+```
+
+## Matplotlib notes and snippets
+
+Sections 13-19
+
+-
+
+```py
+
+```
+
+## Seaborn notes and snippets
+
+Sections 20-22
+
+-
+
+```py
+
 ```
