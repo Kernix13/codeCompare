@@ -48,6 +48,13 @@
 - `sort_index`: to sort by the index "column"
 - `loc`: to access data by row instead of by column
 
+### read_csv and dataframe info
+
+- read_csv() | type() |
+- index_col | sep | names |
+- .columns | .shape | .dtypes
+- .head() | .tail() | .info()
+
 ```py
 import pandas as pd
 df = pd.read_csv('file.csv')
@@ -109,7 +116,14 @@ sellers.info()
 sellers.dtypes
 # just shows the col names and their data type
 # int, float, or object
+```
 
+## dataframe value methods
+
+- .min() | .max() | .sum() | .count() | .describe() | .value_counts() | .plot()
+- .values | .index |
+
+```py
 houses.min()
 # shows the min value for each column
 
@@ -146,7 +160,14 @@ netflix[["title", "rating"]]
 bestsellers["Genre"].value_counts().plot(kind="pie")
 bestsellers["Author"].value_counts().head(10).plot(kind="bar")
 bestsellers["Author"].value_counts().head(10).plot(kind="barh")
+```
 
+## sorting, indexing, rows
+
+- .index | .High |
+- .set_index() | .sort_values() | .sort_index() | .loc() | .iloc() |
+
+```py
 import pandas as pd
 btc = pd.read_csv("data/coin_Bitcoin.csv")
 
@@ -177,6 +198,10 @@ titanic.pclass.value_counts().sort_index().plot(kind="bar")
 countries.loc["Greece"]
 # add square brackets to return a dataframe instead of a series
 countries.loc[["Greece"]]
+# get multiple rows
+countries.loc[["Canada", "Mexico", "United States"]]
+# slicing
+titanic.loc[5:10]
 ```
 
 ## Matplotlib notes and snippets
