@@ -4,7 +4,7 @@
 <li><a href="./../details.html">In Depth</a></li>
 <li><a href="./../frameworks.html">Frameworks</a></li>
 
-## Notebooks & Pandas notes and snippets
+## Jupyter Notebook & Pandas notes and snippets
 
 - A - add cell above | B - add cell below
 - D + D - delete selected cell
@@ -48,7 +48,7 @@
 - `sort_index`: to sort by the index "column"
 - `loc`: to access data by row instead of by column
 
-### read_csv and dataframe info
+### Pandas: read_csv and dataframe info
 
 - read_csv() | type() |
 - index_col | sep | names |
@@ -118,7 +118,7 @@ sellers.dtypes
 # int, float, or object
 ```
 
-## dataframe value methods
+### Pandas: dataframe value methods
 
 - .min() | .max() | .sum() | .count() | .describe() | .value_counts() | .plot()
 - .values | .index |
@@ -162,10 +162,23 @@ bestsellers["Author"].value_counts().head(10).plot(kind="bar")
 bestsellers["Author"].value_counts().head(10).plot(kind="barh")
 ```
 
-## sorting, indexing, rows
+### Pandas: sorting, indexing, rows
 
 - .index | .High |
 - .set_index() | .sort_values() | .sort_index() | .loc() | .iloc() |
+- sort_values: a very commonly used method - it is a dataframe and series method
+- sort_values does not operate on the original dataframe - it makes a new dataframe but you can set it to sort in place
+- param named `key`: takes a lambda and it will run for each element
+- sort_index: to sort by the index "column" - it does not sort in place
+- `loc`: to access data by row instead of by column - access a group of rows and columns by label(s) or a boolean array
+- access by the label -> `.loc[label]`
+- it returns a series
+- use can also use slice syntax: [start:end] - end included?!?
+  - you can slice with text values
+- iloc: accrss rows out of a dataframe but it takes an integer
+- it returns a series - wrap in [] to get a dataframe
+- can pass is a list of positions - can also slice
+- with the rows you get you can also specify what columns you want
 
 ```py
 import pandas as pd
@@ -202,23 +215,137 @@ countries.loc[["Greece"]]
 countries.loc[["Canada", "Mexico", "United States"]]
 # slicing
 titanic.loc[5:10]
+
+# get 20th row
+contries.iloc[20]
+# return a dataframe
+contries.iloc[[20]]
+# slice
+contries.iloc[20:30]
+
+df.iloc[20:30, ['col1', 'col2']]
+houses.iloc[20:30, ['price', 'bedrooms']]
 ```
 
-## Matplotlib notes and snippets
+### Pandas: filtering
 
-Sections 13-19
+- .between(): - find values between ranges
+- isin - filtering a series -> find values that are in some collection
+- use the tilde `~` character to reverse the booleans
 
+```py
+# Selecting
+titanic.name
+titanic.loc[17:20]
+
+# Filtering
+t = titanic.head()
+females = titanic[t.sex == 'female'] # or
+females = titanic[titanic.sex == 'female']
+
+# between(left, right)
+houses[houses["bedrooms"].between(5, 7)]
+
+# isin(list)
+countries = ["India", "Japan", "South Korea"]
+netflix["country"].isin(countries)
+
+# True & True
+houses[(houses["waterfront"] == 1) & (houses["price"] < 500000)]
+
+# True | False
+# False | True
+# False | False
+
+houses[(houses["yr_built"] >= 2014) | (houses["yr_renovated"] >= 2014)]
+
+df = titanic
+women = df.sex == "female"
+~women
+
+# returns records with NaN or maybe other falsies
+netflix[netflix["director"].isna()]
+
+women = titanic["sex"] == "female"
+titanic[women].survived.value_counts().plot(kind="pie")
+titanic[~women].survived.value_counts().plot(kind="pie")
+```
+
+### Pandas: Adding & Removing Columns
+
+- .drop():
+
+```py
+
+```
+
+### Pandas: Updating Values
+
+- replace()
+- loc()
+
+```py
+
+```
+
+### Pandas: Working with Types and NA
+
+- astype()
+- pd.to_numeric()
+- dropna()
+- isna()
+- fillna()
 -
 
 ```py
 
 ```
 
+### Pandas: Working with Dates and Times
+
+- pd.to_datetime()
+- dt
+
+```py
+
+```
+
+- rename()
+- savefig()
+
+---
+
+## Matplotlib notes and snippets
+
+Sections 13-19
+
+- TimeDeltas
+- plt.show()
+- figsize
+- groupby()
+- agg()
+- set_index
+- xs()
+- get_level_values()
+- stack()
+- unstack()
+
+```py
+
+```
+
+---
+
 ## Seaborn notes and snippets
 
 Sections 20-22
 
--
+- load_dataset()
+- replot()
+- displot()
+- catplot
+- set_style()
+- despine()
 
 ```py
 
