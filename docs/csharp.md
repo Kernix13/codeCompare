@@ -28,11 +28,12 @@ dotnet --version
 # Create a console application
 dotnet new console -o ./ProjectName
 
-# Run your application
-dotnet run
-
+# Add your code to Program.cs
 # Compile a build of your application
 dotnet build
+
+# Run your application
+dotnet run
 
 # Create gitignore file (482 lines!)
 dotnet new gitignore
@@ -49,6 +50,12 @@ dotnet list package
 
 # Clean Build Artifacts
 dotnet clean
+
+# Remove a C# project
+dotnet sln remove <path-to-csproj>
+
+# Add a C# project
+dotnet sln add <path-to-csproj>
 ```
 
 Commands to know later

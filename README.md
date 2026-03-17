@@ -18,10 +18,10 @@ Built with HTML, CSS, JavaScript, and Prism.js, it provides a quick reference fo
 
 The project emphasizes **mental model translation** — helping developers recognize how the same concepts appear in different environments.
 
-> **Note (as of 2/6/2026)**  
-> The layout and core comparison structure are in place. Syntax sections are dynamically generated on `compare.html`.
+> **Note (as of 3/17/2026)**  
+> The layout and core comparison structure are in place. Syntax sections are dynamically generated on `index.html`, as are the code blocks on `details.html`.
 >
-> Full implementation examples (`details.html`) and the `frameworks.html` page are still in progress. The current version focuses on UI structure, styling, and core comparison behavior, with expanded examples planned.
+> Full implementation examples on the `frameworks.html` page are still in progress. The current version focuses on UI structure, styling, and core comparison behavior, with expanded examples planned.
 
 ---
 
@@ -143,7 +143,11 @@ This makes the project not just a comparison tool, but also a structured learnin
 
 The languages and frameworks in the forms on all 3 pages are specific to myself, and even they will change over time. If you want to use this project for yourself, then you will most likely want to customize the language choices.
 
-Right now, this project uses HTML + CSS + JavaScript but that may change in the future. If you develope using different languages, then you may not know what you need to change. Here are code blocks you will need to change.
+Right now, this project uses HTML + CSS + JavaScript but that may change in the future. If you develope using different languages, then you may not know what you need to change. Here are code blocks you will need to change:
+
+```js
+// Coming soon
+```
 
 ---
 
