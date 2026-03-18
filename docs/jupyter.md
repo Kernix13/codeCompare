@@ -273,10 +273,49 @@ titanic[~women].survived.value_counts().plot(kind="pie")
 
 ### Pandas: Adding & Removing Columns
 
-- .drop():
+- .drop(): drops columns or rows - it does not affect the original dataframe
+  - labels: can be a single column or a list
+  - axis: 1 = columns
+  - `inplace=True` to actually remove from the dataframe
+- `axis`: default is `0` which means row or to drop by the index label
+- you can also delete a row by position
+- `index[]`: add a single index number or use slice syntax
+- .insert(): use when you want the column to go in a specific position
+- you can also copy the values from another column
 
 ```py
+# drop(labels, axis)
+# Drop "Symbol" column
+btc.drop(labels="Symbol", axis=1)
 
+# Drop multiple columns
+# btc.drop(labels=["SNo", "Name", "Symbol"], axis='columns')
+btc.drop(columns=["SNo", "Name", "Symbol"])
+
+# Dropping rows
+countries.drop(labels="Denmark", axis=0)
+
+# since labels is the 1st arg, you can just pass a list
+# and you can not provide axis since the default is 0
+countries.drop(["Denmark", "Finland", "Iceland"])
+
+# drop by index
+countries.drop(countries.index[0:3])
+
+# adding static columns
+# add "species" series to the titanic dataframe
+titanic["species"] = "human"
+
+# use insert() when you want the column to go in a specific position
+houses.insert(1, "county", "King County")
+
+# copy another column's values - can do the same using insert()
+houses["sales_price"] = houses["price"]
+
+# creating new dynamic columns
+titanic["num_relatives"] = titanic["sibsp"] + titanic["parch"]
+houses["price_sqft"] = houses["price"] / houses["sqft_living"]
+btc["close"] - btc["open"]
 ```
 
 ### Pandas: Updating Values
