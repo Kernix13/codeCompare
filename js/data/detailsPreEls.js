@@ -336,6 +336,8 @@ if (!Number.isNaN(value) && Number.isInteger(value)) {
 } else if (!Number.isNaN(value)) {
   value = parseFloat(input);
   console.log('Valid decimal number:', value);
+} else {
+  console.log('Invalid number: ', input);
 }
         `
       },
@@ -717,7 +719,7 @@ try:
   else:
     print('Valid decimal number:', value)
 except ValueError:
-  print('Invalid number')
+  print('Invalid number:', input_value)
         `
       },
       {
@@ -1068,6 +1070,8 @@ if (!is_nan($value) && intval($value) == $value) {
   echo 'Valid whole number: ' . intval($value);
 } elseif (!is_nan($value)) {
   echo 'Valid decimal number: ' . $value;
+} else {
+  echo 'Invalid number: ' . $input;
 }
         `
       },
@@ -1484,6 +1488,8 @@ if (double.TryParse(input, out double value)) {
   } else {
     Console.WriteLine("Valid decimal number: " + value);
   }
+} else {
+  Console.WriteLine("Invalid number: " + input);
 }
         `
       },

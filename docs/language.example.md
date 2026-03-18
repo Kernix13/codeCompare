@@ -8,10 +8,10 @@ official_docs: https://example.com
 ---
 
 <!--
-
-- You can preview markdown files in a web browser. I recommend the Chrome extension [Markdown Preview Plus](https://chromewebstore.google.com/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?pli=1).
-- I suggest choosing the theme called `ClearnessDarkLg`. You can then bookmark your "Best Of" notes for quick viewing.
-
+✅ You can preview markdown files in a web browser. I recommend the Chrome extension [Markdown Preview Plus](https://chromewebstore.google.com/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?pli=1).
+✅ I suggest choosing the theme called `ClearnessDarkLg`. You can then bookmark your "Best Of" notes for quick viewing.
+📌 Anchor links do not work for this extension. I opened an issue and the repo owner said he fixed it but it has not changed.
+📌 Also, frontmatter is not displaying correctly in the browser
  -->
 
 <li><a href="./../index.html">Compare</a></li>

@@ -56,6 +56,10 @@ dotnet sln remove <path-to-csproj>
 
 # Add a C# project
 dotnet sln add <path-to-csproj>
+
+# What are these:
+dotnet --list-sdks
+dotnet --info
 ```
 
 Commands to know later
@@ -78,7 +82,16 @@ dotnet new webapi -o MyApi
 dotnet new maui -o MyMobileApp
 ```
 
+## To-do - add these
+
+- code blocks of loops and conditionals
+- Add Console.Read(), Console.ReadLine(), Console.ReadKey()
+- string[] names = new string[3] + the syntax using {}
+- Length
+
 ## Intro
+
+> THERE IS TOO MUCH TEXT FROM HERE DOWN - TRIM IT DOWN
 
 - The .NET compiler is a program that converts the source code into a portable language called intermediate language
 - The .NET compiler saves the IL code into a file called a .NET assembly
@@ -190,6 +203,8 @@ Console.WriteLine(true);
 
 ```cs
 string firstName;
+// You can also use var but you must declare a value
+var firstName = 'value';
 ```
 
 - this variable can now only hold string values
@@ -600,6 +615,10 @@ Use `docs.microsoft.com` for information about overloaded methods:
 - Use `else if` statements to create multiple exclusive conditions.
 - An `else` is optional, but it must always come last when included.
 
+```cs
+// Detailed conditional code blocks here
+```
+
 ## Get started with array basics
 
 - https://learn.microsoft.com/en-us/training/modules/csharp-arrays/2-exercise-array-basics
@@ -672,6 +691,10 @@ int sum = 0;
 foreach (int num in nums) {
   sum += num;
 }
+```
+
+```cs
+// examples for: for, while, and do while here
 ```
 
 ## Variable names part 2
