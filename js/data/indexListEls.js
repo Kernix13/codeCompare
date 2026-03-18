@@ -500,7 +500,8 @@ const objects = {
   ],
 }
 
-// This one needs work
+// This one needs work cbut is meant to show important methods/props
+// that are unique to a language with no real correspondence in other languages
 const uniques = {
   "javascript": [
     'console.dir',
@@ -513,9 +514,9 @@ const uniques = {
     'some',
     'find',
     'findIndex',
-    '',
-    '',
-    '',
+    'e.target.value',
+    'e.target.closest',
+    'e.target.contains',
     '',
     '',
     '',

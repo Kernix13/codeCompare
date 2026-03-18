@@ -228,6 +228,17 @@ char userOption;
 int gameScore;
 float particlesPerMillion;
 bool processedCustomer;
+
+int x; // declaration only
+x = 3; // initialization only
+int y = 4; // declaration + initialization
+double phi = 1.618;
+
+bool isDeveloper = true;
+bool hasJob = false;
+
+char flat = '♭';
+String name = "Luna";
 ```
 
 Reassign the value of a variable
@@ -870,6 +881,14 @@ string value1 = "5";
 string value2 = "7";
 int result = Convert.ToInt32(value1) * Convert.ToInt32(value2);
 Console.WriteLine(result); // 35
+
+double a = 3.14
+int b = Convert.ToInt32(a); // System.Int32
+String c = Convert.ToString(a) // System.String
+Console.WriteLine(a.GetType())
+
+Console.WriteLine("Enter your age:");
+ing name = Convert.ToInt32(Console.ReadLine());
 ```
 
 - `System.Int32` is the name of the underlying data type in the .NET Class Library that the C# programming language maps to the keyword `int`
@@ -881,6 +900,22 @@ So, when should you use the Convert class? **The Convert class is best for conve
 When you're casting int value = (int)1.5m;, the value of the float is truncated so the result is 1, meaning the value after the decimal is ignored completely. You could change the literal float to 1.999m and the result of casting would be the same.
 
 When you're converting using `Convert.ToInt32()`, the literal float value is properly rounded up to 2. If you changed the literal value to 1.499m, it would be rounded down to 1.
+
+### Math class
+
+```cs
+double x = 3;
+double y = 5;
+
+double a = Math.Pow(x, 2); // 9
+double b = Math.Sqrt(x);
+double c = Math.Abs(-3);
+double d = Math.Round(3.14); // 3
+double e = Math.Ceiling(3.14); // 4
+double f = Math.Floor(3.99); // 3
+double g = Math.Max(x, y); // 5
+double h = Math.Min(x, y); // 3.99
+```
 
 ## Examine the TryParse() method
 
