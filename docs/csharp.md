@@ -57,8 +57,10 @@ dotnet sln remove <path-to-csproj>
 # Add a C# project
 dotnet sln add <path-to-csproj>
 
-# What are these:
+# Show installed .NET SDKs (version numbers and install locations)
 dotnet --list-sdks
+
+# Display detailed information about your .NET environment
 dotnet --info
 ```
 
@@ -87,41 +89,118 @@ dotnet new maui -o MyMobileApp
 - code blocks of loops and conditionals
 - Add Console.Read(), Console.ReadLine(), Console.ReadKey()
 - string[] names = new string[3] + the syntax using {}
-- Length
+- .Length
+- .Conains()
+- &&
+- string?
 
-## Intro
+## Intro to C# and .NET
 
-> THERE IS TOO MUCH TEXT FROM HERE DOWN - TRIM IT DOWN
+### Core Concepts
 
-- The .NET compiler is a program that converts the source code into a portable language called intermediate language
-- The .NET compiler saves the IL code into a file called a .NET assembly
-- The .NET runtime is an execution environment for your compiled .NET assembly
-- the .NET runtime is what executes and manages your application as it runs on a host operating system
-- application frameworks and libraries of functionality allow you to quickly build rich applications with less effort than older development methods
-- A code library encapsulates functionality for a specific purpose into a single assembly
-- The libraries provide a vast array of functionality you can use in your applications. You merely reference those assemblies and call the methods.
-- An application framework combines several related libraries, along with starter projects, file templates, code generators, and other tools
-- These application frameworks are known as app models
-- You can install the .NET SDK directly or by installing Visual Studio 2022.
-- The .NET SDK preinstalls a comprehensive set of libraries and application frameworks called the base class library
-- developers use package managers like NuGet to find and integrate code libraries from package repositories like the NuGet Gallery
+- The .NET compiler converts C# source code into **Intermediate Language (IL)**.
+- The compiled IL is stored in a **.NET assembly** (e.g., `.dll` or `.exe`).
+- The **.NET runtime (CLR)** executes and manages the application on the host operating system.
+- The runtime handles memory management, execution, and other system-level services.
 
-### Major app models
+### Libraries and Frameworks
 
-- Web, _ASP.NET Core_: The framework for building server-side logic.
-- Web, _ASP.NET Core MVC_: The framework for building server-side logic for web pages or web APIs.
-- Web, _ASP.NET Core Razor Pages_: The framework for building server-generated HTML.
-- Web client, _Blazor_: Blazor is a part of ASP.NET Core. Its two modes allow for either Document Object Model (DOM) manipulation via sockets as a communication vehicle for running server-side code, or a WebAssembly implementation for running compiled C# on a browser.
-- Desktop, _.NET for Mac_: Allows .NET developers to build apps for Mac devices with native UI and API access.
-- Desktop, _WinForms_: A framework for building "battleship gray" Windows-style applications.
-- Desktop, _Windows Presentation Foundation (WPF)_: A framework for building dynamic desktop applications that conform to different form factors. WPF allows form elements to perform movement, fades, glides, and other effects with the help of a rich library of animations.
-- Mobile, _.NET for Android_: Allows .NET developers to build apps for Android devices with native UI and API access.
-- Mobile, _.NET for iOS_: Allows .NET developers to build apps for iOS and iPadOS with native UI and API access.
-- Multi-Platform App UI, _.NET MAUI_: The premier way to build apps for iOS, Android, Mac, and Windows from a single shared code base with native UI and access to native APIs.
+- A **class library** encapsulates reusable functionality into assemblies.
+- .NET provides a large set of built-in libraries known as the **Base Class Library (BCL)**.
+- Developers can reference these libraries and call their methods in applications.
+- External libraries can be installed via package managers like **NuGet**.
+
+- An **application framework** (app model) includes:
+  - Libraries
+  - Project templates
+  - Code generators
+  - Tooling for building specific types of applications
+
+### .NET SDK
+
+- The **.NET SDK** includes:
+  - The compiler
+  - The runtime
+  - The Base Class Library (BCL)
+  - Project templates and CLI tools
+- It can be installed standalone or as part of **Visual Studio**.
+
+---
+
+## Major App Models
+
+### Web
+
+- **ASP.NET Core**: Framework for building web apps and APIs.
+- **ASP.NET Core MVC**: Pattern-based framework for structured web apps.
+- **ASP.NET Core Razor Pages**: Simplified model for server-rendered web pages.
+- **Blazor**:
+  - Runs C# in the browser via **WebAssembly**, or
+  - Uses server-side execution with real-time communication (SignalR)
+
+### Desktop
+
+- **WinForms**: Simple Windows desktop apps (legacy but still used).
+- **WPF (Windows Presentation Foundation)**: Rich, modern desktop UI framework.
+
+### Mobile & Cross-Platform
+
+- **.NET MAUI**:
+  - Build apps for iOS, Android, macOS, and Windows
+  - Single shared codebase with native UI access
+
+- (.NET for iOS/Android are now generally used via MAUI rather than separately)
+
+---
+
+## Basic Code Structure
+
+- `public static void Main()` defines the program entry point.
+- A **method** is a block of code that performs a specific task.
+- Methods are defined inside **classes**.
+- A class can contain multiple methods.
+
+---
+
+## How .NET Code Runs
+
+1. You run a build command (e.g., `dotnet build`).
+2. The C# compiler checks for syntax errors and compiles the code into IL.
+3. The compiled assembly is executed by the .NET runtime.
+4. Execution begins in the `Main()` method (by convention in the `Program` class).
+5. The runtime executes instructions sequentially.
+6. When finished, the application exits and resources are released.
+
+---
+
+## When to Use .NET
+
+- **Enterprise applications** (scalable, maintainable systems)
+- **Web applications and APIs** (via ASP.NET Core)
+- **Cloud applications**:
+  - Integrates with Azure services
+  - Supports serverless (Azure Functions)
+- **Machine learning**:
+  - **ML.NET** for model-based predictions
+- **Cross-platform apps**:
+  - Web, desktop, and mobile via MAUI
+- **IoT applications**:
+  - Works with hardware via GPIO, serial ports, etc.
+
+---
 
 ## Basics
 
-- Writing C# code is an exercise in precision. If you type just one character incorrectly, you'll get an error message in the output area when you run the code
+Writing C# code requires precision—small mistakes (even a single character) will cause compile-time errors.
+
+### `Console.WriteLine` vs `Console.Write`
+
+- `Console.WriteLine()`:
+  - Prints output followed by a **new line**
+  - Each call starts on a new line
+- `Console.Write()`:
+  - Prints output **without** adding a new line
+  - Subsequent output continues on the same line
 
 ```cs
 Console.WriteLine("Hello World!");
@@ -130,52 +209,47 @@ Console.Write(" ");
 Console.Write("You wrote your first line of code.");
 ```
 
-The difference between Console.Write and Console.WriteLine
+Basic Syntax Concepts
 
-- `Console.WriteLine()`: To print an entire message to the output console. At the end of the line, it adds a line feed similar to how to create a new line of text by pressing Enter or Return (block)
-- `Console.Write()`: To print to the output console. So, the next call to Console.Write() prints another message to the same line (inline)
-- `Console.WriteLine()` = block | `Console.Write()` = inline - `Console.WriteLine` prints the output on the existing line and appends a new line after it.
-- A special program called a compiler converts your source code into a different format that the computer's central processing unit (CPU) can execute
-- When the phrase is surrounded by `double-quotation` marks in your C# code, it's called a _literal string_
-- The `Console` part is called a **class** - Classes "own" methods, methods live inside of a class
-- **To visit the method, you must know which class it's in**
-- a `.` dot (or period) that separates the class name `Console` and the method name `WriteLine()` - The period is the _member access operator_
-- the semicolon `;` is the `end of statement operator`. A statement is a complete instruction in C#. The semicolon tells the compiler that you've finished entering the command
+- Console is a class
+- WriteLine() and Write() are methods inside the Console class
+- The . is the member access operator (used to access methods on a class)
+- ; is the statement terminator (marks the end of an instruction)
+- A compiler converts your source code into a format the computer can execute
 
-Use string literals (1)
+### String Literals (string)
 
 - A `literal` value is a constant value that never changes
-- Use the `string` data type whenever you have alphanumeric words, phrases, or data for presentation, not calculation
+- Used for text (words, phrases, display data)
+- Defined with double quotes
 
-Use character literals (2)
+### Character Literals (char)
 
 - If you only wanted a single alphanumeric character printed to screen, you could create a _char literal_ by surrounding one alphanumeric character in `single quotes`.
-- The term `char` is short for character. In C#, this data type is officially named "char", but frequently referred to as a "character".
-- Single quotes create a `character` literal. When you use single quotation marks, the C# compiler expects a single character - use `char` whenever you have a single alphanumeric character
-- Recall that using double quotation marks creates a `string` data type
+- Represents a single character
+- Defined with single quotes
 
-Use integer literals (3)
+### Integer Literals (int)
 
-- If you want to display a numeric whole number (no fractions) value in the output console, you can use an `int literal`
-- An int literal requires no other operators like the string or char
+- Whole numbers (no decimals)
+- No special syntax required
 
-Use floating-point literals (4)
+### Floating-Point Literals
 
-- A floating-point number is a number that contains a decimal
-- C# supports three data types to represent decimal numbers: `float`, `double`, and `decimal`. Each type supports varying degrees of precision.
-- To create a `float` literal, append the letter `F` after the number
-- the F is called a _literal suffix_
-- You can use either a lower-case `f` or upper-case `F` as the literal suffix for a float
-- To create a `double` literal, just enter a decimal number. The compiler defaults to a double literal when a decimal number is entered without a literal suffix
-- To create a `decimal` literal, append the letter `m` after the number. In this context, the m is called a literal suffix. The literal suffix tells the compiler you wish to work with a value of decimal type. You can use either a lower-case `m` or upper-case `M` as the literal suffix for a decimal
+Used for decimal numbers. C# supports three types:
 
-Use Boolean literals (5)
+- `float` (lower precision) → requires `f` or `F` suffix
+- `double` (default) → no suffix needed
+- `decimal` (high precision, commonly used for money) → requires `m` or `M` suffix
+- Prefer `decimal` for financial calculations (higher precision)
 
-- If you wanted to print a value representing either `true` or `false`, you could use a `bool` literal
-- You'll use bool values extensively when you start to add decision logic to your applications. You'll evaluate expressions to see whether the expression is true or false
+### Boolean Literals (bool)
+
+- Represents `true` or `false`
+- Used in conditions and decision-making
 
 ```cs
-// String datatype:
+// string literal:
 Console.WriteLine("Hello");
 
 // char literal:
@@ -197,33 +271,16 @@ Console.WriteLine(12.39816m);
 Console.WriteLine(true);
 ```
 
-## variables
+## Variables
 
 - To create a new variable, you must first declare the data type of the variable, and then give it a name
 
 ```cs
+// this variable can only hold string values:
 string firstName;
 // You can also use var but you must declare a value
 var firstName = 'value';
-```
 
-- this variable can now only hold string values
-- You can choose any name as long as it adheres to a few C# syntax rules for naming variables.
-
-Variable name rules and conventions
-
-- Variable names can contain alphanumeric characters and the underscore character.
-- Variable names must begin with an alphabetical letter or an underscore, not a number.
-- Variable names are case-sensitive, meaning that `string Value;` and `string value;` are two different variables.
-- Variable names must not be a C# keyword.
-- Variable names should use _camel case_: string thisIsCamelCase;.
-- Variable names should **begin with an alphabetical letter**. Developers use the _underscore_ for a special purpose
-- Variable names should be descriptive and meaningful in your app.
-- Variable names should be one or more entire words appended together. _Don't use contractions or abbreviations_ because the name of the variable (and therefore, its purpose) may be unclear to others who are reading your code.
-- Variable names shouldn't include the data type of the variable.
-
-```cs
-// examples:
 char userOption;
 int gameScore;
 float particlesPerMillion;
@@ -241,7 +298,7 @@ char flat = '♭';
 String name = "Luna";
 ```
 
-Reassign the value of a variable
+### Reassign the value of a variable
 
 - **You can reuse and reassign the variable as many times as you want**
 
@@ -272,8 +329,19 @@ Variables using the `var` keyword must be initialized
 
 Why use the var keyword?
 
-- The var keyword has an important use in C#. Many times, the type of a variable is obvious from its initialization. In those cases, it's simpler to use the var keyword.
-- The var keyword can also be useful when planning the code for an application. When you begin developing code for a task, you may not immediately know what data type to use. Using var can help you develop your solution more dynamically
+- `var` declares an **implicitly typed local variable**
+- The compiler determines the type at compile time from the assigned value
+- After that, the variable behaves exactly like a strongly typed variable
+- var does not make C# dynamically typed
+- The type is still determined at compile time and cannot change
+
+Rules:
+
+- Variables declared with var must be initialized
+- The type is fixed after assignment (it cannot change later)
+- Use it when the type is obvious from the assignment
+- Use it when the type is long or complex
+- Do not use it when it makes the code harder to read
 
 ## Basic String Formatting in C#
 
@@ -392,6 +460,13 @@ Casting:
 - You use the name of the data type surrounded by parentheses in front of the value to cast it
 - NOTE: three uses for the parenthesis operator: method invocation, order of operations and casting
 
+```cs
+// Perform division with explicit cast - 2 versions
+// NOTE: Most common / idiomatic syntax is no space
+decimal someValue1 = (decimal)numerator / denominator;
+decimal someValue2 = numerator / (decimal)denominator;
+```
+
 Increment/decrement:
 
 - you'll need to increment and/or decrement values, especially when you're writing looping logic or code that interacts with a data structure
@@ -419,177 +494,201 @@ dotnet --version
 3. Run the .NET SDK installer file
 4. On the .NET SDK Installer window, select Install
 
-## Create, build, and run your application
+<!-- 🚫 STOP HERE -->
 
-The .NET software development kit (SDK) includes a command-line interface (CLI) that can be accessed from Visual Studio Code's integrated Terminal. During this training, you use .NET CLI commands to create new console applications, build your project code, and run your applications
+## Create, Build, and Run a .NET Application
 
-- the following .NET CLI command will create a new console application in the specified folder location
+The **.NET SDK** includes the **.NET CLI**, which lets you create, build, and run applications from the terminal.
+
+### Create a New Project
 
 ```sh
 dotnet new console -o ./ProjectName
 ```
 
-The structure of a CLI command consists of the following three parts:
+**Command structure:**
 
-- The driver: `dotnet` in this example.
-- The command: `new console` in this example to create a console project.
-- The command arguments: `-o ./ProjectName` in this example.
-- `-o` means "output directory" - short for `--output`
-- if you omit -o, the project files will be created in the current directory
-- This .NET CLI command uses a .NET program template to create a new C# console application project in the specified folder location. The command creates the ProjectName folder for you, and uses ProjectName as the name of your `.csproj` file
+- **Driver**: `dotnet`
+- **Command**: `new console`
+- **Arguments**: `-o ./ProjectName`
 
-Update, build, and run your application:
+**Notes:**
 
-- In the Visual Studio Code EXPLORER view, `right-click` the TestProject folder, and then select `Open in integrated Terminal`
+- `-o` = output directory (`--output`)
+- If omitted, files are created in the current directory
+- Creates a folder, project file (`.csproj`), and starter code
 
-> The first time you edit a .cs file, Visual Studio Code may prompt you to add the missing assets to build and debug your app. If you see the prompt, you can select `Yes`
-
-- To compile a build of your application, enter the following command at the Terminal command prompt:
+### Build the Application
 
 ```sh
 dotnet build
 ```
 
-- The dotnet build command builds the project and its dependencies into a set of binaries.
-- The binaries include the project's code in Intermediate Language (IL) files with a `.dll` extension.
-- Depending on the project type and settings, other files may also be included. If you're curious, you can find the TestProject.dll file in the EXPLORER panel
-- To run your application, enter the following command at the Terminal command prompt
+- Compiles source code into **Intermediate Language (IL)**
+- Outputs a `.dll` assembly and related files
+
+### Run the Application
 
 ```sh
 dotnet run
 ```
 
-- The `dotnet run` command runs source code without any explicit compile or launch commands. It provides a convenient option to run your application from the source code with one command.
-- It's useful for fast iterative development from the command line. The command depends on the dotnet build command to build the code
+- Builds and runs the application in one step
+- Useful for fast iteration during development
 
-## Call Methods From the .NET Class Library Using C#
+---
 
-- The C# programming language is supplemented by a large library of functionality
-- learn about class libraries, and write code that calls methods in the .NET Class Library.
-- You learn the characteristics of methods, and why methods of the .NET Class Library are designed and implemented differently across the .NET Class Library
-- You'll need the .NET Runtime, which hosts and manages your code as it executes on the end user's computer
-- You'll also rely on the .NET Class Library, a prewritten collection of coding resources that you can use in your applications
+## .NET Class Library
 
-What is the .NET Class Library?:
+- The **.NET Class Library** is a large collection of prebuilt classes and methods
+- Provides functionality for:
+  - Console I/O (`Console`)
+  - Web apps
+  - Desktop apps
+  - Databases
+  - And more
 
-- `.NET Class Library`: an organized collection of programming resources - is a collection of thousands of classes containing tens of thousands of methods
-- the `Console` class for developers working on console applications
-- You can think of a class as a container for methods
-- any methods that can send or receive information from a console window are collected into the `System.Console` class in the .NET Class Library
-- ...to create dynamic web applications
-- ...to build native desktop applications
-- ...to access a database
-- There are other classes with methods that spans a wide range of device platforms, application frameworks, and technology areas
+- A **class** is a container for methods
+- Even data types (like `int`, `string`) are implemented as classes behind the scenes
 
-Even data types are part of the .NET Class Library:
+### Finding What You Need
 
-- behind the scenes, the data types are implemented just like every other class in the .NET Class Library
+- Use search engines for examples and solutions
+- Use official Microsoft documentation for accurate reference
 
-How to find what you need in the .NET Class Library
+### Calling Methods
 
-- When you have trouble figuring out a programming task, you can use your favorite search engine to find blog posts, articles, or forums where other developers have worked through similar issues.
-- Third-party sources can give you clues about which .NET classes and methods you might want to use, and you may even find sample code that you can try
-- Microsoft provides an online language reference and programming guide for C#
+- Methods can:
+  - Accept input (parameters)
+  - Return values
 
-## Call the methods of a .NET Class
+---
 
-- how to pass input values to a method, and how a method can be used to return a value to the calling routine
-- open Program.cs - delete everything
-- `.Next(min, max)` - >= min, < max
-- Open in Integrated Terminal
-- to run your code, type `dotnet run`
-- some methods are _stateful_ and others are _stateless_
+## Stateful vs Stateless Methods
 
-Stateful versus stateless methods:
+### Stateless Methods (Static)
 
-- the term _state_ is used to describe the condition of the execution environment at a specific moment in time
-- As your code executes line by line, values are stored in variables.
-- **At any moment during execution, the current state of the application is the collection of all values stored in memory**
-- Some methods don't rely on the current state of the application to work properly. In other words, _stateless methods_ are implemented so that they can work without referencing or changing any values already stored in memory. Stateless methods are also known as _static methods_
-- `Console.WriteLine` doesn't rely on any values stored in memory - It performs its function and finishes without impacting the state of the application in any way
-- Other methods, however, must have access to the state of the application to work properly
-- `stateful methods` - rely on values stored in memory by previous lines of code that have already been executed.
-- they modify the state of the application by updating values or storing new values in memory. They're also known as _instance methods_
+- Do **not** depend on stored data (state)
+- Can be called directly from the class
 
-Stateful (instance) methods keep track of their state in fields, which are variables defined on the class. Each new instance of the class gets its own copy of those fields in which to store state
+```cs
+Console.WriteLine("Hello");
+```
 
-A single class can support both stateful and stateless methods. However, _when you need to call stateful methods, you must first create an instance of the class_ so that the method can access state
+### Stateful Methods (Instance)
 
-Creating an instance of a class
+- Depend on data stored in memory (state)
+- Require an **object instance**
 
-- An instance of a class is called an `object`.
-- To create a new instance of a class, you use the `new` operator
+### Creating an Instance
+
+- An instance of a class is called an **object**
+- Created using the `new` operator
 
 ```cs
 Random dice = new Random();
-Random dice = new();
 int roll = dice.Next();
 ```
 
-The `new` operator does several important things:
+**What `new` does:**
 
-- It first requests an address in the computer's memory large enough to store a new object based on the Random class.
-- It creates the new object, and stores it at the memory address.
-- It returns the memory address so that it can be saved in the dice variable.
+- Allocates memory for the object
+- Creates the object
+- Returns a reference to it
 
-Why is the `Next()` method stateful?
+### Why `Random.Next()` is Stateful
 
-- The state that is captured and maintained through the lifetime of the `dice` object is the seed value
-- Each subsequent call to the `Next()` method is rerunning the algorithm, but ensures that the seed changes so that the same value isn't (necessarily) returned
+- Uses an internal **seed value**
+- Each call updates the state to produce different results
 
-**How can you determine whether you need to create an instance of a class before calling its methods?**
+### How to Know if a Method is Static or Instance
 
-- consult the documentation
-- The documentation includes examples that show whether the method must be called from the object instance or directly from the class
-- or you can attempt to access the method directly from the class itself - If it works, you know that it's a stateless method - The worst that can happen is that you'll get a compilation error
-- `Next()` is a stateful method
-- If the method that you're interested in using is stateless, no red squiggly line will appear
+- Check documentation
+- Try calling it from the class:
+  - Works → static
+  - Error → instance (requires `new`)
 
-## Return values and input parameters of methods
+<!--  -->
 
-other important concepts about calling methods:
+## Return Values and Input Parameters
 
-- handling the return value of a method.
-- passing input parameters to a method.
-- choosing an overloaded version of a method.
+When working with methods, three key concepts are:
 
-Return values:
+- Return values
+- Input parameters
+- Method overloading
 
-- Some methods don't return a value when they finish.
-- They are referred to as `void methods`
-- Other methods are designed to return a value upon completion
-- the `Random.Next()` method returns an `int` type
-- a method can be designed to return any data type, even another class
-- the `String` class has some methods that
-  - return a string,
-  - some that return an integer,
-  - and some that return a Boolean
-- When calling a method that returns a value, you'll often assign the return value to a variable
-- you may want to use the return value directly, without assigning it to a variable
-- Even though a method returns a value, it's possible to call the method without using the return value
+### Return Values
 
-Input parameters
+- Some methods return a value; others do not
+- **Void methods**:
+  - Do not return a value
 
-- The information consumed by a method is called a `parameter`.
-- A method can use one or more parameters to accomplish its task, or none at all.
-- Most methods are designed to accept one or more input parameters.
-- The input parameters can be used to configure how the method performs its work, or they might be operated on directly
-- Methods use a _method signature_ to define the number of input parameters required and the data type of each parameter
-- `Methods define input parameters using a data type`. You can't pass args of a different data type as input parameters to the method and expect the method to work
-- Although input parameters are often used, not all methods require input parameters to complete their task, e.g. `Console.Clear()`
+```cs
+Console.WriteLine("Hello");
+```
 
-> Type checking is one way that `C#` and `.NET` uses to prevent end-users from experiencing errors at runtime
+- **Non-void methods**:
+  - Return a value of a specific type
 
-<br>
+```cs
+int roll = new Random().Next();
+```
 
-Overloaded methods:
+- A method can return any data type (`int`, `string`, `bool`, objects, etc.)
+- You can:
+  - Store the return value in a variable
+  - Use it directly
+  - Ignore it (even if it returns something)
 
-- Many methods in the .NET Class Library have `overloaded method signatures`.
-- this enables you to call the method with or without parameters.
-- An `overloaded method` is defined with multiple method signatures.
-- Overloaded methods provide different ways to call the method or provide different types of data.
-- In some cases, overloaded versions of a method are used to accept an input parameter using different data types. For example, the `Console.WriteLine()` method has 19 different overloaded versions. Most of those overloads allow the method to accept different types and then write the specified information to the console
-- In other cases, overloaded versions of a method accept a different number of input parameters. The alternative input parameters can be used to provide more control over desired result. For example, the `Random.Next()` method has three different overloaded versions. The three versions enable you to set various levels of constraint on the randomly generated number.
+### Input Parameters
+
+- **Parameters** are values passed into a method
+- They allow you to control how a method behaves
+
+```cs
+Console.WriteLine("Hello"); // "Hello" is a parameter
+```
+
+- A method can have:
+  - No parameters
+  - One parameter
+  - Multiple parameters
+- Parameters are defined by the method’s **signature**:
+  - Number of parameters
+  - Data types of parameters
+- You must pass the correct data type when calling a method
+
+```cs
+Console.WriteLine(123);   // OK
+Console.WriteLine("123"); // OK (different overload)
+```
+
+- Some methods require no parameters:
+
+```cs
+Console.Clear();
+```
+
+### Method Overloading
+
+- **Overloading** means a method has multiple versions (signatures)
+- Methods can differ by:
+  - Number of parameters
+  - Type of parameters
+- This allows flexibility in how methods are called
+
+```cs
+Console.WriteLine("text");
+Console.WriteLine(123);
+Console.WriteLine(true);
+```
+
+- Example:
+  - `Console.WriteLine()` has many overloads for different data types
+  - `Random.Next()` has overloads for different ranges
+- Method signatures determine how a method must be called
+- C# enforces type safety at compile time (helps prevent runtime errors)
 
 ```cs
 Next(); // no upper or lower boundary, 0 - 2,147,483,647
@@ -615,19 +714,115 @@ Use `docs.microsoft.com` for information about overloaded methods:
 
 ## Create decision logic with if statements
 
-- Use an `if` statement to branch your code logic. The `if` decision statement will execute code in its code block if its Boolean expression equates to `true`. Otherwise, the runtime will skip over the code block and continue to the next line of code after the code block.
-- A Boolean expression is any expression that returns a Boolean value.
-- Boolean operators will compare the two values on its left and right for equality, comparison, and more.
-- A code block is defined by curly braces `{ }`. It collects lines of code that should be treated as a single unit.
-- The logical AND operator `&&` aggregates two expressions so that both subexpressions must be `true` in order for the entire expression to be `true`.
-- The logical OR operator `||` aggregates two expressions so that if either subexpression is `true`, the entire expression is `true`.
-- The combination of `if` and `else` statements allows you to test for one condition, and then perform one of two outcomes. The code block for the `if` will be run when the Boolean expression is `true`, and the code block for the `else` will be run when the Boolean expression is `false`.
-- You can nest `if` statements to narrow down a possible condition. However, you should consider using the `if`, `else if`, and `else` statements instead.
-- Use `else if` statements to create multiple exclusive conditions.
-- An `else` is optional, but it must always come last when included.
+- An if statement executes code only when a condition evaluates to true
+- A Boolean expression is any expression that returns true or false
+
+if, else if, and else:
+
+- if: runs when its condition is true
+- else if: allows you to check additional conditions
+- else: runs when all previous conditions are false
+- else is optional
+- You can nest if statements to create more specific conditions
+- Prefer `else if` when conditions are related (improves readability)
+- Avoid deep nesting when else if can be used instead
+
+Logical Operators
+
+- && (AND): both conditions must be true
+- || (OR): at least one condition must be true
 
 ```cs
-// Detailed conditional code blocks here
+// simple conditional code block
+bool flag = true;
+if (flag)
+    Console.WriteLine(flag);
+// or:
+if (flag) Console.WriteLine(flag);
+
+// larger conditional
+string permission = "Admin|Manager";
+int level = 53;
+
+if (permission.Contains("Admin")) {
+    if (level > 55) {
+        Console.WriteLine("Welcome, Super Admin user.");
+    } else  {
+        Console.WriteLine("Welcome, Admin user.");
+    }
+} else if (permission.Contains("Manager")) {
+    if (level >= 20) {
+        Console.WriteLine("Contact an Admin for access.");
+    } else {
+        Console.WriteLine("You do not have sufficient privileges.");
+    }
+} else {
+    Console.WriteLine("You do not have sufficient privileges.");
+}
+
+// Ternary (conditional operator)
+int saleAmount = 1001;
+Console.WriteLine($"Discount: {(saleAmount > 1000 ? 100 : 50)}");
+
+Random coin = new Random();
+Console.WriteLine((coin.Next(0, 2) == 0) ? "heads" : "tails");
+
+// switch
+// SKU = Stock Keeping Unit
+string sku = "01-MN-L";
+
+string[] product = sku.Split('-');
+
+string type = "";
+string color = "";
+string size = "";
+
+switch (product[0])
+{
+    case "01":
+        type = "Sweat shirt";
+        break;
+    case "02":
+        type = "T-Shirt";
+        break;
+    case "03":
+        type = "Sweat pants";
+        break;
+    default:
+        type = "Other";
+        break;
+}
+
+switch (product[1])
+{
+    case "BL":
+        color = "Black";
+        break;
+    case "MN":
+        color = "Maroon";
+        break;
+    default:
+        color = "White";
+        break;
+}
+
+switch (product[2])
+{
+    case "S":
+        size = "Small";
+        break;
+    case "M":
+        size = "Medium";
+        break;
+    case "L":
+        size = "Large";
+        break;
+    default:
+        size = "One Size Fits All";
+        break;
+}
+
+Console.WriteLine($"Product: {size} {color} {type}");
 ```
 
 ## Get started with array basics
@@ -687,7 +882,9 @@ Looping through an array using foreach:
 - `foreach` uses a temporary variable to hold the value of the array element associated with the current iteration
 
 ```cs
-foreach (string name in names) {...}
+foreach (string name in names) {
+  Console.WriteLine(name);
+}
 ```
 
 Create and initialize an array of int & add a foreach statement & add a variable to sum the value of each element in the array
@@ -698,19 +895,31 @@ Create and initialize an array of int & add a foreach statement & add a variable
 - Use the `++` increment operator to add 1 to the current value of a variable (?)
 
 ```cs
+int[] inventory = { 200, 450, 700, 175, 250 };
 int sum = 0;
-foreach (int num in nums) {
-  sum += num;
+foreach (int items in inventory)
+{
+    sum += items;
 }
 ```
 
 ```cs
 // examples for: for, while, and do while here
+for (int i = 1; i < 101; i++)
+{
+    if ((i % 3 == 0) && (i % 5 == 0))
+        Console.WriteLine($"{i} - FizzBuzz");
+    else if (i % 3 == 0)
+        Console.WriteLine($"{i} - Fizz");
+    else if (i % 5 == 0)
+        Console.WriteLine($"{i} - Buzz");
+    else
+        Console.WriteLine($"{i}");
+}
 ```
 
-## Variable names part 2
+## Variable names
 
-- The rules and conventions described above are for `local variables`.
 - A local variable is a variable that is scoped within the body of a method, or a variable in a console application that uses top-level statements
 - Classes support fields, which are members of a class that act like variables -> they store values, or rather, state.
 - Classes also support accessibility modifiers, which allow some values to be `private` or `public`
@@ -750,30 +959,6 @@ string new_message = new String(charMessage);
 Console.WriteLine(new_message);
 Console.WriteLine($"'o' appears {x} times.");
 ```
-
-## Build your first app by using .NET
-
-- The code `public static void Main()` including the set of curly braces, define a type of code block called a method
-- Methods are organized inside other code blocks called classes
-- A class can contain one or more methods
-
-The following process happens on a server on your behalf:
-
-1. A command to compile your new code invokes the C# compiler.
-2. The C# compiler ensures your code can be compiled and is free from syntax errors. If it can't compile your code, the compiler stops and sends an error message back to the Output pane.
-3. If the C# compiler succeeds, the .NET runtime opens the newly compiled .NET assembly. By default, it looks in a class named Program to find a method named Main() to begin running the instructions.
-4. Instruction by instruction, the .NET runtime evaluates each line of code. It runs the instruction and moves to the next line of code.
-5. When done, the .NET runtime removes the program from its memory
-
-## When to use .NET
-
-- .NET for enterprise-scale applications
-- .NET for prototypes, start-ups, and small-scale applications
-- .NET for cloud and AI applications:
-  - The Azure SDK for .NET allows developers to provision and manage Azure resources
-  - Azure App Service and Azure Functions can host applications built using .NET languages
-  - ML.NET is a free machine learning library for .NET languages. It enables model-based capabilities for machine learning analysis and prediction
-- .NET for IoT applications: interact with sensors, displays, and input devices that require the use of general-purpose I/O (GPIO) pins, serial ports, or similar hardware
 
 ## Iterate through a code block using for statement
 
@@ -825,7 +1010,7 @@ comparison ? codeIfTrue : codeIfFalse;
 array.Aggregate(0, (count, val) => val == value ? count + 1 : count);
 ```
 
-## Explore data type casting and conversion
+## Explore data type casting and conversion (STOPPED EDITS HERE)
 
 There are multiple techniques to perform a data type conversion. The technique you choose depends on your answer to two important questions:
 

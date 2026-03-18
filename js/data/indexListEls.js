@@ -505,6 +505,7 @@ const objects = {
 const uniques = {
   "javascript": [
     'console.dir',
+    'console.trace',
     'Number(str)',
     'padEnd',
     'padStart',
@@ -517,8 +518,7 @@ const uniques = {
     'e.target.value',
     'e.target.closest',
     'e.target.contains',
-    '',
-    '',
+    'DOM methods',
     '',
     '',
   ],
