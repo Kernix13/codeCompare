@@ -237,12 +237,12 @@ const CSharp = {
     'Contains', 
     'IndexOf', 
     'ForEach', 
-    'foraach', 
+    'foreach', 
     'Select', 
     'Skip', 
     'Sum', 
     'GetRange', 
-    'List',
+    'new List',
     'Add', 
     'Take', 
     'Insert', 
@@ -1682,7 +1682,7 @@ public static int[] UniqueValues(int[] array)
         `
       },
       {
-        "keywords": ["Contains", "IndexOf"],
+        "keywords": ["new List", "Contains", "IndexOf"],
         "code": `
 List<string> status = new List<string> { "pending", "approved", "denied" };
 
@@ -1708,7 +1708,7 @@ int[] middleNumbers = numbers[1..4];
         `
       },
       {
-        "keywords": ["Add", "RemoveAt"],
+        "keywords": ["new List", "Add", "RemoveAt"],
         "code": `
 List<int> scores = new List<int> {85, 90, 75};
 

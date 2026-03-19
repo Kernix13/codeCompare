@@ -516,10 +516,10 @@ const uniques = {
     'find',
     'findIndex',
     'e.target.value',
-    'e.target.closest',
-    'e.target.contains',
     'DOM methods',
-    '',
+    'addEventListener',
+    'stringify',
+    'JSON.parse',
     '',
   ],
   "php": [
