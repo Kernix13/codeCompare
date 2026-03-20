@@ -19,26 +19,51 @@ official_docs: https://learn.microsoft.com/en-us/dotnet/csharp/
 
 ## Shell commands
 
+<!--
+
+1. 📌 https://www.linkedin.com/pulse/dotnet-new-command-create-projects-sumanraj-kandel/
+2. 📌 https://auth0.com/blog/create-dotnet-project-template/
+3. 📌 https://www.tutorialsteacher.com/core
+4. 📌 https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new
+-->
+
 Beginner commands
 
 ```sh
 # Check .NET installation
 dotnet --version
 
-# Create a console application
+# Create a new, empty solution
+dotnet new sln
+
+# Get the list of templates available on your machine
+dotnet new --list
+
+# Create a console application (do I need ./?) -o or --output
 dotnet new console -o ./ProjectName
+# How is this different? -n or --name
+dotnet new console -n ProjectName
+# Combo?
+console -n ProjectName -o ProjectName
+# Create an ASP.NET Core web application that uses React
+dotnet new react -o MyReactApp
+# Create a web application using ASP.NET Core
+dotnet new web -o MyWebApp
+# Create a new solution file named MySolution.sln
+dotnet new sln -n MySolution
+
 
 # Add your code to Program.cs
 # Compile a build of your application
 dotnet build
 
-# Run your application
+# Run your application - will build AND execute your application
 dotnet run
 
 # Create gitignore file (482 lines!)
 dotnet new gitignore
 
-# Restore Dependencies after cloning
+# Restore Dependencies after cloning or to update existing packages
 dotnet restore
 
 # Add a NuGet Package
@@ -93,6 +118,17 @@ dotnet new maui -o MyMobileApp
 - .Conains()
 - &&
 - string?
+
+```cs
+// Option 1: nullable reference type / nullable annotation
+string? name = Console.ReadLine();
+if (name is null) // Input stream ends (EOF = End Of File)
+
+// Option 2: null-coalescing operator
+string name = Console.ReadLine() ?? "";
+
+const float pi = 3.14f;
+```
 
 ## Intro to C# and .NET
 

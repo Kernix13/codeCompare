@@ -53,6 +53,7 @@ const JavaScript = {
     'reverse', 
     'splice', 
     'for of loop',
+    'for loop',
     'spread operator'
   ],
   'object': [
@@ -122,7 +123,8 @@ const Python = {
     'sorted', 
     'insert', 
     'extend', 
-    'remove'
+    'remove',
+    'list',
   ],
   'object': [
     'del', 
@@ -248,9 +250,13 @@ const CSharp = {
     'Insert', 
     'RemoveAt', 
     'Reverse', 
-    'Sort', '', 
+    'Sort',
     'AddRange', 
-    'Remove'
+    'Remove',
+    'Clear',
+    'Resize',
+    'for loop',
+    'ToCharArray',
   ],
   'object': [
     'Remove', 
@@ -574,6 +580,22 @@ const result = temps.slice(0, 5);
 const result = temps.map(c => (c * 9/5) + 32);
 
 const result = temps.filter(t => t <= 32);
+        `
+      },
+      {
+        "keywords": ['split', 'for loop', 'reverse', 'push', 'join'],
+        "code": `
+const pangram = 'The quick brown fox jumps over the lazy dog';
+const words = pangram.split(' ');
+const reversedWords = [];
+
+for (let i = 0; i < words.length; i++) {
+  const chars = words[i].split('');
+  chars.reverse();
+  reversedWords.push(chars.join(''));
+}
+console.log(reversedWords.join(' '));
+// ehT kciuq nworb xof spmuj revo eht yzal god
         `
       }
     ],  
@@ -939,6 +961,21 @@ result = temps[:5]
 result = [(c * 9/5) + 32 for c in temps]
 
 result = [t for t in temps if t <= 32]
+        `
+      },
+      {
+        "keywords": ['split', 'list', 'reverse', 'append', 'join'],
+        "code": `
+pangram = "The quick brown fox jumps over the lazy dog"
+words = pangram.split(' ')
+reversed_words = []
+
+for word in words:
+    chars = list(word)
+    chars.reverse()
+    reversed_words.append(''.join(chars))
+print(' '.join(reversed_words))
+# ehT kciuq nworb xof spmuj revo eht yzal god
         `
       }
     ],
@@ -1311,6 +1348,22 @@ $result = array_map(fn($c) => ($c * 9/5) + 32, $temps);
 $result = array_values(
     array_filter($temps, fn($t) => $t <= 32)
 );
+        `
+      },
+      {
+        "keywords": ['explode', 'foreach', 'str_split', 'array_reverse', 'implode'],
+        "code": `
+$pangram = "The quick brown fox jumps over the lazy dog";
+$words = explode(' ', $pangram);
+$reversedWords = [];
+
+foreach ($words as $word) {
+    $chars = str_split($word);
+    $chars = array_reverse($chars);
+    $reversedWords[] = implode('', $chars);
+}
+echo implode(' ', $reversedWords);
+// ehT kciuq nworb xof spmuj revo eht yzal god
         `
       }
     ],
@@ -1718,12 +1771,17 @@ scores.RemoveAt(scores.Count - 1);
         `
       },
       {
-        "keywords": ["Sort", "CompareTo"],
+        "keywords": ["List", "Sort", "CompareTo"],
         "code": `
 List<int> temperatures = new List<int> {72, 65, 88, 90, 75};
 
 temperatures.Sort();                        // ascending
 temperatures.Sort((a, b) => b.CompareTo(a)); // descending
+
+int[] temperatures = [ 72, 65, 88, 90, 75 ];
+
+Array.Sort(temperatures); // ascending
+Array.Reverse(temperatures); // descending
         `
       },
       {
@@ -1742,6 +1800,22 @@ var result = temps.Take(5).ToList();
 var result = temps.Select(c => (c * 9/5) + 32).ToList();
 
 var result = temps.Where(t => t <= 32).ToList();
+        `
+      },
+      {
+        "keywords": ['Split', 'new string', 'for loop', 'ToCharArray', 'Reverse', 'Join'],
+        "code": `
+string pangram = "The quick brown fox jumps over the lazy dog";
+string[] words = pangram.Split(' ');
+string[] reversedWords = new string[words.Length];
+
+for (int i = 0; i < words.Length; i++) {
+    char[] chars = words[i].ToCharArray();
+    Array.Reverse(chars);
+    reversedWords[i] = new string(chars);
+}
+Console.WriteLine(string.Join(" ", reversedWords));
+// ehT kciuq nworb xof spmuj revo eht yzal god
         `
       }
     ],
