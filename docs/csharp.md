@@ -1153,10 +1153,78 @@ The `out` keyword instructs the compiler that the `TryParse()` method doesn't re
 
 - decimal to int is a narrowing conversion so to round, Convert is the best answer
 
-> NEXT: https://learn.microsoft.com/en-us/training/modules/csharp-convert-cast/
-
 ..................................................................
 
 > https://learn.microsoft.com/en-us/training/browse/?products=dotnet
-
 > **CODE EDITOR**: https://microsoftlearning.github.io/c-sharp-minor/
+
+<br>
+
+```sh
+dotnet -?
+
+sdk-options:
+  -d|--diagnostics  Enable diagnostic output.
+  -h|--help         Show command line help.
+  --info            Display .NET information.
+  --list-runtimes   Display the installed runtimes.
+  --list-sdks       Display the installed SDKs.
+  --version         Display .NET SDK version in use.
+
+SDK commands:
+  build             Build a .NET project.
+  build-server      Interact with servers started by a build.
+  clean             Clean build outputs of a .NET project.
+  format            Apply style preferences to a project or solution.
+  help              Opens the reference page in a browser for the specified command.
+  msbuild           Run Microsoft Build Engine (MSBuild) commands.
+  new               Create a new .NET project or file.
+  nuget             Provides additional NuGet commands.
+  pack              Create a NuGet package.
+  package           Search for, add, remove, or list PackageReferences for a .NET project.
+  publish           Publish a .NET project for deployment.
+  reference         Add, remove, or list ProjectReferences for a .NET project.
+  restore           Restore dependencies specified in a .NET project.
+  run               Build and run a .NET project output.
+  sdk               Manage .NET SDK installation.
+  solution          Modify Visual Studio solution files.
+  store             Store the specified assemblies in the runtime package store.
+  test              Run unit tests using the test runner specified in a .NET project.
+  tool              Install or manage tools that extend the .NET experience.
+  vstest            Run Microsoft Test Engine (VSTest) commands.
+  workload          Manage optional workloads.
+  tool              Install or manage tools that extend the .NET experience.
+  vstest            Run Microsoft Test Engine (VSTest) commands.
+  workload          Manage optional workloads.
+  vstest            Run Microsoft Test Engine (VSTest) commands.
+  workload          Manage optional workloads.
+  workload          Manage optional workloads.
+
+Additional commands from bundled tools:
+  dev-certs         Create and manage development certificates.
+  dev-certs         Create and manage development certificates.
+  fsi               Start F# Interactive / execute F# scripts.
+  user-jwts         Manage JSON Web Tokens in development.
+  user-secrets      Manage development user secrets.
+  watch             Start a file watcher that runs a command when files change.
+```
+
+```sh
+dotnet new --help
+
+Options:
+  -o, --output <output>    Location to place the generated output.
+  -n, --name <name>        The name for the output being created. If no name is specified, the
+                           name of the output directory is used.
+  --dry-run                Displays a summary of what would happen if the given command line
+                           were run if it would result in a template creation. [default: False]
+  --force                  Forces content to be generated even if it would change existing
+                           files. [default: False]
+  --no-update-check        Disables checking for the template package updates when instantiating
+                           a template. [default: False]
+  --project <project>      The project that should be used for context evaluation.
+  -v, --verbosity <LEVEL>  Sets the verbosity level. Allowed values are q[uiet], m[inimal],
+                           n[ormal], and diag[nostic]. [default: normal]
+  -d, --diagnostics        Enables diagnostic output. [default: False]
+  -?, -h, --help           Show command line help.
+```
