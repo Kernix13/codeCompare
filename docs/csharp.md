@@ -32,6 +32,10 @@ Beginner commands
 ```sh
 # Check .NET installation
 dotnet --version
+# Show installed .NET SDKs (version numbers and install locations)
+dotnet --list-sdks
+# Display detailed information about your .NET environment
+dotnet --info
 
 # Create a new, empty solution
 dotnet new sln
@@ -52,7 +56,6 @@ dotnet new web -o MyWebApp
 # Create a new solution file named MySolution.sln
 dotnet new sln -n MySolution
 
-
 # Add your code to Program.cs
 # Compile a build of your application
 dotnet build
@@ -62,18 +65,22 @@ dotnet run
 
 # Create gitignore file (482 lines!)
 dotnet new gitignore
+```
 
-# Restore Dependencies after cloning or to update existing packages
-dotnet restore
+Commands to know later
 
+```sh
 # Add a NuGet Package
 dotnet add package PackageName
 dotnet add package Newtonsoft.Json
 
+# Restore Dependencies after cloning or to update existing packages
+dotnet restore
+
 # List Installed Packages
 dotnet list package
 
-# Clean Build Artifacts
+# Clean Build Artifacts, to delete the output of a previous build
 dotnet clean
 
 # Remove a C# project
@@ -82,16 +89,6 @@ dotnet sln remove <path-to-csproj>
 # Add a C# project
 dotnet sln add <path-to-csproj>
 
-# Show installed .NET SDKs (version numbers and install locations)
-dotnet --list-sdks
-
-# Display detailed information about your .NET environment
-dotnet --info
-```
-
-Commands to know later
-
-```sh
 # Create a Solution
 dotnet new sln
 dotnet sln add ProjectName.csproj
