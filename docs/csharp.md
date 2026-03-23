@@ -13,7 +13,7 @@ official_docs: https://learn.microsoft.com/en-us/dotnet/csharp/
 
 # C# — Reference Notes
 
-## Terms
+## Terms to define
 
 - .NET compiler | .NET runtime | app models | .NET SDK | base class library | NuGet | ASP.NET Core | ASP.NET Core Razor Pages | Blazor | .NET MAUI | workload | .NET CLI |
 
@@ -63,7 +63,7 @@ dotnet build
 # Run your application - will build AND execute your application
 dotnet run
 
-# Create gitignore file (482 lines!)
+# Create .gitignore file (482 lines!)
 dotnet new gitignore
 ```
 
@@ -908,7 +908,7 @@ Use the Length property of an array:
 - Depending on how the array is created, you may not know in advance how many elements an array contains.
 - To determine the size of an array, you can use the Length property
 
-## Implement the foreach statement (STOPPED)
+## Implement the foreach statement (STOPPED EDITS HERE)
 
 Looping through an array using foreach:
 

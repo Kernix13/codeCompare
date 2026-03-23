@@ -322,9 +322,52 @@ btc["close"] - btc["open"]
 
 - replace()
 - loc()
+- rename(): to change the labels on the rows or the column names - you can use RegEx
+  - it works like drop() - axis of 0 is the index, 1 for columns
+  - you provide a dictionary that maps the existing column name to a new name
+  - it does not do it in place unless you add `inplace=True`
+- don't replace anything with `None` unless you use list notation
+- NOTE: value_counts does not include NA values unless you pass it `dropna=False`
+- REMEMBER: `.loc` uses square brackets `[]`
+- we can access rows by their label
+- and then you can ask for specific columns by providing a list of column names
+- you can use the same syntax to update specific columns
+- you can create new columns with the loc syntax
+- you can use loc to access rows by their index label, but also with a boolean array
 
 ```py
+# update column names
+mapper = {
+  "Regional indicator": "region",
+  "Ladder score": "ladder_score"
+}
+countries.rename(columns=mapper)
 
+# update index labels (rows)
+mapper = {
+  "Denmark": "DNK",
+  "Finland": "FIN"
+}
+countries.rename(index=mapper)
+
+# Basic replace
+titanic["sex"].replace(["female", "male"], ["F", "M"])
+
+# None example
+titanic["age"].replace(["?"], [None])
+
+# .loc[[rows], [columns]]
+countries.loc[["Brazil", "Panama", "Belize"], ["Ladder score", "Generosity"]]
+
+# this happens in place:
+countries.loc[["Denmark", "Sweden", "Norway"], ["Regional indicator"]] = "Scandinavia"
+
+# create a new column, give the selected countries a value, all others get NaN
+countries.loc[["Finland", "Denmark", "Iceland"], ["Regional indicator", "is_cold"]] = ["Nordic", "Yes"]
+
+# making updates with loc() and boolean masks
+many_bedrooms = houses["bedrooms"] >= 10
+houses.loc[many_bedrooms, ["bedrooms"]] = "TOO MANY"
 ```
 
 ### Pandas: Working with Types and NA
@@ -334,9 +377,22 @@ btc["close"] - btc["open"]
 - dropna()
 - isna()
 - fillna()
--
+- astype(): a series method, convert data types for columns
+- category data type: used to represent text data where there is a finite number of possible values -> titanic.sex - 2 choices
+- when pandas shows object as the data type, that allows for any data type
+- doing that will reduce the size of your dataset - it optimizes the dataset
 
 ```py
+# Changing object to float using astype()
+# Use square brackets when replacing with None
+titanic["age"].replace(['?'], [None], inplace=True)
+titanic["age"].astype("float") # or
+titanic["age"] = titanic["age"].astype("float") # or
+titanic["age_float"] = titanic["age"].astype("float")
+
+# Set category type
+titanic["sex"] = titanic["sex"].astype("category")
+
 
 ```
 
