@@ -372,15 +372,18 @@ houses.loc[many_bedrooms, ["bedrooms"]] = "TOO MANY"
 
 ### Pandas: Working with Types and NA
 
-- astype()
-- pd.to_numeric()
-- dropna()
-- isna()
-- fillna()
 - astype(): a series method, convert data types for columns
 - category data type: used to represent text data where there is a finite number of possible values -> titanic.sex - 2 choices
 - when pandas shows object as the data type, that allows for any data type
 - doing that will reduce the size of your dataset - it optimizes the dataset
+- to_numeric(): it is not a series method, it is on pandas (pd)
+- you can provide it data that is not all "castable"
+- it has an `errors` argument with values of raise, ignore or **coerce**
+- coerce sets invalid values to `NaN` - it does not mutate the original data series
+- isna(): shows where a value is na - use it to filter to find specific rows with na values
+- dropna(): a series and dataframe method, you only tend to use it to remove rows that have bad values - `any` or `all` are the options, `how="all"`
+- `subset` param: provide a label or list of labels to look at
+- fillna(value): replace na values with some other value
 
 ```py
 # Changing object to float using astype()
@@ -393,7 +396,33 @@ titanic["age_float"] = titanic["age"].astype("float")
 # Set category type
 titanic["sex"] = titanic["sex"].astype("category")
 
+# pd.to_numeric() and coerce
+titanic["age"] = pd.to_numeric(titanic["age"], errors="coerce")
 
+stats = pd.read_csv("data/game_stats.csv")
+# returns a boolean dataframe, True for any na
+stats.isna()
+# returns a boolean series
+stats["league"].isna()
+# find rows with na values for a column
+stats[stats["league"].isna()]
+
+# dropna() - only returns rows that have valid values
+stats["assists"].dropna()
+
+# using subset to drop rows based on a list of columns
+stats.dropna(subset=["league"])
+
+# for entire dataframe
+stats.fillna(0)
+# just a column
+stats["league"].fillna("amateur")
+
+# values for specific columns
+stats.fillna({"points": 0, "assists": "None"})
+
+sales = pd.read_csv("data/sales.csv")
+sales["shipping_zip"].fillna(sales["billing_zip"])
 ```
 
 ### Pandas: Working with Dates and Times
