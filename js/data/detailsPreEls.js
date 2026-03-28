@@ -597,6 +597,31 @@ for (let i = 0; i < words.length; i++) {
 console.log(reversedWords.join(' '));
 // ehT kciuq nworb xof spmuj revo eht yzal god
         `
+      },
+      {
+        "keywords": ['length', 'for loop', 'indexOf', 'while loop', 'slice', 'trimStart', 'trim'],
+        "code": `
+const stringsCount = myStrings.length;
+let myString = '';
+let periodLocation = 0;
+
+for (i = 0; i < stringsCount; i++) {
+  myString = myStrings[i];
+  periodLocation = myString.indexOf('.');
+
+  let mySentence;
+
+  while (periodLocation != -1) {
+    mySentence = myString.slice(0, periodLocation);
+    myString = myString.slice(periodLocation + 1);
+    myString = myString.trimStart();
+    periodLocation = myString.indexOf('.');
+    console.log(mySentence);
+  }
+  mySentence = myString.trim();
+  console.log(mySentence);
+}
+        `
       }
     ],  
     "object": [
@@ -976,6 +1001,33 @@ for word in words:
     reversed_words.append(''.join(chars))
 print(' '.join(reversed_words))
 # ehT kciuq nworb xof spmuj revo eht yzal god
+        `
+      },
+      {
+        "keywords": ["len", "for loop", "range", "find", "while loop", "slice", "lstrip", "strip"],
+        "code": `
+myStrings = [
+    "I like pizza. I like roast chicken. I like salad",
+    "I like all three of the menu choices"
+]
+
+stringsCount = len(myStrings)
+myString = ""
+periodLocation = 0
+
+for i in range(stringsCount):
+    myString = myStrings[i]
+    periodLocation = myString.find(".")
+    
+    while periodLocation != -1:
+        mySentence = myString[:periodLocation]
+        myString = myString[periodLocation + 1:]
+        myString = myString.lstrip()
+        periodLocation = myString.find(".")
+        print(mySentence)
+    
+    mySentence = myString.strip()
+    print(mySentence)
         `
       }
     ],
@@ -1364,6 +1416,35 @@ foreach ($words as $word) {
 }
 echo implode(' ', $reversedWords);
 // ehT kciuq nworb xof spmuj revo eht yzal god
+        `
+      },
+      {
+        "keywords": ["count", "for loop", "strpos", "while loop", "substr", "ltrim", "PHP_EOL", "trim"],
+        "code": `
+$myStrings = [
+    "I like pizza. I like roast chicken. I like salad",
+    "I like all three of the menu choices"
+];
+
+$stringsCount = count($myStrings);
+$myString = "";
+$periodLocation = 0;
+
+for ($i = 0; $i < $stringsCount; $i++) {
+    $myString = $myStrings[$i];
+    $periodLocation = strpos($myString, ".");
+    
+    while ($periodLocation !== false) {
+        $mySentence = substr($myString, 0, $periodLocation);
+        $myString = substr($myString, $periodLocation + 1);
+        $myString = ltrim($myString);
+        $periodLocation = strpos($myString, ".");
+        echo $mySentence . PHP_EOL;
+    }
+    
+    $mySentence = trim($myString);
+    echo $mySentence . PHP_EOL;
+}
         `
       }
     ],
@@ -1816,6 +1897,35 @@ for (int i = 0; i < words.Length; i++) {
 }
 Console.WriteLine(string.Join(" ", reversedWords));
 // ehT kciuq nworb xof spmuj revo eht yzal god
+        `
+      },
+      {
+        "keywords": ['string', 'Length', 'for loop', 'IndexOf', 'while loop', 'Remove', 'Substring', 'TrimStart', 'Trim'],
+        "code": `
+string[] myStrings = new string[2] { "I like pizza. I like roast chicken. I like salad", "I like all three of the menu choices" };
+int stringsCount = myStrings.Length;
+
+string myString = "";
+int periodLocation = 0;
+
+for (int i = 0; i < stringsCount; i++)
+{
+    myString = myStrings[i];
+    periodLocation = myString.IndexOf(".");
+    string mySentence;
+
+    while (periodLocation != -1)
+    {
+        mySentence = myString.Remove(periodLocation);
+        myString = myString.Substring(periodLocation + 1);
+        myString = myString.TrimStart();
+        periodLocation = myString.IndexOf(".");
+        Console.WriteLine(mySentence);
+    }
+
+    mySentence = myString.Trim();
+    Console.WriteLine(mySentence);
+}
         `
       }
     ],
