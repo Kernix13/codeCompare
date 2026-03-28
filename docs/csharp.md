@@ -44,11 +44,18 @@ dotnet new sln
 dotnet new --list
 
 # Create a console application (do I need ./?) -o or --output
+# -o Creates a new folder and puts project inside
 dotnet new console -o ./ProjectName
+# you do not need ./
+dotnet new console -o ProjectName
 # How is this different? -n or --name
+# -n Names the project but stays in current folder
 dotnet new console -n ProjectName
 # Combo?
 console -n ProjectName -o ProjectName
+# If you are already inside your project folder
+dotnet new console # or
+dotnet new console -n ProjectName
 # Create an ASP.NET Core web application that uses React
 dotnet new react -o MyReactApp
 # Create a web application using ASP.NET Core
