@@ -621,6 +621,16 @@ for (i = 0; i < stringsCount; i++) {
   mySentence = myString.trim();
   console.log(mySentence);
 }
+
+// or more concise with for of loops and .split:
+for (const str of myStrings) {
+  const sentences = str.split('.');
+
+  for (let sentence of sentences) {
+    sentence = sentence.trim();
+    if (sentence) console.log(sentence);
+  }
+}
         `
       }
     ],  
