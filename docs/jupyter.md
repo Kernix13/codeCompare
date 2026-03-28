@@ -4,7 +4,11 @@
 <li><a href="./../details.html">In Depth</a></li>
 <li><a href="./../frameworks.html">Frameworks</a></li>
 
+> I forgot the frontmatter - do I need it?
+
 ## Jupyter Notebook & Pandas notes and snippets
+
+> ### Add links to the pandas docs for the methods in each section
 
 Run the project: `jupyter lab` or `jupyter notebook`. How do those commands differ from opening Anaconda then Jupyter Notebook and viewing a `.ipynb` file in the browser? You can specify folders with `jupyter notebook ./myproject`.
 
@@ -606,6 +610,7 @@ netflix.fillna({"country": mode_country}, inplace=True)
 - returns a data type called `timedelta64` or Timedelta -> a span of time
 - it has special methods you can use
 - invert_yaxis: inverting the axis makes sense for the charts dataframe
+- isocalendar
 
 ```py
 pd.to_datetime("2019/12/31")
@@ -732,45 +737,9 @@ waterfront = df[df["waterfront"] == 1]
 waterfront["date"].dt.quarter.value_counts().plot(kind="bar")
 ```
 
+Where did these come from:
+
 - rename()
 - savefig()
 
 ---
-
-> I should move Matplotlib and maybe Seaborn to their own files
-
-## Matplotlib notes and snippets
-
-Sections 13-19
-
-- TimeDeltas
-- plt.show()
-- figsize
-- groupby()
-- agg()
-- set_index
-- xs()
-- get_level_values()
-- stack()
-- unstack()
-
-```py
-
-```
-
----
-
-## Seaborn notes and snippets
-
-Sections 20-22
-
-- load_dataset()
-- replot()
-- displot()
-- catplot
-- set_style()
-- despine()
-
-```py
-
-```
