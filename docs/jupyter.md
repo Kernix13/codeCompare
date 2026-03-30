@@ -12,6 +12,9 @@
 
 Run the project: `jupyter lab` or `jupyter notebook`. How do those commands differ from opening Anaconda then Jupyter Notebook and viewing a `.ipynb` file in the browser? You can specify folders with `jupyter notebook ./myproject`.
 
+THERE ARE TOO MANY METHODS IN THIS TOP SECTION THAT ARE COVERED FURTHER DOWN - REMOVE THEM
+
+- <kbd>SHIFT</kbd> + <kbd>TAB</kbd> for a method opens docs
 - A - add cell above | B - add cell below
 - D + D - delete selected cell
 - Z - undo delete cells
@@ -62,51 +65,33 @@ Run the project: `jupyter lab` or `jupyter notebook`. How do those commands diff
 - .head() | .tail() | .info()
 
 ```py
+# ✅ USEFUL COMMANDS ✅
 import pandas as pd
 df = pd.read_csv('file.csv')
 
-import statistics
+# 1. Basic read
+sellers = pd.read_csv('data/bestsellers.csv')
 
-# see methods on statistics
-statistics.
-
-# Add ? then execute cell
-statistics?
-
-pd.read_csv?
-
-import pandas as pd
-
-# 1. tab separated, .tsv so \t
+# 2. tab separated, .tsv so \t
 titles = pd.read_csv('data/movie_titles.tsv', sep="\t")
 
-# 2. set 1st col in dataset as the index
+# 3. set 1st col in dataset as the index
 # Tell Pandas to use the first column as the index using index_col
 everest = pd.read_csv('data/mount_everest_deaths.csv', index_col=0)
 
-# 1. & 2. pipe | separated, has an index col but that is not titled
+# 4. pipe | separated, has an index col but that is not titled
 netflix = pd.read_csv("data/netflix_titles.csv", sep="|", index_col=0)
 
-# 3. names is a list of strings which are the NEW column names
-# 4. original col headings were bad so header=0 which overrides the col names
+# names is a list of strings which are the NEW column names
+# 5. original col headings were bad so header=0 which overrides the col names
 state_pops = pd.read_csv("data/nst-est2020.csv", names=names, header=0)
 
-sellers = pd.read_csv('data/bestsellers.csv')
-
-type(sellers)
-# pandas.core.frame.DataFrame
-
-sellers.columns
 # shows a list of the col names
-
-len(sellers)
-# shows the number of records: 21613
+# Useful to see what you can select or if any column names are keywords
+sellers.columns
 
 sellers.shape
-# number of records and columns: (21613, 21)
-
-pd.options.display.min_rows = 20
-# set the min # of rows to display
+# number of records/rows and columns: (21613, 21)
 
 first_5 = sellers.head()
 # shows the first 5 rows - makes a new DataFrame
@@ -122,6 +107,31 @@ sellers.info()
 sellers.dtypes
 # just shows the col names and their data type
 # int, float, or object
+
+# 🚫 LESS USEFUL COMMANDS 🚫
+type(sellers)
+# pandas.core.frame.DataFrame - nothing useful
+
+len(sellers)
+# shows the number of records: 21613
+
+# set the min # of rows to display
+# Only useful for large datasets I think
+pd.options.display.min_rows = 20
+```
+
+Odd commands to learn later or skip
+
+```py
+import statistics
+
+# see methods on statistics
+statistics.
+
+# Add ? then execute cell
+statistics?
+
+pd.read_csv?
 ```
 
 ### Pandas: dataframe value methods
@@ -130,20 +140,11 @@ sellers.dtypes
 
 - .min() | .max() | .sum() | .count() | .describe() | .value_counts() | .plot()
 - .values | .index | .unique | nunique
+- `numeric_only=True` works for .min() and .max() also
 
 ```py
-houses.min()
-# shows the min value for each column
-
-houses.max()
-# shows the max value for each column
-
 type(houses.max())
 # pandas.core.series.Series
-
-houses.sum()
-# sums each column though a lot do not make sense
-houses.sum(numeric_only=True)
 
 houses.count()
 # returns the non-null count for each column
@@ -152,13 +153,8 @@ houses.count()
 titanic.describe(include=['object']) # pr like this if just one
 titanic.describe(include='object')
 
-titanic.name
-titanic["name"]
-# that returns a series
-
-names = titanic.name
-names.values # without index/label
-names.index # just the labels - RangeIndex(start=0, stop=1309, step=1)
+# sums each column though a lot do not make sense
+houses.sum(numeric_only=True)
 
 houses["bedrooms"].unique()
 
@@ -185,9 +181,34 @@ bestsellers.mean()
 bestsellers.mode()
 ```
 
+Methods that caused me a problem
+
+```py
+# I GOT ERRORS FOR ALL OF THESE
+houses.min()
+# shows the min value for each column
+
+houses.max()
+# shows the max value for each column
+
+houses.sum()
+
+titanic.name
+titanic["name"]
+# that returns a series
+```
+
+Methods that do not seem useful:
+
+```py
+names = titanic.name
+names.values # without index/label
+names.index # just the labels - RangeIndex(start=0, stop=1309, step=1)
+```
+
 ### Pandas: sorting, indexing, rows
 
-- .index | .High |
+- .index
 - .set_index() | .sort_values() | .sort_index() | .loc() | .iloc() |
 - sort_values: a very commonly used method - it is a dataframe and series method
 - sort_values does not operate on the original dataframe - it makes a new dataframe but you can set it to sort in place
@@ -207,13 +228,8 @@ bestsellers.mode()
 import pandas as pd
 btc = pd.read_csv("data/coin_Bitcoin.csv")
 
-# see the index
-btc.index
-
-# same range index for a series - looks at the High column
-btc.High
-
 # make Date the index - makes a new dataframe
+# Only use when you don't set the index with index_col with read_csv
 btc.set_index("Date")
 
 df = pd.read_csv("data/world-happiness-report-2021.csv", index_col=0)
@@ -246,11 +262,19 @@ contries.iloc[[20]]
 # slice
 contries.iloc[20:30]
 
+# YOU CAN'T USE THIS SYNTAX UNLESS YOUR INDEX IS AN INTEGER
 df.iloc[20:30, ['col1', 'col2']]
 houses.iloc[20:30, ['price', 'bedrooms']]
 
 # set "Name" as index in place
 pokemon.set_index("Name", inplace=True)
+```
+
+Methods that do not seem useful:
+
+```py
+# see the index
+btc.index
 ```
 
 ### Pandas: filtering

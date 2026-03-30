@@ -601,6 +601,10 @@ console.log(reversedWords.join(' '));
       {
         "keywords": ['length', 'for loop', 'indexOf', 'while loop', 'slice', 'trimStart', 'trim'],
         "code": `
+const myStrings = [ 
+  "I like pizza. I like roast chicken. I like salad", 
+  "I like all three of the menu choices"
+];
 const stringsCount = myStrings.length;
 let myString = '';
 let periodLocation = 0;
@@ -1020,7 +1024,6 @@ myStrings = [
     "I like pizza. I like roast chicken. I like salad",
     "I like all three of the menu choices"
 ]
-
 stringsCount = len(myStrings)
 myString = ""
 periodLocation = 0
@@ -1435,7 +1438,6 @@ $myStrings = [
     "I like pizza. I like roast chicken. I like salad",
     "I like all three of the menu choices"
 ];
-
 $stringsCount = count($myStrings);
 $myString = "";
 $periodLocation = 0;
@@ -1912,9 +1914,11 @@ Console.WriteLine(string.Join(" ", reversedWords));
       {
         "keywords": ['string', 'Length', 'for loop', 'IndexOf', 'while loop', 'Remove', 'Substring', 'TrimStart', 'Trim'],
         "code": `
-string[] myStrings = new string[2] { "I like pizza. I like roast chicken. I like salad", "I like all three of the menu choices" };
+string[] myStrings = new string[2] { 
+  "I like pizza. I like roast chicken. I like salad", 
+  "I like all three of the menu choices" 
+  };
 int stringsCount = myStrings.Length;
-
 string myString = "";
 int periodLocation = 0;
 
