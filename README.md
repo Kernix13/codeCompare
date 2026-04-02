@@ -1,6 +1,7 @@
 # codeCompare – Programming Language Syntax Comparison Tool
 
-> NOTE: I need to redo this REaDME but I added `prism.js` and `prism.css` to `.gitignore` because they are not my code, they are large, and anyone wanting to clone this repo may want a different Prism theme.
+> NOTE: I need to redo this README but I added `prism.js` and `prism.css` to `.gitignore` because they are not my code, they are large, and anyone wanting to clone this repo may want a different Prism theme.
+> I also need to add a TypeScript option
 
 CodeCompare is a programming language syntax comparison tool that helps developers learn new languages faster by viewing code side-by-side with technologies they already know.
 

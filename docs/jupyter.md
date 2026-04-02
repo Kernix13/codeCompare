@@ -8,6 +8,19 @@
 
 ## Jupyter Notebook & Pandas notes and snippets
 
+Methods I had a problem with using my csv file:
+
+```py
+df.min()
+df.max()
+df.sum()
+
+df.index
+df.name
+
+df.loc[5:10]
+```
+
 > ### Add links to the pandas docs for the methods in each section
 
 Run the project: `jupyter lab` or `jupyter notebook`. How do those commands differ from opening Anaconda then Jupyter Notebook and viewing a `.ipynb` file in the browser? You can specify folders with `jupyter notebook ./myproject`.
@@ -208,6 +221,10 @@ names.index # just the labels - RangeIndex(start=0, stop=1309, step=1)
 
 ### Pandas: sorting, indexing, rows
 
+**loc** - access data by a row LABEL
+
+**iloc** - access data by row but by index position
+
 - .index
 - .set_index() | .sort_values() | .sort_index() | .loc() | .iloc() |
 - sort_values: a very commonly used method - it is a dataframe and series method
@@ -219,10 +236,13 @@ names.index # just the labels - RangeIndex(start=0, stop=1309, step=1)
 - it returns a series
 - use can also use slice syntax: [start:end] - end included?!?
   - you can slice with text values
-- iloc: accrss rows out of a dataframe but it takes an integer
+- iloc: accross rows out of a dataframe but it takes an integer
 - it returns a series - wrap in [] to get a dataframe
 - can pass is a list of positions - can also slice
 - with the rows you get you can also specify what columns you want
+- The primary difference is that `.loc` is used for label-based indexing, while `.iloc` is used for integer position-based indexing.
+- but index slicing worked for `loc` - column names do not work with `.iloc`
+- loc and iloc work on dataframes and series
 
 ```py
 import pandas as pd
@@ -247,6 +267,9 @@ countries.sort_index(ascending=False)
 titanic.pclass.value_counts().sort_values().plot(kind="bar")
 titanic.pclass.value_counts().sort_index().plot(kind="bar")
 
+# get the count os people who were 18 years old
+titanic["age"].value_counts().loc["18"]
+
 countries.loc["Greece"]
 # add square brackets to return a dataframe instead of a series
 countries.loc[["Greece"]]
@@ -263,8 +286,9 @@ contries.iloc[[20]]
 contries.iloc[20:30]
 
 # YOU CAN'T USE THIS SYNTAX UNLESS YOUR INDEX IS AN INTEGER
+# That may be wrong
 df.iloc[20:30, ['col1', 'col2']]
-houses.iloc[20:30, ['price', 'bedrooms']]
+houses.loc[20:30, ['price', 'bedrooms']]
 
 # set "Name" as index in place
 pokemon.set_index("Name", inplace=True)
@@ -279,8 +303,8 @@ btc.index
 
 ### Pandas: filtering
 
-- .between(): - find values between ranges
-- isin - filtering a series -> find values that are in some collection
+- `.between()`: - find values between ranges
+- `.isin()` - filtering a series -> find values that are in some collection
 - use the tilde `~` character to reverse the booleans
 
 ```py
