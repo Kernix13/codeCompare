@@ -1,12 +1,66 @@
+---
+language: Jupyter Notebook
+slug: jupyter
+type: reference
+level: beginner–intermediate
+last_updated: 2026-04-01
+official_docs: https://docs.jupyter.org/en/latest/use/using.html
+---
+
 # Jupyter Code Snippets
 
-<li><a href="./../index.html">Compare</a></li>
-<li><a href="./../details.html">In Depth</a></li>
-<li><a href="./../frameworks.html">Frameworks</a></li>
+<br>
 
-> I forgot the frontmatter - do I need it?
+<p> Page Links: <br>
+<a href="./../index.html">Compare</a>  • 
+<a href="./../details.html">In Depth</a>  • 
+<a href="./../frameworks.html">Frameworks</a>
+</p>
+
+<p> Markdown File Links: <br>
+<a href="./csharp.md">csharp.md</a>  • 
+<a href="./javascript.md">javascript.md</a>  • 
+<a href="./jupyter.md">jupyter.md</a>  • 
+<a href="./jupyter2.md">jupyter2.md</a>  • 
+<a href="./php.md">php.md</a>  • 
+<a href="./python.md">python.md</a>  • 
+<a href="./react.md">react.md</a>  • 
+<a href="./typescript.md">typescript.md</a>
+</p>
 
 ## Jupyter Notebook & Pandas notes and snippets
+
+Command line:
+
+```sh
+# Installing Jupyter with pip
+pip3 install --upgrade pip
+# Then install the Jupyter Notebook using:
+pip3 install jupyter
+
+# Upgrading Jupyter Notebook
+# If using Anaconda, update Jupyter using conda:
+conda update jupyter
+# If using pip:
+pip install -U jupyter
+
+# Start the notebook server (Running the notebook, http://localhost:8888)
+jupyter notebook
+# or this:
+jupyter lab
+
+# Open a specific notebook:
+jupyter notebook notebook.ipynb
+
+# Start notebook server without opening a web browser
+jupyter notebook --no-browser
+# get help
+jupyter notebook --help
+# execute a notebook
+jupyter execute notebook.ipynb
+jupyter execute notebook.ipynb notebook2.ipynb
+jupyter execute notebook.ipynb --allow-errors
+```
 
 Methods I had a problem with using my csv file:
 
@@ -21,7 +75,7 @@ df.name
 df.loc[5:10]
 ```
 
-> ### Add links to the pandas docs for the methods in each section
+> IT'S REALLY IMPORTANT TO SET THE INDEX IF YOUR CURRENT INDEX DOES NOT MAKE SENSE FOR THE PLOT YOU WANT, ESPCIALLY IF IT IS JUST A RANGE INDEX
 
 Run the project: `jupyter lab` or `jupyter notebook`. How do those commands differ from opening Anaconda then Jupyter Notebook and viewing a `.ipynb` file in the browser? You can specify folders with `jupyter notebook ./myproject`.
 

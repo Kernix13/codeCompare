@@ -565,7 +565,7 @@ const uniques = {
     'ReadLine',
     'Substring',
     'TrimStart',
-    '',
+    '$""" """',
     '',
     '',
     '',

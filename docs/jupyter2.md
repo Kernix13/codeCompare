@@ -1,12 +1,36 @@
+---
+language: Jupyter Notebook
+slug: jupyter2
+type: reference
+level: beginner–intermediate
+last_updated: 2026-04-04
+official_docs: https://docs.jupyter.org/en/latest/use/using.html
+---
+
 # Jupyter Code Snippets for Matplotlib and Seaborn
 
-<li><a href="./../index.html">Compare</a></li>
-<li><a href="./../details.html">In Depth</a></li>
-<li><a href="./../frameworks.html">Frameworks</a></li>
+<br>
 
-> I forgot the frontmatter - do I need it?
+<p> Page Links: <br>
+<a href="./../index.html">Compare</a>  • 
+<a href="./../details.html">In Depth</a>  • 
+<a href="./../frameworks.html">Frameworks</a>
+</p>
+
+<p> Markdown File Links: <br>
+<a href="./csharp.md">csharp.md</a>  • 
+<a href="./javascript.md">javascript.md</a>  • 
+<a href="./jupyter.md">jupyter.md</a>  • 
+<a href="./jupyter2.md">jupyter2.md</a>  • 
+<a href="./php.md">php.md</a>  • 
+<a href="./python.md">python.md</a>  • 
+<a href="./react.md">react.md</a>  • 
+<a href="./typescript.md">typescript.md</a>
+</p>
 
 ## Matplotlib notes and snippets
+
+> How to see kwargs/docs for methods in Jupyter Notebook?
 
 I missed `index.values` somehow in the Pandas lessons?
 
@@ -389,11 +413,286 @@ plt.title("3rd Class")
 
 ## Revisiting Pandas - plotting
 
--
+- pandas can plot a dataframe - it will plot each series (column) - but you need a similar unit of measure or metric
+- you can use a Matplotlib stylesheet
+- .style.available property shows you the available stylesheets
+- `df.plot(*args, **kwargs)`
+- `kwargs`: kind, figsize, title, legend, ...
+- But when y ou use the Pandas shortcut, you don't have the same amount of control as with Matplotlib
+- so if you make a chart/plot with Pandas and you've imported MAtplotlib, you can just use MAtplotlib methods below the Pandas plot
+- `rename()` method: to rename the labels of series/columns
+- good to do right before you plot
+- you pass a dictionary -> {index: value}
+- easy to make stacked bar plots in Pandas vs Matplotlib
+- .plot(kind="bar") or .plot.bar() or .plot.bar(key=value, key=value)
+- .plot(kind="barh") or .plot.barh()
+- NOTE: you can use Matplotlib params in pandas plot() method and it will be passed to Matplotlib
 
 ```py
+import pandas as pd
+import matplotlib.pyplot as plt
 
+titanic = pd.read_csv('data/titanic.csv')
+# parse age as a number
+titanic["age"] = pd.to_numeric(titanic["age"], errors="coerce")
+houses = pd.read_csv("data/kc_house_data.csv")
+ufos = pd.read_csv("data/nuforc_reports.csv", parse_dates=['date_time', "posted"])
+
+# plotting df with Pandas - each series will be plotted on the same axes
+houses[["sqft_living", "sqft_lot"]].sort_values("sqft_living", ascending=False).head(10).plot(kind="bar")
+
+plt.style.available
+plt.style.use("fivethirtyeight")
+
+titanic.sex.value_counts().plot(kind="bar", title="Gender Breakdown On Titanic")
+
+titanic.sex.value_counts().plot(kind="bar")
+# use Matplotlib title method instead
+plt.title("My Title", loc="right")
+
+ufos["month"] = ufos["date_time"].dt.month
+ufos["year"] = ufos["date_time"].dt.year
+
+# Pandas kwargs
+sightings = ufos.month.value_counts().sort_index()
+sightings.plot(
+    kind="bar",
+    title="UFO Sightings By Month",
+    xlabel="Month",
+    ylabel="Num Sightings",
+    fontsize="10")
+
+# Same as above but use Matpltlib for xlabel & ylabel
+sightings = ufos.month.value_counts().sort_index()
+sightings.plot(
+    kind="bar",
+    title="UFO Sightings By Month",
+    fontsize="10")
+plt.xlabel("Month", fontsize=24, color="olive")
+plt.ylabel("Num Sightings", fontsize=24)
+
+months_dict = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7:"Jul", 8: "Aug", 9:"Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
+sightings.rename(months_dict) # does not do in place
+
+sightings.rename(months_dict).plot(
+    kind="bar",
+    title="UFO Sightings By Month",
+    fontsize="20")
+plt.xlabel("Month", fontsize=24, color="olive")
+plt.ylabel("Num Sightings", fontsize=24)
+
+salaries = pd.read_csv("data/Salaries.csv", low_memory=False)
+
+salaries["BasePay"] = pd.to_numeric(salaries["BasePay"], errors="coerce").fillna(0)
+salaries["OvertimePay"] = pd.to_numeric(salaries["OvertimePay"], errors="coerce").fillna(0)
+salaries["OtherPay"] = pd.to_numeric(salaries["OtherPay"], errors="coerce").fillna(0)
+
+df = salaries[["EmployeeName", "BasePay", "OvertimePay", "OtherPay"]]
+df.set_index("EmployeeName", inplace=True)
+df.head(10).plot(kind="bar")
+# make a stacked bar chart
+df.head(10).plot(kind="bar", stacked=True)
+
+# horizontal bar plot
+df["BasePay"].sort_values(ascending=False).head().plot.barh(color="red", title="Highest Paid SF Employees")
+
+# on a dataframe
+df.sort_values("OvertimePay", ascending=False).head().plot(kind="barh", stacked=True)
 ```
+
+### pandas plotting challenge #1
+
+- NOTE: you can use Matplotlib params in pandas plot() method and it will be passed to Matplotlib
+
+```py
+import pandas as pd
+import matplotlib.pyplot as plt
+billboard = pd.read_csv("data/billboard_charts.csv", parse_dates=["date"])
+plt.style.use("ggplot")
+
+top_10 = billboard[billboard["rank"] == 1]["artist"].value_counts().head(10)
+
+top_10.plot(
+    kind="barh",
+    title="Artists With Most Weeks At #1",
+    figsize=(8,6),
+    edgecolor="black",
+    linewidth=3
+)
+plt.xlabel("Weeks At #1")
+```
+
+### pandas histograms & box plots
+
+- a histogram visualizes the distribution of data
+- you can use multiple series in the same histogram if it makes sense
+- df.hist(): makes a separate histogram for each column in the dataframe
+- .boxplot: another way to visualize the distribution of values in a column
+- box + "whiskers" + "flyers" -> Box & Whisker plot
+- whiskers - outliers I think
+- YOU HAVE TO GO TO THE mATPLOTLIB DOCS FOR PARAMS (I think that is what he said)
+
+```py
+df["BasePay"].plot(kind="hist", bins=200, color="purple") # or
+df.plot.hist()
+
+df.hist()
+
+# this makes a box plot for each column in a dataframe
+df.plot(kind="box")
+df.boxplot()
+
+# box plot for an individual series
+houses.bedrooms.plot(kind="box")
+houses.bedrooms.plot(kind="box", showfliers=False)
+houses[["bedrooms", "bathrooms"]].boxplot(showfliers=False)
+```
+
+### pandas line plots
+
+- the default for .plot() is a line plot
+- remember you can use KW params from Matplotlib
+
+```py
+# get value counts by year, sort by year
+ufos.year.value_counts().sort_index().plot(kind="line", color="olive", linestyle=":")
+
+# called on the df but plotting 2 cols against each other
+houses.plot.line(x="bedrooms", y="price")
+```
+
+### pandas scatter plots & nultiple plots on the same axes
+
+- `kind="scatter"` or dataframe method `plot.scatter(x, y)`
+- `plt.plot()` one after each other for Matplotlib
+- same for pandas
+- if you do `.plot()` in a different cell, you get different plots
+- same if you add `plt.figure()` in between
+- `plt.xlim(min,max)` not as efficient as `.between()`
+
+```py
+houses.plot.scatter(x="bedrooms", y="bathrooms")
+houses.plot.scatter(x="bedrooms", y="bathrooms", marker="X")
+
+# 2 plots one after another go onto the ame axes
+ufos[ufos["state"] == "CA"].year.value_counts().sort_index().plot(label="CA")
+ufos[ufos["state"] == "TX"].year.value_counts().sort_index().plot(label="TX")
+
+plt.xlabel("Year")
+plt.legend(loc="upper left")
+plt.title("UFO Sighting By State")
+```
+
+### pandas automatic subplots
+
+- NOT HAVE PLOTS STACKED ON TOP OF EACH OTHER IN THE SAME AXES BUT DESERVE TO BE IS A SINGLE FIGURE
+- pandas supports subplots out of the box with the `subplots` kwarg, default is `False`
+- each column will get it's own subplot in the figure
+- `layout` tuple: `layout=(num_rows, num_cols)`
+
+```py
+df.plot(kind="hist", subplots=True, sharex=False, figsize=(5,5))
+plt.tight_layout()
+
+axs = df.plot(kind="hist", subplots=True, sharex=False, layout=(1,3), figsize=(10,3), bins=30)
+plt.tight_layout()
+axs[0][2].set_xlim(0,20000)
+axs[0][1].set_title("Middle")
+axs[0][0].set_title("First")
+axs[0][2].set_title("Third")
+```
+
+### manual subplots with pandas
+
+- `.subplots()`
+- NOTE: `ax=axs[0][0]` -> nested array
+- what is `gca()`?
+- what is this syntax: `fig, axs`
+- `.suptitle()`
+
+```py
+fig, axs = plt.subplots(1,2)
+
+ufos.year.value_counts().sort_index().plot(ax=axs[0])
+axs[0].set_title("Sightings By Year")
+
+ufos.month.value_counts().sort_index().plot(kind="bar", ax=axs[1])
+axs[1].set_title("Sightings By Month")
+
+
+months = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
+          7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}
+fig, axs = plt.subplots(2, 3, figsize=(14, 8))
+fig.suptitle("UFO sightings by month", fontsize=14)
+fig.tight_layout(pad=2)
+
+ufos[ufos.year == 2014].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[0][0], title="2014")
+ufos[ufos.year == 2015].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[0][1], title="2015")
+ufos[ufos.year == 2016].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[0][2], title="2016")
+ufos[ufos.year == 2017].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[1][0], title="2017")
+ufos[ufos.year == 2018].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[1][1], title="2018")
+ufos[ufos.year == 2019].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[1][2], title="2019")
+plt.tight_layout()
+
+
+jl = billboard[billboard["artist"] == "John Lennon"]["song"].value_counts().head(8)
+wings = billboard[billboard["artist"] == "Wings"]["song"].value_counts().head(8)
+gh = billboard[billboard["artist"] == "George Harrison"]["song"].value_counts().head(8)
+rs = billboard[billboard["artist"] == "Ringo Starr"]["song"].value_counts().head(8)
+
+fig, axs = plt.subplots(2,2, figsize=(14,8))
+fig.suptitle("Beatles Solo Songs (By Weeks On Chart)", fontsize=20 )
+
+jl.plot(kind="barh", ax=axs[0][0], color="#fc5c65")
+axs[0][0].set_title("John Lennon", color="#fc5c65")
+
+wings.plot(kind="barh", ax=axs[0][1], color="#fd9644")
+axs[0][1].set_title("Wings(Paul)", color="#fd9644")
+
+gh.plot(kind="barh", ax=axs[1][0], color="#2bcbba")
+axs[1][0].set_title("George Harrison", color="#2bcbba")
+
+rs.plot(kind="barh", ax=axs[1][1], color="#26de81")
+axs[1][1].set_title("Ringo Starr", color="#26de81")
+
+plt.tight_layout()
+```
+
+### exporting figures with savefig()
+
+- matplotlib.pyplot.savefig - to save images after you run them
+- allows you to export a chart
+- `savefig("image name")`: it will be saved as a .png in the same folder as the notebook
+- you can also set an edge color, change dpi, add padding, meta data, ...
+
+```py
+ufos[ufos["shape"] == "light"].year.value_counts().sort_index().plot(label="light", figsize=(10,8), title="UFO Sightings By Shape")
+ufos[ufos["shape"] == "fireball"].year.value_counts().sort_index().plot(label="fireball")
+ufos[ufos["shape"] == "circle"].year.value_counts().sort_index().plot(label="circle")
+ufos[ufos["shape"] == "triangle"].year.value_counts().sort_index().plot(label="triangle")
+ufos[ufos["shape"] == "formation"].year.value_counts().sort_index().plot(label="formation")
+
+plt.xlim(2000, 2019)
+plt.legend()
+plt.savefig("UFO_Shapes")
+
+
+months = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
+          7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}
+fig, axs = plt.subplots(2, 3, figsize=(14, 8))
+fig.suptitle("UFO sightings by month", fontsize=14)
+fig.tight_layout(pad=2)
+ufos[ufos.year == 2014].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[0][0], title="2014")
+ufos[ufos.year == 2015].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[0][1], title="2015")
+ufos[ufos.year == 2016].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[0][2], title="2016")
+ufos[ufos.year == 2017].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[1][0], title="2017")
+ufos[ufos.year == 2018].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[1][1], title="2018")
+ufos[ufos.year == 2019].month.value_counts().sort_index().rename(months).plot(kind="bar", ax=axs[1][2], title="2019")
+plt.tight_layout()
+plt.savefig("UFO_By_Month")
+```
+
+---
 
 ## Grouping & Aggregating
 

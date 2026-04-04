@@ -7,11 +7,26 @@ last_updated: 2026-01-05
 official_docs: https://docs.python.org/3/
 ---
 
-<li><a href="./../index.html">Compare</a></li>
-<li><a href="./../details.html">In Depth</a></li>
-<li><a href="./../frameworks.html">Frameworks</a></li>
-
 # Python — Reference Notes
+
+<br>
+
+<p> Page Links: <br>
+<a href="./../index.html">Compare</a>  • 
+<a href="./../details.html">In Depth</a>  • 
+<a href="./../frameworks.html">Frameworks</a>
+</p>
+
+<p> Markdown File Links: <br>
+<a href="./csharp.md">csharp.md</a>  • 
+<a href="./javascript.md">javascript.md</a>  • 
+<a href="./jupyter.md">jupyter.md</a>  • 
+<a href="./jupyter2.md">jupyter2.md</a>  • 
+<a href="./php.md">php.md</a>  • 
+<a href="./python.md">python.md</a>  • 
+<a href="./react.md">react.md</a>  • 
+<a href="./typescript.md">typescript.md</a>
+</p>
 
 The majority of these notes are from Colt's Steels's The Modern Python3 Bootcamp: 36 sections, 378 lectures, 30 hours
 

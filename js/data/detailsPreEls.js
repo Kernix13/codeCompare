@@ -942,7 +942,7 @@ def unique_values(lst):
         `
       },
       {
-        "keywords": ["in", "index"],
+        "keywords": ["in operator", "index"],
         "code": `
 status = ["pending", "approved", "denied"]
 
