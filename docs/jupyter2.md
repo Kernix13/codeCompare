@@ -1235,20 +1235,368 @@ ufos[ufos["duration"].str.contains("day|week|month", na=False)]
 
 ## Apply, Map, and Applymap
 
--
+### applying functions to series
+
+- .apply() - there is both a series and a dataframe apply method
+- `pd.Series.apply()`: takes a Fx and invokes it on every value in the series and returns a new series
+
+> Would I use this to calc the various fields I need or is it overkill
 
 ```py
+def years_to_days(yrs):
+    return yrs * 365
 
+titanic["age"].apply(years_to_days)
+# Although you couls just do titanic["age"] * 365
+
+def get_age_group(age):
+    if age < 2:
+        return "infant"
+    elif age < 12:
+        return "child"
+    elif age < 18:
+        return "teen"
+    elif age < 65:
+        return "adult"
+    else:
+        return "senior"
+
+titanic["age_group"] = titanic["age"].apply(get_age_group)
+titanic.age_group.value_counts()
+titanic.groupby("age_group").survived.mean()
+titanic.groupby(["age_group", "sex"]).survived.mean()
+```
+
+### Apply() with Lambdas & arguments
+
+- you can use .apply() with FXs that need args using `args`
+- `args` needs to be a tuple
+
+```py
+# convert to today's rates (multiple by 24)
+titanic["fare"] * 24
+# use a lambda
+titanic["fare"].apply(lambda x: f"${x * 24}")
+
+# pass arguments
+def convert_currency(num, multiplier):
+    return f"${num * multiplier}"
+
+# apply will pass the values in "fare" as the first arg
+titanic["fare"].apply(convert_currency, args=(24,))
+```
+
+### Apply() with dataframes: columns
+
+- `pd.Dataframe.apply()`: the dataframe version is more complicated
+- if you don't specify a direction/axis, it defaults to 0 (columns)
+
+```py
+df = titanic[["pclass", "survived", "age", "fare"]]
+
+def get_range(s):
+    return s.max() - s.min()
+
+df.apply(get_range)
+# default axis is 0
+df.apply(get_range, axis=0)
+```
+
+### Apply() with dataframes: rows
+
+- FXs across rows - each row becomes a series
+- `axis`: 0 = columns, 1 = rows
+
+```py
+df.apply(get_range, axis=1)
+
+def get_fam_size(s):
+    fam_size = s.sibsp + s.parch
+    if fam_size == 0:
+        return "solo"
+    elif fam_size < 5:
+        return "average"
+    else:
+        return "large"
+
+titanic.apply(get_fam_size, axis=1)
+
+titanic["fam_size"] = titanic.apply(get_fam_size, axis=1)
+
+titanic["fam_size"].value_counts()
+titanic.groupby("fam_size").survived.mean()
+titanic.groupby(["fam_size", "sex"]).survived.mean()
+```
+
+### the series Map() method
+
+- `.map()`: only exists on series - maps a series of values to another series of values based on a Fx or a dictionary
+- you can not supply a dictionary for the series apply() method
+
+```py
+# pass a dictionary
+titanic["pclass"].map({1: "1st", 2: "2nd", 3: "3rd"})
+# use a lambda Fx
+titanic["age"].map(lambda a: a < 18)
+```
+
+### the applymap() method
+
+- `.applymap()`: not used that much - returns a dataframe I think
+- it is a dataframe only method
+- it takes a Fx and runs it for every value in the dataframe - that means you need homogeneous data or datatypes
+
+```py
+# use it for text columns
+titanic[["name", "sex", "age_group"]].applymap(str.upper)
+
+# these examples are weak
+# df is pclass, survived, age, fare
+df.applymap(lambda el: el * 7) # vs just:
+df * 7
+# get the length of the strings
+titanic[["name", "sex", "age_group"]].applymap(len)
 ```
 
 <br>
 
 ## Combining Series and Dataframes
 
--
+### concatenating series
+
+- you can join series and datasets
+- joining series is really important
+- `.concat()`: is a pandas method, not a series or dataframe method
+- for a series, they are stacked on top of each other
+- **NOTE**: the individual indices are preserved from the original series
+- `ignore_index`
+- can mix series of any data type but it will result in 'object'
 
 ```py
+# pd.concat([series1, series2, series2, ...])
 
+s1 = pd.Series(['a', 'b', 'c'])
+s2 = pd.Series(['d', 'e', 'f', 'z'])
+
+pd.concat([s1,s2])
+'''
+0    a
+1    b
+2    c
+0    d
+1    e
+2    f
+3    z
+'''
+
+# use a range index
+pd.concat([s2, s1], ignore_index=True)
+```
+
+### concatenating series by index
+
+- concat side by side instead of stacking to make a dataframe
+- `axis` - default is 0 for stacking/series
+
+```py
+c1 = pd.Series(["red", "orange", "yellow"])
+c2 = pd.Series(["green", "blue", "purple"])
+pd.concat([c1,c2], axis=1)
+'''
+       0	    1
+0	red	    green
+1	orange	blue
+2	yellow	purple
+'''
+
+fruits = pd.Series(
+    data=["apple", "banana", "cherry"],
+    index=["a","b", "c"]
+)
+
+animals = pd.Series(
+    data=["badger", "cougar", "anaconda"],
+    index=["b", "c", "a"]
+)
+# matches the provided indices
+pd.concat([fruits, animals], axis=1)
+# this renames the columns 0, 1 to fruit, animal
+pd.concat([fruits, animals], axis=1, keys=["fruit", "animal"])
+'''
+      0	         1
+a	apple	anaconda
+b	banana	badger
+c	cherry	cougar
+'''
+
+pd.concat([fruits, animals], axis=0, keys=["fruit", "animal"])
+```
+
+### inner vs. outer joins
+
+- what happens when your data does not match up
+- what if there is not a one-to-one matchup?
+- non-matching fields get filled with `NaN`
+- use `join` param
+- like SQL, `outer` (default) `join` keeps everything, `inner` only matching
+
+```py
+fruits = pd.Series(
+    data=["apple", "banana", "cherry", "durian"],
+    index=["a","b", "c", "d"]
+)
+
+animals = pd.Series(
+    data=["badger", "cougar", "anaconda", "elk", "pika"],
+    index=["b", "c", "a", "e", "p"]
+)
+# this stacks (series)
+pd.concat([animals, fruits], ignore_index=True)
+# this creates a dataframe with NaN for some fields
+pd.concat([animals, fruits], axis=1)
+
+# only outputs where both series have a matching index
+pd.concat([animals, fruits], axis=1, join="inner")
+```
+
+### concatenating dataframes by columns
+
+- `axis=0` is default so stacks
+
+```py
+harvest_21 = pd.DataFrame(
+    [['potatoes', 900], ['garlic', 1350], ['onions', 875]],
+    columns=['crop', 'qty']
+)
+
+harvest_22 = pd.DataFrame(
+    [['garlic', 1600], ['spinach', 560], ['turnips', 999], ['onions', 1000]],
+    columns=['crop', 'qty']
+)
+
+# combine both dataframes, preserves original indices
+pd.concat([harvest_21, harvest_22], ignore_index=True)
+# createhierchical index
+pd.concat([harvest_21, harvest_22], keys=[2021, 2022])
+
+harvest_23 = pd.DataFrame(
+    [['potatoes', 900, 500], ['garlic', 1350, 1200], ['onions', 875, 950]],
+    columns=['crop', 'qty', 'profit']
+)
+# NaN for profit in 21 & 22
+pd.concat([harvest_21, harvest_22, harvest_23])
+# lose profile column - the columns must exist for all 3
+pd.concat([harvest_21, harvest_22, harvest_23], join="inner")
+```
+
+### concatenating dataframes by index
+
+- `axis=1`: concat 2 dataframes along the other axis using the index
+
+```py
+livestock = pd.DataFrame(
+    [['pasture', 9], ['stable', 3], ['coop', 34]],
+    columns=['location', 'qty'],
+    index=['alpaca', 'horse', 'chicken']
+)
+weights = pd.DataFrame(
+    [[4,10], [900, 2000], [1.2, 4], [110, 150]],
+    columns=['min_weight', 'max_weight'],
+    index=['chicken', 'horse', 'duck', 'alpaca']
+)
+# NaN fields
+pd.concat([livestock, weights])
+# combo - only index labels (unique, no repeats), NaN for duck
+pd.concat([livestock, weights], axis=1)
+# lose the duck row, only the rows that match between dataframes
+pd.concat([livestock, weights], axis=1, join="inner")
+```
+
+### the dataframe Merge() method
+
+- merge() - more powerful than concat when it comes to combining dataframes
+- merge is a SQL or database-style join - merge 2 dataframes and merge them on sole column where the values are equal (or multiple columns)
+- it is a dataframe method
+
+```py
+teams = pd.DataFrame(
+    [
+        ["Suns", "Phoenix", 20, 4],
+        ["Mavericks", "Dallas", 11,12],
+        ["Rockets", "Houston", 7, 16],
+        ['Nuggets', "Denver", 11, 12]
+    ],
+    columns=["team", "city", "wins", "losses"]
+)
+
+cities = pd.DataFrame(
+    [
+        ["Houston", "Texas", 2310000],
+        ["Phoenix", "Arizona", 1630000],
+        ["San Diego", "California", 1410000],
+        ["Dallas", "Texas", 1310000]
+    ],
+    columns=["city", "state", "population"]
+)
+# left_df.merge(right_df)
+# no Denver or San Diego - merge on common column "city"
+teams.merge(cities)
+```
+
+### Merge() with left, right, inner, and outer joins
+
+- `on`: label or list - if not provided, will merrge on a common column
+- often you want to specify one or more columns to join on
+- the default type of merge is `inner` - the intersection of keys from both frames, similar to a sql inner join, preserve the order of the keys on the left
+- `how` param: allows the type of merge - left, right, outer, inner, cross
+- `left` join: take all the keys/values from the left DF regardless if there is an intersection or not - `NaN` for some fields in no match
+- `right` join: same as above but preference for the right DF
+- `outer` join: all records
+
+```py
+teams.merge(cities, on="city")
+# default, same result
+teams.merge(cities, on="city", how="inner")
+
+# all teams
+teams.merge(cities, how="left")
+# all cities
+teams.merge(cities, how="right")
+# both dataframes
+teams.merge(cities, how="outer")
+
+cities.merge(teams, on="city", how="left")
+teams.merge(cities, on="city", how="right")
+```
+
+### Merge() On and Suffixes arguments
+
+- `on`: what column(s)
+- `suffixes`: defaults to `_x` and `_y`
+- when you are joining on a colun or columns but there is 1 or more columns with the same label - provide your own tuple of suffixes
+
+```py
+midterms = pd.DataFrame(
+    [['alex', 'padilla', 92], ['rayna', 'wilson', 83], ['juan', 'gomez', 78], ['angela', 'smith', 66],['stephen', 'yu', 98]],
+    columns=['first', 'last', 'score']
+)
+finals = pd.DataFrame(
+    [['alex','padilla', 97, False], ['rayna', 'wilson', 88, False], ['alex', 'smith', 86, True], ['juan', 'gomez', 71, True], ['stephen', 'yu', 78, False], ['sakura', 'steel', 100, True]],
+    columns=['first', 'last','score', 'extra_credit']
+)
+# this is bad
+midterms.merge(finals, on="score")
+# this can be bad as well
+midterms.merge(finals, on="first")
+# this - join on first and last name - returns score_x and score_y
+midterms.merge(finals, on=["first", "last"], how="inner")
+# provide your own suffixes
+midterms.merge(finals, on=["first", "last"], how="inner", suffixes=("_midterms", "_finals"))
+combo = midterms.merge(finals, on=["first", "last"], how="inner", suffixes=("_m", "_f"))
+
+combo["avg"] = (combo["score_m"] + combo["score_f"]) / 2
+
+combo.loc[combo["extra_credit"] == True, 'avg'] += 5
 ```
 
 <br>
@@ -1285,6 +1633,28 @@ Sections 20-22
 ## Controlling Seaborn Aestetics
 
 -
+
+```py
+
+```
+
+---
+
+## Practical methods seen in GitHub projects
+
+### Pandas
+
+```py
+
+```
+
+### Matplotlib
+
+```py
+
+```
+
+### Seaborn
 
 ```py
 

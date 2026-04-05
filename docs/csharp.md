@@ -128,6 +128,37 @@ dotnet new webapi -o MyApi
 dotnet new maui -o MyMobileApp
 ```
 
+## Methods breakdown
+
+Add freeCodeCamp methods
+
+| Dtype  | Method          | Return | Mutate |
+| :----- | :-------------- | :----- | :----: |
+| String | Convert.ToInt32 | int    |   N    |
+| -      | int.Parse       | int    |   N    |
+| -      | int.TryParse    | bool   |   N    |
+| -      | Substring       | str    |   N    |
+| -      | TrimStart       | str    |   N    |
+| -      | Trim            | str    |   N    |
+| -      | IndexOf         | int    |   N    |
+| -      | Remove          | str    |   N    |
+| -      | ToCharArray     | array  |   N    |
+| -      | Split           | array  |   N    |
+| -      |                 |        |        |
+| Number | Math.Max        | num    |        |
+| -      |                 |        |        |
+| -      |                 |        |        |
+| -      |                 |        |        |
+| Array  | foreach         | n/a    |        |
+| -      | Array.sort      | ?      |        |
+| -      | Array.Reverse   | ?      |        |
+| -      | Array.Clear     | ?      |        |
+| -      | Array.Resize    | ?      |        |
+| -      | Join            | string |        |
+| -      |                 |        |        |
+
+Remove()
+
 ## To-do - add these
 
 - code blocks of loops and conditionals
