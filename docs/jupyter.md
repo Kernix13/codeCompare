@@ -30,6 +30,8 @@ official_docs: https://docs.jupyter.org/en/latest/use/using.html
 
 ## Jupyter Notebook & Pandas notes and snippets
 
+I have been using Jupyter Notebook through Anaconda.
+
 Command line:
 
 ```sh
@@ -77,7 +79,11 @@ df.loc[5:10]
 
 > IT'S REALLY IMPORTANT TO SET THE INDEX IF YOUR CURRENT INDEX DOES NOT MAKE SENSE FOR THE PLOT YOU WANT, ESPCIALLY IF IT IS JUST A RANGE INDEX
 
-Run the project: `jupyter lab` or `jupyter notebook`. How do those commands differ from opening Anaconda then Jupyter Notebook and viewing a `.ipynb` file in the browser? You can specify folders with `jupyter notebook ./myproject`.
+Run the project: `jupyter lab` or `jupyter notebook`. How do those commands differ from opening Anaconda then Jupyter Notebook and viewing a `.ipynb` file in the browser?
+
+Questions
+
+1. `set_index(col)` vs `index_col(num)`
 
 THERE ARE TOO MANY METHODS IN THIS TOP SECTION THAT ARE COVERED FURTHER DOWN - REMOVE THEM
 
@@ -95,41 +101,48 @@ THERE ARE TOO MANY METHODS IN THIS TOP SECTION THAT ARE COVERED FURTHER DOWN - R
 - mean(): the average
 - median(): the item in the middle when sorted
 - mode(): the most frequent value
-- these also take `numeric_only=True`
-- describe(): a generic nameb\c it does multiple things - it generates descriptive statistics
-- just like the other methods, it returns a dataframe
+- **these also take `numeric_only=True`**
+- describe(): a generic name because it does multiple things - it generates descriptive statistics
+  - just like the other methods, it returns a dataframe
 - dot and bracket notation to select a column
   - df.age
   - df["age"] - use this to select multiple columns
   - df[var_name] - need square brackets for a variable
   - another area where you need bracket notation is if you have a column name that is a reserved keyword like a dataframe method
-- head(n=5): same - returns a new series
-- tail(n=5): same - returns a new series
-- descibe():
-- unique():
-- nunique():
-- nlargest(): get the num largest values
-- nsmallest(): get the num smallest values
-- value_counts()
-- plot(): `kind` param is the type of plot you want
-- value_counts(): on series and dataframes - returns a series containing counts of unique values
+- `head(n=5)`: returns a new series of the first 5 items, 5 is default
+- `tail(n=5)`: same - returns a new series
+- `descibe()`:
+- `unique()`:
+- `nunique()`:
+- `nlargest()`: get the num largest values
+- `nsmallest()`: get the num smallest values
+- `value_counts()`:
+- `plot()`: `kind` param is the type of plot you want
+- `value_counts()`: on series and dataframes - returns a series containing counts of unique values
 - both dataframes and series are indexed
-- the default for read_csv is a range() index
+- the default for `read_csv` is a `range()` index
 - you can manually change the index for something that makes more sense
-- to change the index use `set_index(keys)` - you can also do multi-indexing
+- to change the index use `set_index(col)` - you can also do multi-indexing
 - it makes a new data frame unless you pass in `inplace=True`
 - a param named `index_col(num)` where `num` is the position of the column you want as the index
-- `sort_values`: a very commonly used method - it is a dataframe and series method - makes a new dataframe
+- `sort_values()`: a very commonly used method - it is a dataframe and series method - makes a new dataframe
   - param named `key`: takes a lambda and it will run for each element
-- `sort_index`: to sort by the index "column"
-- `loc`: to access data by row instead of by column
+- `sort_index()`: to sort by the index "column"
+- `loc[]`: to access data by row instead of by column
 
 ### Pandas: read_csv and dataframe info
 
-- read_csv() | type() |
-- index_col | sep | names |
-- .columns | .shape | .dtypes
-- .head() | .tail() | .info()
+- `read_csv()`:
+- `type()`:
+- `index_col`:
+- `sep` param:
+- `names` param:
+- `.columns`:
+- `.shape`:
+- `.dtypes`:
+- `.head()`:
+- `.tail()`:
+- `.info()`:
 
 ```py
 # ✅ USEFUL COMMANDS ✅
@@ -142,8 +155,7 @@ sellers = pd.read_csv('data/bestsellers.csv')
 # 2. tab separated, .tsv so \t
 titles = pd.read_csv('data/movie_titles.tsv', sep="\t")
 
-# 3. set 1st col in dataset as the index
-# Tell Pandas to use the first column as the index using index_col
+# 3. Tell Pandas to use the first column as the index using index_col
 everest = pd.read_csv('data/mount_everest_deaths.csv', index_col=0)
 
 # 4. pipe | separated, has an index col but that is not titled
@@ -157,23 +169,23 @@ state_pops = pd.read_csv("data/nst-est2020.csv", names=names, header=0)
 # Useful to see what you can select or if any column names are keywords
 sellers.columns
 
-sellers.shape
 # number of records/rows and columns: (21613, 21)
+sellers.shape
 
-first_5 = sellers.head()
 # shows the first 5 rows - makes a new DataFrame
+first_5 = sellers.head()
 
-last_7 = sellers.tail(7)
 # shows the last 7 rows - makes a new DataFrame
+last_7 = sellers.tail(7)
 
-sellers.info()
 # shows each column, non-null count, and data type for each
 # also shows the number of records and columns
 # id             21613 non-null  int64
+sellers.info()
 
-sellers.dtypes
 # just shows the col names and their data type
 # int, float, or object
+sellers.dtypes
 
 # 🚫 LESS USEFUL COMMANDS 🚫
 type(sellers)
@@ -205,9 +217,18 @@ pd.read_csv?
 
 > I need notes on these
 
-- .min() | .max() | .sum() | .count() | .describe() | .value_counts() | .plot()
-- .values | .index | .unique | nunique
-- `numeric_only=True` works for .min() and .max() also
+- `.min()`:
+- `.max()`:
+- `.sum()`:
+- `.count()`:
+- `.describe()`:
+- `.value_counts()`:
+- `.plot()`:
+- `.values`:
+- `.index`:
+- `.unique()`: Return unique values, returned in order of appearance, does NOT sort. Significantly faster than `numpy.unique` for long enough sequences. Includes `NA` values.
+- `.nunique()`
+- `numeric_only=True` works for `.min()` and `.max()` also
 
 ```py
 type(houses.max())
@@ -216,8 +237,8 @@ type(houses.max())
 houses.count()
 # returns the non-null count for each column
 
-# O or object pr numpy.object for Object -> text fields
-titanic.describe(include=['object']) # pr like this if just one
+# O or object or numpy.object for Object -> text fields
+titanic.describe(include=['object']) # or like this if just one
 titanic.describe(include='object')
 
 # sums each column though a lot do not make sense
@@ -275,22 +296,28 @@ names.index # just the labels - RangeIndex(start=0, stop=1309, step=1)
 
 ### Pandas: sorting, indexing, rows
 
-**loc** - access data by a row LABEL
+> STOPPED HERE
 
-**iloc** - access data by row but by index position
+**loc[]** - access data by a row LABEL
 
-- .index
-- .set_index() | .sort_values() | .sort_index() | .loc() | .iloc() |
-- sort_values: a very commonly used method - it is a dataframe and series method
-- sort_values does not operate on the original dataframe - it makes a new dataframe but you can set it to sort in place
+**iloc[]** - access data by row but using index position/number
+
+- `.index`:
+- `.set_index()`:
+- `.sort_values()`:
+- `.sort_index()`:
+- `.loc()`:
+- `.iloc()`:
+- `sort_values`: a very commonly used method - it is a dataframe and series method
+- `sort_values` does not operate on the original dataframe - it makes a new dataframe but you can set it to sort in place
 - param named `key`: takes a lambda and it will run for each element
-- sort_index: to sort by the index "column" - it does not sort in place
-- `loc`: to access data by row instead of by column - access a group of rows and columns by label(s) or a boolean array
+- `sort_index`: to sort by the index "column" - it does not sort in place
+- `loc[]`: to access data by row instead of by column - access a group of rows and columns by label(s) or a boolean array
 - access by the label -> `.loc[label]`
 - it returns a series
 - use can also use slice syntax: [start:end] - end included?!?
   - you can slice with text values
-- iloc: accross rows out of a dataframe but it takes an integer
+- `iloc[]`: accross rows out of a dataframe but it takes an integer
 - it returns a series - wrap in [] to get a dataframe
 - can pass is a list of positions - can also slice
 - with the rows you get you can also specify what columns you want

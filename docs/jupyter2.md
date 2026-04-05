@@ -692,31 +692,546 @@ plt.tight_layout()
 plt.savefig("UFO_By_Month")
 ```
 
----
+<br>
 
 ## Grouping & Aggregating
 
--
+- `.groupby()`
+- https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html
+- groupby returns a group object but they don't do a lot until you ask to do something (horribly written!)
+- .ngroups: shows you the number of groups
+- .groups: shows a dictionary with each group and its indices
+- `.first()`: shows the first element in each group
+- `get_group()`:
+- looping over the group object gives you a tuple which contains the group name and the actual group
 
 ```py
+import pandas as pd
+carstocks = pd.read_csv("data/car_stocks.csv")
+carstocks["Close"].mean()
+carstocks[carstocks["Symbol"] == "GM"]["Close"].mean()
+# Use the Symbol to calculate the average Close price
+carstocks.groupby("Symbol")["Close"].mean()
 
+titanic = pd.read_csv("data/titanic.csv")
+titanic['age'] = titanic["age"].replace(['?'], [None]).astype('float')
+
+df = titanic[["pclass", "survived", "sex", "age"]]
+gbo = df.groupby(by="sex")
+gbo = df.groupby("sex")
+gbo.ngroups # 2
+
+df.groupby("age").first()
+gbo.get_group("male")
+
+for name, group in gbo:
+    print(name)
+    print("----------")
+    print(group)
+
+carstocks.groupby("Symbol")["High"].max()
 ```
+
+### split-apply-combine
+
+1. "Split" the data into different groups - `groupby`
+2. "Apply" FXs or analysis to each group
+3. "Combine" the results into a new data structure
+
+- this process is not specific to groupby - groupby is a common/easy way to split things + it has a lot of methods
+
+```py
+# .mean() runs on each group - returns a new series
+carstocks.groupby("Symbol")["Close"].mean()
+
+# gbo = "Split"
+# get average age by sex group = "Apply" + "Combine" into a series
+gbo["age"].mean()
+# get max age by sex group
+gbo["age"].max()
+gbo["age"].mean().plot(kind="bar", title="Average Age By Sex")
+
+# group by passenger class, look at age, get mean/average
+titanic.groupby("pclass")["age"].mean()
+
+# this returns a dataframe:
+titanic.groupby("sex").median()
+
+carstocks.groupby("Symbol")["High"].max()
+```
+
+### using the agg method
+
+- `aggregate()` or `agg()`: agg() is more common but the docs have aggregate()
+- it allows you to run multiple functions on a `groupby` object
+- you can run multiple statistics at once
+- this is the _Apply_ portion
+- you pass a named function in quotes, you can pass in your own FXs
+- you can do this for a specific column and which Fxs you want to run, but have different functions for a different column
+  - need a dictionary where the key is the col and the val is a list of FXs
+
+```py
+# could just add .min(), but this is an example
+titanic.groupby("sex")["age"].agg("min")
+# pass in a list of function names
+titanic.groupby("sex")["age"].agg(["min", "max", "mean", "median"])
+
+# get the min & max for each column in groupby("sex") dataframe
+titanic.groupby("sex").agg(["min", "max"])
+
+# different functions for different columns
+titanic.groupby("sex").agg({"age": ["min", "max"], "pclass": "mode"})
+
+# different functions for different columns
+carstocks.groupby("Symbol").agg({"Open": "mean", "Close": "mean", "Volume": ["mean", "sum"]})
+```
+
+### agg with custom functions
+
+- custom functions are not wrapped in quotes
+
+```py
+# custom function example
+def diff(series):
+    return series.max() - series.min()
+
+# diff between highest & lowest age by passenger class
+titanic.groupby("pclass")["age"].agg(["min", "max", diff])
+
+# get number of null values in age column
+titanic["age"].size - titanic["age"].count()
+
+def count_nulls(series):
+    return series.size - series.count()
+
+# number of null values in age by passenger class
+titanic.groupby("pclass")["age"].agg(count_nulls)
+```
+
+### named aggregation
+
+- named aggregation: a fancy syntax - creates new columns
+- instead of providing a dictionary, create a column name as th key set = to a tuple where
+  - the first value is the column you are working with
+  - the second is the Fx you want to run
+- `as_index`
+
+```py
+# standard
+carstocks.groupby("Symbol").agg({"Open": ["min", "max"],"Close": ["min", "max"], })
+
+# create your own columns,
+df.groupby(col).agg(
+    new_col_name=(some_other_col, "function_name")
+)
+
+# how come these FXs are in quotes but in the exercise they are not?
+carstocks.groupby("Symbol").agg(
+    min_open=("Open", "min"),
+    max_open=("Open", "max"),
+    min_close=("Close", "min"),
+    max_close=("Close", "max")
+)
+
+carstocks.groupby("Symbol", as_index=False).agg({
+    "Open": ["min", "max"],
+    "Close": ["min", "max"],
+})
+
+carstocks.groupby("Symbol").agg({
+    "Open": ["min", "max"],
+    "Close": ["min", "max"],
+})
+```
+
+### EXERCISE: groupby
+
+```py
+import pandas as pd
+import matplotlib.pyplot as plt
+stats = pd.read_csv("data/laliga.csv")
+
+# Find the 5 teams that had the most "Red Cards"
+# group by team, look at Red Cards, sum them
+stats.groupby("Team")["Red Cards"].sum().nlargest(5)
+
+# Find the average number of "Long passes" made by each Position (Goalkeeper, Forward, etc.)
+stats.groupby("Position")["Long passes"].mean()
+
+# Find the 10 Shirt numbers that scored the most goals
+stats.groupby("Shirt number")["Goals scored"].sum().nlargest(10)
+
+# PART 2
+# total shots by each team + on target shots
+# Why isn't sum in quotes?
+shots = stats.groupby("Team").agg(
+    total=("Shots", sum),
+    on_target=("Shots on target", sum)
+)
+
+# create accuracy column
+shots["accuracy"] = shots["on_target"] / shots["total"]
+
+plt.style.use("ggplot")
+# 2 rows, 1 col, share the x axis labels
+fig, axs = plt.subplots(2,1, figsize=(5,8), sharex=True)
+# get top 5 most accurate teams
+shots["accuracy"].nlargest().sort_values(ascending=True).plot(
+    kind="barh",
+    ax=axs[0],
+    color="green",
+    title="Most Accurate Teams"
+)
+# get bottom 5 least accurate teams
+shots["accuracy"].nsmallest().plot(
+    kind="barh",
+    ax=axs[1],
+    color="red",
+    title="Least Accurate Teams"
+)
+plt.xlabel("On Target Percentage")
+```
+
+<br>
 
 ## Hierachical Indexing
 
--
+### groupby with multiple columns
+
+- Multi-Indexing, or Hierchical Indexing
+- this comes up a lot, especially with groupby
+
+> I CAN SEE THIS BEING USEFUL
 
 ```py
+import pandas as pd
+carstocks = pd.read_csv("data/car_stocks.csv")
 
+titanic = pd.read_csv("data/titanic.csv")
+# fix age & fare values
+titanic['age'] = titanic["age"].replace(['?'], [None]).astype('float')
+titanic['fare'] = titanic["fare"].replace(['?'], [None]).astype('float')
+
+s1 = titanic.groupby("sex")["age"].mean()
+s1.index
+# Index(['female', 'male'], dtype='object', name='sex')
+
+# example of a multi-index but the labels are "hierachical"
+# group by 2 columns
+# when you do this, pclass AND sex are BOTH the index
+df = titanic.groupby(["pclass", "sex"]).mean()
+df.index
+'''
+MultiIndex([(1, 'female'),
+            (1,   'male'),
+            (2, 'female'),
+            (2,   'male'),
+            (3, 'female'),
+            (3,   'male')],
+           names=['pclass', 'sex'])
+'''
+
+# Aother multi-index example
+titanic.groupby(["sex", "age"]).mean()
 ```
+
+### creating a multiindex with set_index
+
+- you can get a series or dataframe back with a multi-index
+- you could also setup your own multi-index any time you want using set_index
+  - you just pass in a list
+
+```py
+pops = pd.read_csv("data/state_pops.csv")
+pops.index
+# set state as index - NOT UNIQUE
+pops.set_index("state")
+# set year as index - NOT UNIQUE
+pops.set_index("year")
+# set state and year as multi-index - UNIQUE
+pops.set_index(["state", "year"])
+```
+
+### sorting a multiindex
+
+```py
+# sort_index - this will sort level 0 then level 1, ascending
+pops.sort_index()
+# or descending
+pops.sort_index(ascending=False)
+
+# choose which hierarchical level to sort,
+# level 0 is the 1st, level 1 2nd, ...
+# this will sort all the years, level 0 comes next, it's not years withing level 0
+pops.sort_index(level=1)
+
+# combination: sort level 1 descending, then level 0 ascending
+pops.sort_index(level=[1, 0], ascending=[False, True])
+
+# but this is probably best:
+pops.sort_index() # or
+pops.sort_index(inplace=True)
+```
+
+### using .loc() with a multiindex
+
+- accessing data out after sorting, accessing rows by their label
+- how to get Nevada's population for 2001
+- use `.loc[]` for a dataframe to get a row
+- **.loc takes the row label, but if you add a comma you can ask for a specific column**
+
+```py
+# .loc[some_index_label, some_col_or_list_of_cols]
+
+# get the row with the label of 7
+df.loc[7]
+df.loc[[7]]
+
+# this returns more than 1 row - returns a subset (just years)
+pops.loc["CA"] # or (state and years)
+pops.loc[["CA", "AK"]]
+
+# take a slice - all fows from NM to TX
+pops.loc["NM": "TX"]
+
+# for a multi-index, pass .loc a tuple - 1 state and 1 year
+# though it does work without () but that is not best practice
+pops.loc[("MT", 1992)]
+
+# multi-index slice with tuples
+pops.loc[("AK", 1990):("AK",1995)]
+
+# This won't work
+pops.loc[1990]
+# This won't work either
+pops.loc[:,1990]
+
+# use year on its own, get all 1990 rows - THIS WORKS
+# you need to add a 2nd comma & :
+pops.loc[:, 1990, :]
+# get a slice instead of a single year
+pops.loc[:, [1990,1991], :]
+# slice(None) -> same result, different syntax
+pops.loc[slice(None), [1990,1991], :]
+```
+
+### cross sections with the xs method
+
+- `xs()`: cross-section - an easier way (sometimes) to get a portion of a dataframe that is multi-indexes bu one part of the index
+
+```py
+# with .loc - odd syntax
+pops.loc[:,2013,:]
+# using xs(value, level) -> defaults to level 0
+# level as a label
+pops.xs(2013, level="year")
+# level as a number
+pops.xs(2013, level=1)
+```
+
+### get_level_values()
+
+- `get_level_values()`: useful if you need to do something using the actual index
+
+```py
+# nested list of lists for each level
+pops.index.levels
+# get a list of the values for a level
+pops.index.get_level_values(0)
+
+even_years = pops.index.get_level_values(1) % 2 == 0
+pops[even_years]
+pops[pops["population"] % 2 == 0]
+even_pops = pops["population"] % 2 == 0
+pops[even_years & even_pops]
+ends_with_a = pops.index.get_level_values(0).str[1] == "A"
+pops[ends_with_a]
+```
+
+### Hierchical columns
+
+- not common to work with hierarchical columns - multi-index t hough is very common
+
+```py
+df = titanic.groupby(["pclass", "sex"]).mean()
+df.loc[(2, "male")]
+
+# Hierchical columns names (single level index)
+df = titanic.groupby("sex").agg({
+    "age": ["min", "max", "mean"],
+    "fare": ["min", "max", "mean"],
+    "survived": ["mean"]
+})
+
+# shows MultiIndex
+df.columns
+# select the "column" age + mean - use a tuple
+df[("age", "mean")]
+# or you could do this but it is less efficent
+df["age"]["mean"]
+```
+
+### stack() and unstack()
+
+- `stack()` and `unstack()`: 2 methods useful when working with mult-indexed data
+- `unstack()`: "pivot" one of the muti-level items into a column
+- `stack()`: not used as much - is the opposite, turns a column into part of the multi-index
+
+```py
+# default is last level gets unstacked
+# one row for each state, column for each year
+pops.unstack()
+# unstack state and leave year as the index
+unstacked_df = pops.unstack(level="state")
+
+# bring state back into the multi-index
+unstacked_df.stack()
+# ???
+unstacked_df.stack().unstack()
+```
+
+### plotting with unstack
+
+- unstack comes in handy when working with groupby and plotting
+
+```py
+titanic.groupby(["pclass", "sex"])["age"].mean().plot(kind="bar")
+
+titanic.groupby(["pclass", "sex"])["age"].mean().unstack()
+titanic.groupby(["pclass", "sex"])["age"].mean().unstack().plot(kind="bar")
+
+titanic.groupby(["pclass", "sex"])["age"].mean().unstack(level="pclass")
+titanic.groupby(["pclass", "sex"])["age"].mean().unstack(level="pclass").plot(kind="bar")
+```
+
+### grouping by index
+
+- group by a portion of the index for a multi-index
+
+```py
+# group by by year
+pops.groupby(level=1).sum()
+# group by by state
+pops.groupby(level=0).min()
+# group by year then by state (makes no sense for this dataset)
+pops.groupby(level=[1, 0]).min()
+
+pops.index
+# use the names instead of level numbers
+pops.groupby(["year", "state"]).min()
+```
+
+<br>
 
 ## Working with Text
 
--
+- strings / text -> Dtype = Object
+- any data, including lists, can be stored in an Object column
+- "string" is a data type in Pandas
+- objects can store any data type
+
+### upper, lower, and capitalize
+
+- you can run methods on individual values
+- for string methods, you access under `str.`
+- similar to `.dt` when working with dates
+- `str.upper()`
+- `str.lower()`
+- `str.capitalize()`
 
 ```py
-
+titanic["name"].str.upper()
+titanic["lower_name"] = titanic["name"].str.lower()
+titanic.lower_name.str.capitalize()
 ```
+
+### indexing string series with []
+
+- `col.str[0]`
+
+```py
+# this makes a new series
+titanic["cabin"].str[0]
+
+titanic["deck"] = titanic["cabin"].str[0]
+titanic.groupby("deck").mean()
+```
+
+### stripping whitespace with Strip()
+
+- `series.str.strip()` - remove whitespace, any leading or training whitespace chars
+- `to_strip` - provide a list of chars to strip - the default is whitespace chars
+- `series.str.lstrip()` - only remove from beginning (left)
+- `series.str.rstrip()` - only remove from end (right)
+
+```py
+s = pd.Series(['1. Hawk.  ', '2. Pickle!\n', '3. Melonhead?\t'])
+s.str.strip()
+s.str.strip(to_strip="123. \n \t")
+s.str.lstrip()
+s.str.strip(to_strip="123.")
+
+titanic.caabin.str[1:]
+```
+
+### splitting text values with Split()
+
+- `col.str.split()` - returns a list or a dataframe
+- default is to split on spaces
+- `expand` - if True, a column for the man len() of the lists with index numbers as columns headers - **returns a dataframe**
+- `n`: dictate how many times it can split
+- you can also use RegEx to split on
+  str.rsplit() - split starting from the right
+
+```py
+# this returns a series & each row contains a list
+titanic["home.dest"].str.split("/")
+# make cols
+titanic["home.dest"].str.split("/", expand=True)
+# add 1st elemnt to the data frame
+titanic["home"] = titanic["home.dest"].str.split("/", expand=True)[0]
+# 2nd element add to df
+titanic["destination"] = titanic["home.dest"].str.split("/", expand=True)[1]
+
+titanic["home"].value_counts()
+titanic["destination"].value_counts()
+# only split on forward slash once
+titanic["home.dest"].str.split("/", n=1, expand=True)
+```
+
+### replacing portions of strings with Replace()
+
+- `col.str.replace()`: to replace a portion of a string
+- replace: can also be a Fx
+- `regex`
+- `.group()`: what you are replacing
+- `case`
+
+```py
+# str.replace(pattern, replace)
+# str.replace(pattern, replace, regex=True)
+ufos = pd.read_csv("data/nuforc_reports.csv")
+ufos["duration"].str.replace("seconds", "s")
+ufos["duration"].str.replace("seconds|minutes", "", regex=True)
+# run this in a separate cell
+def abbrv(reo):
+    return reo.group()[0]
+
+ufos["duration"].str.replace("seconds|minutes|hours", abbrv)
+```
+
+### testing strings with Contains()
+
+- `col.str.contains()` - boolean check for a substring, leaves `NaN`
+- `na` - replaces na values with whatever you set it equal to
+
+```py
+ufos["duration"].str.contains("hour")
+# this handles na values, prevents errors
+ufos[ufos["duration"].str.contains("day|week|month", na=False)]
+```
+
+<br>
 
 ## Apply, Map, and Applymap
 
@@ -726,6 +1241,8 @@ plt.savefig("UFO_By_Month")
 
 ```
 
+<br>
+
 ## Combining Series and Dataframes
 
 -
@@ -733,6 +1250,8 @@ plt.savefig("UFO_By_Month")
 ```py
 
 ```
+
+<br>
 
 ## Seaborn notes and snippets
 
@@ -751,6 +1270,8 @@ Sections 20-22
 
 ```
 
+<br>
+
 ## Seaborn Categorical plots
 
 -
@@ -758,6 +1279,8 @@ Sections 20-22
 ```py
 
 ```
+
+<br>
 
 ## Controlling Seaborn Aestetics
 
