@@ -1671,6 +1671,219 @@ sns.scatterplot(data=tips, x="total_bill", y="tip", size="size")
 sns.scatterplot(data=tips, x="total_bill", y="tip", size="size", hue="sex")
 ```
 
+### seaborn lineplots
+
+- similar to scatterplots - pass in `data`, `x` column, `y` column, and hue or size or style
+- time-related data is best for Line Plots
+- `lineplot()`:
+- `estimator` param: set to mean by default,
+- **IMPORTANT**: it assumes your x-axis is sorted but Seaborn does it automatically, where Pandas you need sort_index
+- `parse_dates`: handed over to Pandas
+- `ci` param: confidence interval - set to `None`
+
+```py
+flights = sns.load_dataset("flights")
+# this plots the average for all the months (default behavior)
+# and it add a confidence interval
+sns.lineplot(data=flights, x="year", y="passengers")
+
+flights.groupby("year")["passengers"].mean().plot()
+# show sum instead of default mean
+sns.lineplot(data=flights, x="year", y="passengers", estimator="sum")
+# example without Seaborn - grouping by year
+flights.groupby("year")["passengers"].mean().plot()
+# the only other column is "month"
+sns.lineplot(data=flights, x="year", y="passengers", hue="month")
+
+trips= sns.load_dataset("taxis", parse_dates=["pickup", "dropoff"])
+trips["hour"] = trips["pickup"].dt.hour
+
+sns.lineplot(data=trips, x="hour", y="total", hue="payment", style="color", ci=None)
+```
+
+### replot() method
+
+- `replot()`: relational - scatterplots & line plotsm can make subplots
+- you need to pass in `kind`: has to be scatter or line
+- axes-level functions - makes 1 axes
+- figure-level vs axes-level functions
+- displot: distribution - histplot, kdeplot, ecdfplot, rugplot
+- catplot: categorical - stripplot, swarmplot, boxplot, violinplot, pointplot
+- relplot makes a FacetGrid - a grid of subplots
+- add a `col` or `row` param, or both - you can not do this with the scatterplot() method
+  - `col` and `row` creates subplots
+- relplot is a figure level method where scatterplot is an axes-level method
+- relplot is one of three figure-level methods
+
+```py
+# default kind for relplot() is scatter
+sns.relplot(data=tips, x="total_bill", y="tip")
+# add col
+sns.relplot(data=tips, x="total_bill", y="tip", kind="scatter", col="sex")
+sns.relplot(data=tips, x="total_bill", y="tip", kind="scatter", hue="smoker", col="sex")
+# add row and col
+sns.relplot(data=tips, x="total_bill", y="tip", kind="scatter", hue="smoker", col="sex", row="time")
+# line plot
+sns.relplot(data=trips, x="hour", y="total", kind="line", col="pickup_borough", hue="payment")
+# this makes 20 plots
+sns.relplot(
+    data=trips,
+    x="hour",
+    y="total",
+    kind="line",
+    col="pickup_borough",
+    hue="payment",
+    row="dropoff_borough"
+)
+```
+
+### resizing seaborn plots: aspect & height
+
+- setting the figsize on plt only works for axes-level, relplot makes its own figure so setting figsize has no effect
+- `height` params: in inches for each facet/grid size, not the overall figure
+- `aspect` param: default is 1 so width = height, 2 is width 2 X's the height
+
+```py
+# set the figsize for Seaborn
+plt.figure(figsize=(8,5))
+sns.lineplot(data=flights, x="year", y="passengers", hue="month")
+
+sns.relplot(
+    data=tips,
+    x="total_bill",
+    y="tip",
+    kind="scatter",
+    hue="smoker",
+    col="day",
+    row="sex",
+    height=3,
+    aspect=1.5
+)
+```
+
+### seaborn histograms
+
+- distribution plots - visualize t he distribution of data
+- `multiple`: set to stack, or dodge (side-by-side)
+- `binwidth`:
+- `element`: step
+- kde curve: kernal density estimation (looks cool) - a continuous curve
+- `palette`:
+
+```py
+# basic
+sns.histplot(data=tips, x="tip")
+sns.histplot(data=tips, x="tip", hue="time")
+# enable the columns to stack
+sns.histplot(data=tips, x="tip", hue="smoker", multiple="stack")
+# enable the columns to go side-by-side with dodge
+sns.histplot(data=tips, x="tip", hue="smoker", multiple="dodge")
+
+# binwidth & bins
+sns.histplot(data=penguins, x="body_mass_g", binwidth=200)
+sns.histplot(data=penguins, x="body_mass_g", bins=20)
+# hue & multiple
+sns.histplot(data=penguins, x="body_mass_g", bins=20, hue="species", multiple="stack")
+# element
+sns.histplot(data=penguins, x="body_mass_g", bins=20, hue="species", multiple="stack", element="step")
+# kde curve
+sns.histplot(data=tips, x="tip", kde=True)
+
+sns.set_theme()
+plt.figure(dpi=200)
+sns.histplot(
+    data=penguins,
+    x="body_mass_g",
+    hue="species",
+    multiple="stack",
+    palette="muted",
+    bins=20,
+    kde=True
+)
+plt.title("Penguin Body Mass")
+```
+
+### KDE plots
+
+- KDE plots: also a distribution plot
+- kdeplot(): makes a kde curve on a plot
+- you can overlay a kde curve onto a histogram or you can make your own kde curve
+- `bw_adjust`: whether the curve is smooth or jagged?
+
+```py
+sns.kdeplot(data=penguins, x="body_mass_g")
+sns.kdeplot(data=penguins, x="body_mass_g", hue="species")
+sns.kdeplot(data=penguins, x="body_mass_g", hue="species", bw_adjust=0.4)
+sns.kdeplot(data=penguins, x="body_mass_g", hue="species", multiple="stack")
+```
+
+### bivariate distribution plots
+
+- all the histograms so far have been univariate which is just looking at the distribution for a single feature
+- bivariate histograms/kde plots - they have an x and a y axis, the distribution of 2 separate factors
+- you read them like a heat map - darker colors means a higher density
+
+```py
+# univariate histogram examples
+sns.histplot(data=penguins, x="flipper_length_mm")
+sns.histplot(data=penguins, x="body_mass_g")
+
+# bivariate histogram
+sns.histplot(data=penguins, x="body_mass_g", y="flipper_length_mm")
+# bivariate kde plot
+sns.kdeplot(data=penguins, x="body_mass_g", y="flipper_length_mm")
+sns.kdeplot(data=penguins, x="bill_length_mm", y="flipper_length_mm", hue="species")
+```
+
+### rugplots
+
+- `rugplot()`: they are used with other plots (do right below main plot)
+- just ticks marks at the x and/or y axis
+- they help visualize the density
+- `height`: proportion relative to the entire height of the plot - `1` takes up the entire height (leave the default)
+- `s`:
+- `alpha`: opacity of the lines
+
+```py
+sns.rugplot(data=tips, x="tip")
+sns.rugplot(data=tips, x="tip", height=0.2)
+# on y-axis
+sns.rugplot(data=tips, y="tip")
+# kde and rug plots
+sns.kdeplot(data=tips, x="total_bill")
+sns.rugplot(data=tips, x="total_bill", height=0.05)
+# scatter and rug plots, both axes for rugplot
+sns.scatterplot(data=tips, x="total_bill", y="tip")
+sns.rugplot(data=tips,x="total_bill", y="tip")
+
+diamonds = sns.load_dataset("diamonds")
+sns.scatterplot(data=diamonds, x="carat", y="price", s=5)
+sns.rugplot(data=diamonds, x="carat", y="price", lw=1, alpha=.005)
+```
+
+### displot() methot
+
+- not to be confusted with `distplot()` with a _t_ which is deprecated
+- `displot()`: figure-level plotting methods like relplot
+- need the `kind` param
+- How does `col` and `y` differ?
+
+```py
+# histogram displot - this one could just use histplot()
+sns.displot(kind="hist", data=penguins, x="body_mass_g", height=4, aspect=1.5)
+# better example of hist displot
+sns.displot(
+    kind="hist",
+    data=penguins,
+    hue="sex",
+    x="body_mass_g",
+    col="species"
+)
+# kde displot
+sns.displot(data=tips, kind="kde", x="tip", col="time", rug=True)
+sns.displot(data=tips, kind="kde", x="total_bill", y="tip", rug=True)
+```
+
 <br>
 
 ## Seaborn Categorical plots
