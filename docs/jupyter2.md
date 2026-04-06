@@ -21,7 +21,6 @@ official_docs: https://docs.jupyter.org/en/latest/use/using.html
 <a href="./csharp.md">csharp.md</a>  • 
 <a href="./javascript.md">javascript.md</a>  • 
 <a href="./jupyter.md">jupyter.md</a>  • 
-<a href="./jupyter2.md">jupyter2.md</a>  • 
 <a href="./php.md">php.md</a>  • 
 <a href="./python.md">python.md</a>  • 
 <a href="./react.md">react.md</a>  • 
@@ -1614,8 +1613,62 @@ Sections 20-22
 
 ## Seaborn
 
-```py
+- [Seaborn](https://seaborn.pydata.org/)
+- [Tutorials](https://seaborn.pydata.org/tutorial.html)
+- [API](https://seaborn.pydata.org/api.html)
+- you can use Seaborn with many languages, not just Python and Jupyter (?)
+- it is a data viz library for python
+- it is built on top of Matplotlib
+- you can easily plot multiple columns against each other with a single method call
+- it works very well with pandas
+- it comes with Anaconda just like Pandas and Matplotlib
+- He does not cover Numpy. When would I want to use Numpy?
 
+### load_dataset()
+
+- `load_dataset()`: fetches the dataset, returns a Pandas dataframe
+- you can grab datasets from [seaborn-data](https://github.com/mwaskom/seaborn-data)
+- how does seaborn now to go to that repo?
+
+```py
+# How do I "import" these into a Notebook without Anaconda?
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# load_dataset(file_name)
+# this is not the normay way - use pd.read_csv
+tips = sns.load_dataset("tips")
+penguins = sns.load_dataset("penguins")
+```
+
+### seaborn scatterplots
+
+- `scatterplot()`:
+- `data`: the dataset
+- `x`: col for x-axis
+- `y`: col for y-axis
+- many chart types require data, x and y
+- `hue`: 3rd column - many Seaborn methods expect it
+- `style` param: 4th col
+- `size` param:
+
+```py
+# use default Seaborn theme
+sns.set_theme()
+
+sns.scatterplot(data=tips, x="total_bill", y="tip")
+# 3rd column/param "hue"
+sns.scatterplot(data=tips, x="total_bill", y="tip", hue="smoker")
+sns.scatterplot(data=tips, x="total_bill", y="tip", hue="sex")
+sns.scatterplot(data=tips, x="total_bill", y="tip", hue="day")
+# 4th col/param "Style"
+sns.scatterplot(data=tips, x="total_bill", y="tip", hue="sex", style="time")
+# you can set hue and style to be the same col
+sns.scatterplot(data=tips, x="total_bill", y="tip", hue="sex", style="sex")
+# size param
+sns.scatterplot(data=tips, x="total_bill", y="tip", size="size")
+sns.scatterplot(data=tips, x="total_bill", y="tip", size="size", hue="sex")
 ```
 
 <br>

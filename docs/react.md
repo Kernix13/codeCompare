@@ -24,7 +24,6 @@ official_docs: https://react.dev/reference/react
 <a href="./jupyter2.md">jupyter2.md</a>  • 
 <a href="./php.md">php.md</a>  • 
 <a href="./python.md">python.md</a>  • 
-<a href="./react.md">react.md</a>  • 
 <a href="./typescript.md">typescript.md</a>
 </p>
 

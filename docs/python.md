@@ -23,7 +23,6 @@ official_docs: https://docs.python.org/3/
 <a href="./jupyter.md">jupyter.md</a>  • 
 <a href="./jupyter2.md">jupyter2.md</a>  • 
 <a href="./php.md">php.md</a>  • 
-<a href="./python.md">python.md</a>  • 
 <a href="./react.md">react.md</a>  • 
 <a href="./typescript.md">typescript.md</a>
 </p>

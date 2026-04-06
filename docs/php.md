@@ -22,7 +22,6 @@ official_docs: https://www.php.net/manual/en/index.php
 <a href="./javascript.md">javascript.md</a>  • 
 <a href="./jupyter.md">jupyter.md</a>  • 
 <a href="./jupyter2.md">jupyter2.md</a>  • 
-<a href="./php.md">php.md</a>  • 
 <a href="./python.md">python.md</a>  • 
 <a href="./react.md">react.md</a>  • 
 <a href="./typescript.md">typescript.md</a>

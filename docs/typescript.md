@@ -25,7 +25,6 @@ official_docs: https://www.typescriptlang.org/docs/
 <a href="./php.md">php.md</a>  • 
 <a href="./python.md">python.md</a>  • 
 <a href="./react.md">react.md</a>  • 
-<a href="./typescript.md">typescript.md</a>
 </p>
 
 ## C# correlations

@@ -19,7 +19,6 @@ official_docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 <p> Markdown File Links: <br>
 <a href="./csharp.md">csharp.md</a>  • 
-<a href="./javascript.md">javascript.md</a>  • 
 <a href="./jupyter.md">jupyter.md</a>  • 
 <a href="./jupyter2.md">jupyter2.md</a>  • 
 <a href="./php.md">php.md</a>  • 
