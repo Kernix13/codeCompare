@@ -1888,20 +1888,361 @@ sns.displot(data=tips, kind="kde", x="total_bill", y="tip", rug=True)
 
 ## Seaborn Categorical plots
 
--
+### countplot
+
+- countplot(): similar to a histogram - it shows the distribution of occurrences of certain values in the data
+- it works best with categorical data, aka non-numeric values
+- it does value_Counts behind the scenes
+- "categorical data" does not have to be category data type
 
 ```py
+# count + plot occurrences of each species, then secies + sex
+sns.countplot(data=penguins, x="species")
+sns.countplot(data=penguins, x="species", hue="sex")
 
+titanic = pd.read_csv("data/titanic.csv")
+# NOTE: not loading a dataset from Seaborn!!!
+sns.countplot(data=titanic, x="pclass", hue="sex")
+sns.countplot(data=titanic, y="pclass", hue="sex")
+```
+
+### stripplot and swarmplot
+
+- these are in the catplot figure-level plots - strip and form are 2 types
+- all the types help plot data where at least one axis is categorical
+- stripplot()
+- swarmplot(): the problem with this method is that it plots every single pointa without overlaps - it plots each point horizontally for the same value
+  - if the dataset is too large, your notebook will get hung up
+  - you use swarm plots when you have more "manageable" datasets
+
+```py
+# example of scatter plots for a categorical column
+sns.scatterplot(data=trips, x="pickup_borough", y="distance")
+
+plt.figure(dpi=100)
+# the x-axis is categorical, but this example is too dense
+sns.stripplot(data=trips, x="pickup_borough", y="distance")
+plt.title("Taxi Trip Distance By Burough")
+
+# reduce the record count to 600
+trips_sample = trips.nlargest(600, "total")
+# adjust figsize to be wider if you get a warning
+plt.figure(figsize=(12,5))
+sns.swarmplot(data=trips_sample, x="pickup_borough", y="distance")
+plt.title("Taxi Trips By Borough")
+
+titanic = sns.load_dataset("titanic")
+plt.figure(figsize=(12,5))
+# stripplot does not look as good for this dataset
+sns.swarmplot(data=titanic, x="pclass", y="age")
+sns.swarmplot(data=titanic, x="pclass", y="age", hue="sex")
+```
+
+### boxplots
+
+- boxplots: a good way to quickly visualize distributions, especially when you have multiple levels of some categorical value
+- they make it easy to visualize distributions from 1 value to the next
+- Q1: 25%, 25th percentile
+- Q13: 75%, 75th percentile
+- there is a line at the median value
+- interquartile range (IQR): diff between Q1 and Q3
+- the Whiskers on either side are rrelative to the IQR
+- 1.5 x IQR for Seaborn
+- the Whiskers range are not the bounds of the distribution, you will still have outliers
+- so the "box" is Q1 to Q3 with the median line
+- NOTE: the length (distance from the box) of whiskers indicates the distribution as well
+- `whis`: to change the size of the whiskers (how far away they are)
+- `fliersize`: the outliers (?) - controls their size I think
+- `color`: 0 is black, 1 is white
+
+```py
+# simple box plot
+sns.boxplot(data=titanic, x="age")
+# with x and y axis
+sns.boxplot(data=trips, x="pickup_borough", y="total")
+sns.boxplot(data=trips, x="pickup_borough", y="total", whis=2.5, fliersize=2)
+# example using fliersize
+sns.boxplot(data=titanic, x="pclass", y="age", hue="sex", fliersize=5)
+# combo of box plot and swarm plot
+sns.boxplot(data=penguins, x="species", y="body_mass_g")
+sns.swarmplot(data=penguins, x="species", y="body_mass_g", color="0.3")
+```
+
+### boxenplots
+
+- boxenplots: very similar to the box plot
+- better for large datasets that have a lot of outliers
+- you have the box with the median line
+- each successive box contins have of the remaining data points
+- you don't see these plots a lot
+
+```py
+sns.boxplot(data=trips, x="pickup_borough", y="total")
+
+plt.figure(figsize=(10,6))
+sns.boxenplot(data=trips, x="pickup_borough", y="total")
+```
+
+### violinplots
+
+- violins are similar to a box plot, usually across a categorical col
+- it's a box plot with a median and whiskers - on either side is a kde
+- it matters what you set for x and y - the x-axis should have a small number of variations
+- hue: the default is to give 2 separate violins, assuming the hue has 2 values - fi fix that use:
+- `split=True`:
+
+```py
+sns.violinplot(data=titanic, x="age")
+# sns.boxplot(data=titanic, x="age")
+
+# with x & y axis
+sns.violinplot(data=titanic, x="pclass", y="age")
+
+sns.violinplot(data=titanic, x="pclass", y="age", hue="sex")
+
+plt.figure(figsize=(10,4))
+sns.violinplot(data=titanic, x="pclass", y="age", hue="sex", split=True, palette="muted")
+```
+
+### barplots
+
+- `estimator`: to use something other than mean
+- error bar: uncertainty around the measurement
+- `dodge`: when using hue, they share the space but if you set dodge to `False` they stack
+- `orient`: rotate the plot, vertical or horizontal (v|h).
+- `ci`: to control uncertainty bar
+
+```py
+# these show the mean by default for the y-axis
+sns.barplot(data=trips, x="pickup_borough", y="distance")
+sns.barplot(data=trips, x="pickup_borough", y="total")
+
+# set the y-axis to sum
+sns.barplot(data=trips, x="pickup_borough", y="total", estimator=sum)
+# how to do above in pandas
+trips.groupby("pickup_borough")["total"].sum().plot(kind="bar")
+
+# add a hue
+sns.barplot(data=trips, x="pickup_borough", y="distance", hue="color")
+# using dodge
+sns.barplot(data=trips, y="pickup_borough", x="distance", hue="color", dodge=False)
+# using orient
+sns.barplot(data=titanic, y="pclass", x="survived", orient="h")
+```
+
+### catplot method
+
+- catplot - figure-level plot method for categorical plots
+- to create plots at the figure level for the types above
+- you can provide columns and rows for sub plots
+- also height and aspect
+- `ci=None`: turn off the confidence interval bars
+
+```py
+# basic bar plot
+sns.catplot(data=titanic, x="sex", y="survived", kind="bar")
+# use col to create sub plots, or facets
+sns.catplot(data=titanic, x="sex", y="survived", kind="bar", col="pclass")
+# however, hue is better than col for this data
+sns.catplot(data=titanic, x="pclass", y="survived", kind="bar", hue="sex")
+
+sns.catplot(
+    data=trips,
+    kind="strip",
+    x="pickup_borough",
+    y="distance",
+    col="color",
+    aspect=0.8
+)
+# variation as violin plot
+sns.catplot(data=trips, kind="violin", x="pickup_borough", y="distance", hue="color", split=True)
+
+# bar example - "who" column
+sns.catplot(
+    data=titanic,
+    kind="bar",
+    x="who",
+    y="survived",
+    col="pclass",
+    ci=None,
+)
 ```
 
 <br>
 
 ## Controlling Seaborn Aestetics
 
--
+### changing seaborn themes
+
+- there are 5 built-in themes in Seaborn though they are very similar
+- there are 2 ways to load the themes
+- `set_style()` is the simplest way
+- there are a lot of params you can addd to customize them
+- `set_theme()` - the other way, but you need the `style` key/param but you can add other params
 
 ```py
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+tips = sns.load_dataset("tips")
+
+# The 5 themes: "white", "dark", "whitegrid", "darkgrid", "ticks"
+sns.set_style("white")
+sns.scatterplot(data=tips, x="total_bill", y="tip")
+
+sns.set_style("whitegrid")
+sns.scatterplot(data=tips, x="total_bill", y="tip")
+
+sns.set_style("dark")
+sns.scatterplot(data=tips, x="total_bill", y="tip")
+
+sns.set_style("darkgrid")
+sns.scatterplot(data=tips, x="total_bill", y="tip")
+
+sns.set_style("ticks")
+sns.scatterplot(data=tips, x="total_bill", y="tip")
+
+# set_theme
+sns.lineplot(data=tips, x="total_bill", y="tip")
+sns.set_theme(style="darkgrid")
+```
+
+### customizing styles with set_style()
+
+- `axes_style()`: view all the current styles that are controlled by Seaborn for the current theme
+- it shows the params you can change
+- use `set_style` to make those changes
+- `rc` param: he didn't use this? He used a dictionary instead???
+- all plots below will take on that theme with any changes you made
+
+```py
+sns.axes_style()
+
+sns.lineplot(data=tips, x="total_bill", y="tip")
+sns.set_style({'axes.facecolor': '#FC427B', 'grid.color': '#9AECDB'})
+
+# set theme then add changes
+sns.set_style("ticks", {'axes.facecolor': '#FC427B', 'grid.color': '#9AECDB'})
+
+# ay any point you can get rid of the changes by choosing a diff theme
+sns.set_style("darkgrid")
+sns.scatterplot(data=tips, x="total_bill", y="tip")
+```
+
+### altering spines with despine()
+
+- `despine()`: to remove the spines from top and right (default) of plots, or to remove all spines - on the CURRENT figure only
+- the spines are the borders of the plot
+- `bottom`
+- `top`
+
+```py
+sns.set_style("white")
+sns.histplot(data=tips,x="total_bill")
+# remove top and right spines
+sns.despine()
+
+sns.histplot(data=tips,x="total_bill")
+# remove all 4 spines
+sns.despine(bottom=True, top=False)
+```
+
+### changing color palettes
+
+- using existing built-in color palettes
+- the easiest way to find the total list is to provide an invalid name to set_palette
+- `set_palette()`: for the lines, the markers, the boxes, etc
+- `color_palette()`: pass it an existing name to see color swatches
+- `palette`: to use a different palette for one plot - setting it does not work for a single line
+- `color`: use this for a single line
+- `log_scale`:
+- `blend_palette()`:
+
+<br>
+
+#### Existing palettes
+
+```py
+# (deep, muted, bright, pastel, dark, colorblind)
+sns.set_palette("muted")
+sns.barplot(data=tips, x="day", y="total_bill")
+
+sns.set_palette("pastel")
+sns.barplot(data=tips, x="day", y="total_bill")
+
+sns.set_palette("dark")
+sns.barplot(data=tips, x="day", y="total_bill")
+
+# See all the paettes
+sns.set_palette("invalid")
+# Accent', 'Accent_r', 'Blues', 'Blues_r', 'BrBG', 'BrBG_r', 'BuGn', 'BuGn_r', 'BuPu', 'BuPu_r', 'CMRmap', 'CMRmap_r', 'Dark2', 'Dark2_r', 'GnBu', 'GnBu_r', 'Greens', 'Greens_r', 'Greys', 'Greys_r', 'OrRd', 'OrRd_r', 'Oranges', 'Oranges_r', 'PRGn', 'PRGn_r', 'Paired', 'Paired_r', 'Pastel1', 'Pastel1_r', 'Pastel2', 'Pastel2_r', 'PiYG', 'PiYG_r', 'PuBu', 'PuBuGn', 'PuBuGn_r', 'PuBu_r', 'PuOr', 'PuOr_r', 'PuRd', 'PuRd_r', 'Purples', 'Purples_r', 'RdBu', 'RdBu_r', 'RdGy', 'RdGy_r', 'RdPu', 'RdPu_r', 'RdYlBu', 'RdYlBu_r', 'RdYlGn', 'RdYlGn_r', 'Reds', 'Reds_r', 'Set1', 'Set1_r', 'Set2', 'Set2_r', 'Set3', 'Set3_r', 'Spectral', 'Spectral_r', 'Wistia', 'Wistia_r', 'YlGn', 'YlGnBu', 'YlGnBu_r', 'YlGn_r', 'YlOrBr', 'YlOrBr_r', 'YlOrRd', 'YlOrRd_r', 'afmhot', 'afmhot_r', 'autumn', 'autumn_r', 'binary', 'binary_r', 'bone', 'bone_r', 'brg', 'brg_r', 'bwr', 'bwr_r', 'cividis', 'cividis_r', 'cool', 'cool_r', 'coolwarm', 'coolwarm_r', 'copper', 'copper_r', 'crest', 'crest_r', 'cubehelix', 'cubehelix_r', 'flag', 'flag_r', 'flare', 'flare_r', 'gist_earth', 'gist_earth_r', 'gist_gray', 'gist_gray_r', 'gist_heat', 'gist_heat_r', 'gist_ncar', 'gist_ncar_r', 'gist_rainbow', 'gist_rainbow_r', 'gist_stern', 'gist_stern_r', 'gist_yarg', 'gist_yarg_r', 'gnuplot', 'gnuplot2', 'gnuplot2_r', 'gnuplot_r', 'gray', 'gray_r', 'hot', 'hot_r', 'hsv', 'hsv_r', 'icefire', 'icefire_r', 'inferno', 'inferno_r', 'jet', 'jet_r', 'magma', 'magma_r', 'mako', 'mako_r', 'nipy_spectral', 'nipy_spectral_r', 'ocean', 'ocean_r', 'pink', 'pink_r', 'plasma', 'plasma_r', 'prism', 'prism_r', 'rainbow', 'rainbow_r', 'rocket', 'rocket_r', 'seismic', 'seismic_r', 'spring', 'spring_r', 'summer', 'summer_r', 'tab10', 'tab10_r', 'tab20', 'tab20_r', 'tab20b', 'tab20b_r', 'tab20c', 'tab20c_r', 'terrain', 'terrain_r', 'turbo', 'turbo_r', 'twilight', 'twilight_r', 'twilight_shifted', 'twilight_shifted_r', 'viridis', 'viridis_r', 'vlag', 'vlag_r', 'winter', 'winter_r'
+
+# examples
+sns.color_palette("Blues")
+sns.color_palette("ocean")
+sns.color_palette("gist_rainbow")
+sns.color_palette("terrain")
+# a number is the 2nd param for the number of colors
+sns.color_palette("terrain", 8)
+
+# set a palette
+sns.set_palette("terrain")
+
+sns.barplot(data=tips, x="day", y="total_bill")
+
+sns.scatterplot(data=tips, x="tip", y="total_bill", hue="sex")
+
+# set a different palette for a single plot
+sns.barplot(data=tips, x="day", y="total_bill", palette="ocean")
+# this uses the palette set with set_palette
+sns.barplot(data=tips, x="day", y="total_bill")
+
+# if you have a single line, you can change its color
+sns.kdeplot(data=tips, x="tip", color="magenta")
+```
+
+<br>
+
+#### Custom palettes
+
+He did not actually cover any of this but there was code in the notebook.
+
+- light_palette
+- dark_palette
+- load_dataset
+
+```py
+sns.color_palette("pastel", 6)
+
+codes = ["#B33771", "#3B3B98", "#FD7272", "#9AECDB", "#D6A2E8"]
+custom_pal = sns.color_palette(codes)
+
+sns.barplot(data=tips, x="day", y="total_bill", palette=custom_pal)
+
+sns.light_palette("#eb2f06")
+
+sns.dark_palette("#eb2f06")
+
+diamonds = sns.load_dataset("diamonds")
+
+sns.histplot(
+    diamonds,
+    x="price", hue="cut",
+    multiple="stack",
+    log_scale=True,
+    palette=sns.dark_palette("#eb2f06", 5)
+)
+
+sns.histplot(
+    diamonds,
+    x="price", hue="cut",
+    multiple="stack",
+    log_scale=True,
+    palette="dark:olive"
+)
+
+sns.blend_palette(["#4a69bd", "#e58e26"])
 ```
 
 ---
