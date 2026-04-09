@@ -1137,8 +1137,10 @@ pops.groupby(["year", "state"]).min()
 - `str.upper()`
 - `str.lower()`
 - `str.capitalize()`
+- `str.len()`
 
 ```py
+titanic["name"].str.len() # get the character length
 titanic["name"].str.upper()
 titanic["lower_name"] = titanic["name"].str.lower()
 titanic.lower_name.str.capitalize()
@@ -1242,6 +1244,11 @@ ufos[ufos["duration"].str.contains("day|week|month", na=False)]
 > Would I use this to calc the various fields I need or is it overkill
 
 ```py
+# use can also use .apply() for regular Python methods like len()
+titanic["name"].apply(len)
+# NOTE: Prefer .str.method() over .apply() for strings because it is faster
+# If .str exists → use it. Only use .apply() for functions or custom logic.
+
 def years_to_days(yrs):
     return yrs * 365
 

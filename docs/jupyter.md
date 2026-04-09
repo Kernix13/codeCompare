@@ -123,6 +123,7 @@ THERE ARE TOO MANY METHODS IN THIS TOP SECTION THAT ARE COVERED FURTHER DOWN - R
 - you can manually change the index for something that makes more sense
 - to change the index use `set_index(col)` - you can also do multi-indexing
 - it makes a new data frame unless you pass in `inplace=True`
+  - you probably always want to do inplace
 - a param named `index_col(num)` where `num` is the position of the column you want as the index
 - `sort_values()`: a very commonly used method - it is a dataframe and series method - makes a new dataframe
   - param named `key`: takes a lambda and it will run for each element
@@ -196,6 +197,22 @@ len(sellers)
 # set the min # of rows to display
 # Only useful for large datasets I think
 pd.options.display.min_rows = 20
+
+# ✅ COMMON PATTERN ✅
+df = pd.read_csv("file.csv")
+
+# clean / validate
+df = df.dropna(subset=["col_name"])
+df = df.drop_duplicates(subset=["col_name"])
+
+# then set index
+df['col_name'].is_unique # check first: If True, you're safe
+df.set_index("col_name", inplace=True)
+
+
+
+repos[repos['good_intro'] == 1].sort_values('user_reponame', ascending=False)
+good_repo = repos[repos['good_intro' == 1]]
 ```
 
 Odd commands to learn later or skip
@@ -212,7 +229,7 @@ statistics?
 pd.read_csv?
 ```
 
-### Pandas: dataframe value methods
+## dataframe value methods
 
 > I need notes on these
 
@@ -293,9 +310,7 @@ names.values # without index/label
 names.index # just the labels - RangeIndex(start=0, stop=1309, step=1)
 ```
 
-### Pandas: sorting, indexing, rows
-
-> STOPPED HERE
+## indexing & sorting rows
 
 **loc[]** - access data by a row LABEL
 
@@ -350,6 +365,19 @@ titanic.pclass.value_counts().sort_index().plot(kind="bar")
 # get the count os people who were 18 years old
 titanic["age"].value_counts().loc["18"]
 
+# df.loc[rows, columns]
+# df.loc[row_selection, column_selection]
+# Where each selection can take multiple forms
+# df.loc[start:stop, [columns]]
+# stop is inclusive
+
+# : = "everything"
+# df.loc[:, [columns]]
+
+# boolean mask
+# df.loc[a > b]
+# df.loc[a > b, [columns]]
+
 countries.loc["Greece"]
 # add square brackets to return a dataframe instead of a series
 countries.loc[["Greece"]]
@@ -381,7 +409,7 @@ Methods that do not seem useful:
 btc.index
 ```
 
-### Pandas: filtering
+## filtering
 
 - `.between()`: - find values between ranges
 - `.isin()` - filtering a series -> find values that are in some collection
@@ -458,7 +486,7 @@ low_rated = books[books["User Rating"] < 4.5]
 low_rated["Author"].value_counts().head().plot(kind="bar")
 ```
 
-### Pandas: Adding & Removing Columns
+## Adding & Removing Columns
 
 - .drop(): drops columns or rows - it does not affect the original dataframe
   - labels: can be a single column or a list
@@ -467,7 +495,7 @@ low_rated["Author"].value_counts().head().plot(kind="bar")
 - `axis`: default is `0` which means row or to drop by the index label
 - you can also delete a row by position
 - `index[]`: add a single index number or use slice syntax
-- .insert(): use when you want the column to go in a specific position
+- `.insert()`: use when you want the column to go in a specific position
 - you can also copy the values from another column
 
 ```py
@@ -538,7 +566,9 @@ tweets["interactions"] = tweets["replies"] + tweets["retweets"] + tweets["quotes
 tweets.sort_values("interactions", ascending=False).head(8)
 ```
 
-### Pandas: Updating Values
+## Updating Values
+
+> Some of the examples below are confusing so watch the videos again.
 
 - replace()
 - loc()
@@ -592,6 +622,8 @@ houses.loc[many_bedrooms, ["bedrooms"]] = "TOO MANY"
 
 <br>
 
+> ### Use `replace` to change any calcs that result in `NaN` to `0` - or can I do it with a conditional?
+
 Exercises
 
 ```py
@@ -630,7 +662,9 @@ netflix.loc[netflix["title"].isin(favs), "is_fav"] = True
 netflix["is_fav"].value_counts()
 ```
 
-### Pandas: Working with Types and NA
+## Types and NA
+
+> STOPPED HERE - DO A NEW NOTEBOOK
 
 - astype(): a series method, convert data types for columns
 - category data type: used to represent text data where there is a finite number of possible values -> titanic.sex - 2 choices
@@ -720,7 +754,7 @@ netflix.fillna({"country": mode_country}, inplace=True)
 # netflix.country.isna().value_counts()
 ```
 
-### Pandas: Working with Dates and Times
+## Dates and Times
 
 - pd.to_datetime()
 - dt
