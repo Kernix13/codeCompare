@@ -46,6 +46,13 @@ Sections 13-19
 - stack() - ?
 - unstack() - ?
 
+| Layer            | Tool                | Role                   |
+| :--------------- | :------------------ | ---------------------- |
+| Math engine      | NumPy               | Fast array math        |
+| Data handling    | Pandas              | Tables, cleaning, prep |
+| Visualization    | Matplotlib, Seaborn | Charts                 |
+| Machine learning | scikit-learn        | Models & predictions   |
+
 ## Matplotlib
 
 - Pandas calls plottting methods from Matplotlib
@@ -72,9 +79,10 @@ Sections 13-19
 ```py
 import matplotlib.pyplot as plt
 
-plt.plot()
 # plot(y)
 # plot(x, y)
+# plot(x-axis_series, y-axis_series)
+plt.plot()
 
 salaries=[55000,65000,72000,90000,115000,150000]
 ages = [20,25,30,32,40,45]
@@ -243,6 +251,8 @@ plt.barh(plants, germinated, color="#2ecc71")
 ```
 
 ### creating histograms
+
+> STOPPED HERE
 
 - matplotlib.pyplot.hist: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html
 - histogram: distribution of values in a dataset
@@ -560,7 +570,7 @@ ufos.year.value_counts().sort_index().plot(kind="line", color="olive", linestyle
 houses.plot.line(x="bedrooms", y="price")
 ```
 
-### pandas scatter plots & nultiple plots on the same axes
+### pandas scatter plots & multiple plots on the same axes
 
 - `kind="scatter"` or dataframe method `plot.scatter(x, y)`
 - `plt.plot()` one after each other for Matplotlib
@@ -693,13 +703,21 @@ plt.savefig("UFO_By_Month")
 
 <br>
 
-## Grouping & Aggregating
+## Grouping & Aggregating (Matplotlib)
 
 - `.groupby()`
 - https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html
-- groupby returns a group object but they don't do a lot until you ask to do something (horribly written!)
-- .ngroups: shows you the number of groups
-- .groups: shows a dictionary with each group and its indices
+- groupby: splits your data into groups based on one or more columns, then lets you apply calculations to each group
+  - Think: “Group → then aggregate”
+  - “split data into groups and run a function on each group.”
+- Common things you do after `groupby()`:
+  - `.mean()`
+  - `.sum()`
+  - `.count()`
+  - `.max()` / `.min()`
+- **Because `groupby()` does nothing useful on its own — it’s incomplete until you add something after it**.
+- `.ngroups`: shows you the number of groups
+- `.groups`: shows a dictionary with each group and its indices
 - `.first()`: shows the first element in each group
 - `get_group()`:
 - looping over the group object gives you a tuple which contains the group name and the actual group
@@ -762,6 +780,8 @@ carstocks.groupby("Symbol")["High"].max()
 ### using the agg method
 
 - `aggregate()` or `agg()`: agg() is more common but the docs have aggregate()
+  - `gbo.mean()` is short for `gbo.agg("mean")`
+  - `agg()` shines when you want multiple functions
 - it allows you to run multiple functions on a `groupby` object
 - you can run multiple statistics at once
 - this is the _Apply_ portion
@@ -774,6 +794,11 @@ carstocks.groupby("Symbol")["High"].max()
 titanic.groupby("sex")["age"].agg("min")
 # pass in a list of function names
 titanic.groupby("sex")["age"].agg(["min", "max", "mean", "median"])
+
+gbo.agg({
+    "word_count": ["mean", "max"],
+    "images": "sum"
+})
 
 # get the min & max for each column in groupby("sex") dataframe
 titanic.groupby("sex").agg(["min", "max"])
@@ -1868,7 +1893,7 @@ sns.scatterplot(data=diamonds, x="carat", y="price", s=5)
 sns.rugplot(data=diamonds, x="carat", y="price", lw=1, alpha=.005)
 ```
 
-### displot() methot
+### displot() method
 
 - not to be confusted with `distplot()` with a _t_ which is deprecated
 - `displot()`: figure-level plotting methods like relplot

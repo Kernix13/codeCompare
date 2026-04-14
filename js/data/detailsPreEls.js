@@ -29,7 +29,9 @@ const JavaScript = {
     'endsWith', 
     'includes', 
     'indexOf', 
-    'for loop'
+    'for loop',
+    'toUpperCase',
+    'toLowerCase',
   ],
   'array': [
     'join', 
@@ -104,6 +106,8 @@ const Python = {
     'isupper',
     'islower',
     'count',
+    'capitalize',
+    'lower',
   ],
   'array': [
     'join', 
@@ -170,7 +174,9 @@ const PHP = {
     'str_split', 
     'strrev', 
     'preg_replace', 
-    'trim'
+    'trim',
+    'strtoupper',
+    'strtolower',
   ],
   'array': [
     'implode', 
@@ -226,8 +232,11 @@ const CSharp = {
     'Substring', 
     'Split', 
     'Join', 
-    'str.Replace', 
-    'Regex.Replace', 'Trim'
+    'Replace', 
+    'Regex.Replace', 
+    'Trim',
+    'ToLower',
+    'ToUpper',
   ],
   'array': [
     'Join', 
@@ -1661,7 +1670,7 @@ public static double CalcDiag(double len, double width) {
     ],
     "string": [
       {
-        "keywords": ["string.Join", "str.ToLower", "Split"],
+        "keywords": ["string.Join", "ToLower", "Split"],
         "code": `
 string title = "This is a Blog Post Title";
 public static string Slugify(string str)

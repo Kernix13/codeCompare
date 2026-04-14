@@ -74,8 +74,16 @@ dotnet new console -n ProjectName
 dotnet new react -o MyReactApp
 # Create a web application using ASP.NET Core
 dotnet new web -o MyWebApp
+
 # Create a new solution file named MySolution.sln
+# This step is unnecessary IMO
 dotnet new sln -n MySolution
+
+# Create the Solution file inside current folder
+dotnet new sln
+# Link the project to the solution
+dotnet sln add MyProjectName.csproj
+dotnet sln add <ProjectName>.csproj
 
 # Add your code to Program.cs
 # Compile a build of your application
@@ -86,6 +94,29 @@ dotnet run
 
 # Create .gitignore file (482 lines!)
 dotnet new gitignore
+
+# SUMMARY
+# 1. Create the project folder and files
+dotnet new console -o MyProjectName
+
+# 2. Move into the project folder
+cd MyProjectName
+
+# 3. Create a solution file (named after the folder automatically)
+dotnet new sln
+
+# 4. Link the project to the solution
+dotnet sln add MyProjectName.csproj
+
+# 5. Add a professional gitignore
+dotnet new gitignore
+
+# NOTE: if you prefer a .sln solution file instead of .slnx, run:
+dotnet new sln --use-legacy-format
+# or:
+dotnet new solution
+# or:
+dotnet new sln --format sln
 ```
 
 Commands to know later
@@ -127,9 +158,18 @@ dotnet new webapi -o MyApi
 dotnet new maui -o MyMobileApp
 ```
 
+Suggested .gitignore entries instead of the huge version from `dotnet new gitignore`:
+
+```gitignore
+[Bb]in/
+[Ob]j/
+.vscode/
+*.user
+```
+
 ## Methods breakdown
 
-Add freeCodeCamp methods
+> Lots of work needed for this section
 
 | Dtype  | Method          | Return | Mutate |
 | :----- | :-------------- | :----- | :----: |
