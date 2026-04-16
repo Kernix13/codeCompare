@@ -232,6 +232,7 @@ ol,
 
 .sub-nav-item {
   font-size: 1rem;
+  padding: 0 0 0.5rem;
 }
 
 .sub-nav-item > a {
