@@ -204,9 +204,14 @@ Remove()
 - Add Console.Read(), Console.ReadLine(), Console.ReadKey()
 - string[] names = new string[3] + the syntax using {}
 - .Length
-- .Conains()
+- .Contains()
 - &&
 - string?
+- Float f or F
+- Decimal m or M
+- checked vs unchecked
+
+Null:
 
 ```cs
 // Option 1: nullable reference type / nullable annotation
@@ -216,7 +221,9 @@ if (name is null) // Input stream ends (EOF = End Of File)
 // Option 2: null-coalescing operator
 string name = Console.ReadLine() ?? "";
 
-const float pi = 3.14f;
+// null-forgiving operator
+// Console.ReadLine()!
+int divisor = int.Parse(Console.ReadLine()!);
 ```
 
 ## Intro to C# and .NET

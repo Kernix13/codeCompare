@@ -163,3 +163,7 @@ Contributions are welcome. Please review [CONTRIBUTING.md](./CONTRIBUTING.md) fo
 ## License
 
 Licensed under the [MIT License](./LICENSE). Free to use for educational purposes.
+
+<!--
+https://compare-code.netlify.app/
+ -->
