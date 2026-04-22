@@ -29,6 +29,8 @@ official_docs: https://docs.jupyter.org/en/latest/use/using.html
 
 ## Jupyter Notebook & Pandas notes and snippets
 
+- value_counts() | sort_values() | .loc[label] | iloc[] | between() | isin(list) | drop(labels, axis) | replace() | astype("category") | dropna() | savefig()
+
 I have been using Jupyter Notebook through Anaconda.
 
 Command line:

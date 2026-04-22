@@ -31,6 +31,8 @@ official_docs: https://docs.jupyter.org/en/latest/use/using.html
 
 > How to see kwargs/docs for methods in Jupyter Notebook?
 
+- str.len() | str.contains("/", regex=False) | describe() | plt.figure() | figsize | plt.title() | plt.xlabel() | plt.ylabel() | plt.xticks() | plt.yticks() | plt.legend() | plt.bar(x, y) | plt.show() | plt.hist(nums, bins=20) | plt.scatter(x, y) | plt.pie(list) | subplot(nrows, ncols, index) | groupby() | count() | agg() | unstack() | str.upper() | str.lower() | str.capitalize() | str.len() | col.str[i] | str.strip() | str.split() | str.contains() | apply() | concat() | merge() |
+
 I missed `index.values` somehow in the Pandas lessons?
 
 Sections 13-19
@@ -1633,6 +1635,8 @@ combo.loc[combo["extra_credit"] == True, 'avg'] += 5
 <br>
 
 ## Seaborn notes and snippets
+
+- scatterplot(): data: the dataset, x: col for x-axis, y: col for y-axis, hue: 3rd column - many Seaborn methods expect it, style param: 4th col | lineplot(): estimator param: set to mean by default | replot() kind: has to be scatter or line | relplot() | histplot() | kdeplot() | displot() | countplot() works best with categorical data, aka non-numeric values | barplot() estimator: to use something other than mean, dodge: when using hue | catplot() |
 
 Sections 20-22
 
