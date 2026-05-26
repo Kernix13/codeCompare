@@ -117,6 +117,13 @@ dotnet new sln --use-legacy-format
 dotnet new solution
 # or:
 dotnet new sln --format sln
+
+####
+# you can actually force .NET to create the traditional structure:
+# namespace {}, class Program {}, static void Main() {}
+# just add the --use-program-main flag
+####
+dotnet new console -o MyProjectName --use-program-main
 ```
 
 Commands to know later
