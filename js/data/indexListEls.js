@@ -384,7 +384,7 @@ const arrays = {
   ],
   "csharp": [
     'new List<T>(iterable)',
-    'list1.Length or list1.Count',
+    'list1.Count',
     'list1[i]',
     'list1[i,j] | list1[i][j]',
     'var list2 = new List<T>(list1)',
