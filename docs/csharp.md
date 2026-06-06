@@ -148,10 +148,6 @@ dotnet sln remove <path-to-csproj>
 # Add a C# project
 dotnet sln add <path-to-csproj>
 
-# Create a Solution
-dotnet new sln
-dotnet sln add ProjectName.csproj
-
 # Create web app
 dotnet new webapp -o MyWebApp
 
@@ -163,6 +159,26 @@ dotnet new webapi -o MyApi
 
 # Create mobile app using .NET MAUI
 dotnet new maui -o MyMobileApp
+
+# check available templates
+dotnet new list
+
+# Add React as the front end
+dotnet new react -o MyReactApp
+
+# That command may not work so instead try this:
+dotnet new webapi -o MyProject
+cd MyProject
+npm create vite@latest client -- --template react
+
+# New .NET SPA Templates
+dotnet new react
+dotnet new react --help
+
+# To see all SPA-related templates
+dotnet new list react
+dotnet new list angular
+dotnet new list
 ```
 
 Suggested .gitignore entries instead of the huge version from `dotnet new gitignore`:
