@@ -50,6 +50,8 @@ dotnet --version
 dotnet --list-sdks
 # Display detailed information about your .NET environment
 dotnet --info
+# See detailed list of all commands
+dotnet --help
 
 # Create a new, empty solution
 dotnet new sln
@@ -138,6 +140,14 @@ dotnet restore
 
 # List Installed Packages
 dotnet list package
+# list all transitive packages
+dotnet list package --include-transitive
+
+# lists outdated packages
+dotnet list package --outdated
+
+# To remove a package from your project
+dotnet remove package <name of dependency>
 
 # Clean Build Artifacts, to delete the output of a previous build
 dotnet clean
@@ -179,6 +189,12 @@ dotnet new react --help
 dotnet new list react
 dotnet new list angular
 dotnet new list
+
+# Install global command line tool
+dotnet tool install <name of package>
+
+# Install templates
+dotnet new -i <name of package>
 ```
 
 Suggested .gitignore entries instead of the huge version from `dotnet new gitignore`:
