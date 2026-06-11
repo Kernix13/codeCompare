@@ -134,6 +134,8 @@ Commands to know later
 # Add a NuGet Package
 dotnet add package PackageName
 dotnet add package Newtonsoft.Json
+# Add specific version package
+dotnet add package PackageName -Version 1.2.3
 
 # Restore Dependencies after cloning or to update existing packages
 dotnet restore
