@@ -197,7 +197,17 @@ dotnet tool install <name of package>
 
 # Install templates
 dotnet new -i <name of package>
+
+# build and test the Release version of your console application
+dotnet run --configuration Release
+
+# publish a console app
+dotnet publish
 ```
+
+- Console Application: `dotnet new console`
+- Class Library: `dotnet new classlib`
+- xUnit Test Project: `dotnet new xunit`
 
 Suggested .gitignore entries instead of the huge version from `dotnet new gitignore`:
 
