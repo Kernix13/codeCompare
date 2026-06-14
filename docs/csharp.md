@@ -203,6 +203,39 @@ Suggested .gitignore entries instead of the huge version from `dotnet new gitign
 *.user
 ```
 
+In case you forget adding a gitignore file:
+
+```sh
+git rm -r --cached **/bin/
+git rm -r --cached **/obj/
+```
+
+### Remove MSTest and create xUnit test
+
+```sh
+# create branch
+git checkout -b experiment/xunit-tests
+
+# Remove the MSTest project from the solution
+dotnet sln remove StringLibraryTest/StringLibraryTest.csproj
+```
+
+```ps1
+# Delete the MSTest folder (Windows)
+Remove-Item -Recurse -Force StringLibraryTest
+```
+
+```sh
+# Create the new xUnit project
+dotnet new xunit -o StringLibrary.Tests
+
+# Link the new xUnit project: Add it to your solution and reference your class library
+dotnet sln add StringLibrary.Tests/StringLibrary.Tests.csproj
+dotnet add StringLibrary.Tests/StringLibrary.Tests.csproj reference StringLibrary/StringLibrary.csproj
+```
+
+- Change MSTest `IsTrue` and `IsFalse` to `True` and `False`
+
 ## Various Methods
 
 > Lots of work needed for this section
