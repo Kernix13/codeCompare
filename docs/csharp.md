@@ -29,7 +29,7 @@ official_docs: https://learn.microsoft.com/en-us/dotnet/csharp/
 
 ## Terms to define
 
-- .NET compiler | .NET runtime | app models | .NET SDK | base class library | NuGet | ASP.NET Core | ASP.NET Core Razor Pages | Blazor | .NET MAUI | workload | .NET CLI |
+- .NET compiler | .NET runtime | app models | .NET SDK | base class library | ASP.NET Core | ASP.NET Core Razor Pages | Blazor | .NET MAUI | workload | .NET CLI |
 
 ## Shell commands
 
@@ -41,53 +41,90 @@ official_docs: https://learn.microsoft.com/en-us/dotnet/csharp/
 4. 📌 https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new
 -->
 
-Beginner commands
+### Beginner commands
 
 ```sh
-# Check .NET installation
+# Check your latest .NET installation version
 dotnet --version
+
 # Show installed .NET SDKs (version numbers and install locations)
 dotnet --list-sdks
-# Display detailed information about your .NET environment
-dotnet --info
-# See detailed list of all commands
-dotnet --help
-
-# Create a new, empty solution
-dotnet new sln
 
 # Get the list of templates available on your machine
-dotnet new --list
+dotnet new --list # or
+dotnet new list
 
-# Create a console application (do I need ./?) -o or --output
+# Display detailed information about your .NET environment
+dotnet --info
+
+# See detailed list of all commands
+dotnet --help
+```
+
+Create .NET applications
+
+1. Console Application: creates a .NET Core console application that can be used to build command-line tools or utilities
+2. Class Library: creates a .NET Core class library that can be used to create reusable components or libraries
+3. ASP.NET Core Web Application: creates a web application using ASP.NET Core, which is a cross-platform framework for building web applications
+4. Web API: creates a web API project using ASP.NET Core, which can be used to create RESTful services
+5. MVC Web Application: creates an ASP.NET Core web application that uses the Model-View-Controller (MVC) pattern
+6. React: creates an ASP.NET Core web application that uses React
+7. Web Api
+8. xUnit Test Project
+
+```sh
+# dotnet new <template> command
+
+# 📌 1. Console Application:
 # -o Creates a new folder and puts project inside
-dotnet new console -o ./ProjectName
-# you do not need ./
+dotnet new console -o ./ProjectName # or without ./
 dotnet new console -o ProjectName
-# How is this different? -n or --name
+
 # -n Names the project but stays in current folder
 dotnet new console -n ProjectName
-# Combo?
-console -n ProjectName -o ProjectName
-# If you are already inside your project folder
+# If you are already inside your console project folder
 dotnet new console # or
 dotnet new console -n ProjectName
-# Create an ASP.NET Core web application that uses React
-dotnet new react -o MyReactApp
-# Create a web application using ASP.NET Core
+
+# 📌 2. Class Library:
+dotnet new classlib -o ProjectName
+
+# 📌 3. ASP.NET Core Web Application:
 dotnet new web -o MyWebApp
 
-# Create a new solution file named MySolution.sln
-# This step is unnecessary IMO
-dotnet new sln -n MySolution
+# 📌 4. Web API:
+dotnet new webapi -o MyWebApi
 
-# Create the Solution file inside current folder
+# 📌 5. MVC Web Application:
+dotnet new mvc -o MyMvcApp
+
+# 📌 6. Create an ASP.NET Core web application that uses React
+dotnet new react -o MyReactApp
+
+# That command may not work so instead try this:
+dotnet new webapi -o MyProject
+cd MyProject
+npm create vite@latest client -- --template react
+
+# 📌 7. Create web API
+dotnet new webapi -o MyApi
+
+# 📌 8. xUnit Test Project
+dotnet new xunit
+
+# Remaining commands you will use
+# 📌 Solution commands
+# Create a new, empty solution inside current folder
 dotnet new sln
-# Link the project to the solution
-dotnet sln add MyProjectName.csproj
-dotnet sln add <ProjectName>.csproj
 
-# Add your code to Program.cs
+# Link the project to the solution: dotnet sln add <path-to-csproj>
+dotnet sln add <ProjectName>.csproj
+dotnet sln add MyProjectName.csproj
+
+# Remove a C# project
+dotnet sln remove <path-to-csproj>
+
+# 📌 build, run, gitignore, clean, ...
 # Compile a build of your application
 dotnet build
 
@@ -97,7 +134,10 @@ dotnet run
 # Create .gitignore file (482 lines!)
 dotnet new gitignore
 
-# SUMMARY
+# Clean Build Artifacts, to delete the output of a previous build
+dotnet clean
+
+# ✅ SUMMARY
 # 1. Create the project folder and files
 dotnet new console -o MyProjectName
 
@@ -112,28 +152,18 @@ dotnet sln add MyProjectName.csproj
 
 # 5. Add a professional gitignore
 dotnet new gitignore
-
-# NOTE: if you prefer a .sln solution file instead of .slnx, run:
-dotnet new sln --use-legacy-format
-# or:
-dotnet new solution
-# or:
-dotnet new sln --format sln
-
-####
-# you can actually force .NET to create the traditional structure:
-# namespace {}, class Program {}, static void Main() {}
-# just add the --use-program-main flag
-####
-dotnet new console -o MyProjectName --use-program-main
 ```
 
-Commands to know later
+- You can actually force .NET to create the traditional structure: namespace {}, class Program {}, static void Main() {}. Just add the `--use-program-main` flag:
+  - `dotnet new console -o MyProjectName --use-program-main`
+
+### Package commands
 
 ```sh
 # Add a NuGet Package
 dotnet add package PackageName
 dotnet add package Newtonsoft.Json
+
 # Add specific version package
 dotnet add package PackageName -Version 1.2.3
 
@@ -151,47 +181,6 @@ dotnet list package --outdated
 # To remove a package from your project
 dotnet remove package <name of dependency>
 
-# Clean Build Artifacts, to delete the output of a previous build
-dotnet clean
-
-# Remove a C# project
-dotnet sln remove <path-to-csproj>
-
-# Add a C# project
-dotnet sln add <path-to-csproj>
-
-# Create web app
-dotnet new webapp -o MyWebApp
-
-# Creates an ASP.NET Razor Pages app
-dotnet new mvc -o MyMvcApp
-
-# Create web API
-dotnet new webapi -o MyApi
-
-# Create mobile app using .NET MAUI
-dotnet new maui -o MyMobileApp
-
-# check available templates
-dotnet new list
-
-# Add React as the front end
-dotnet new react -o MyReactApp
-
-# That command may not work so instead try this:
-dotnet new webapi -o MyProject
-cd MyProject
-npm create vite@latest client -- --template react
-
-# New .NET SPA Templates
-dotnet new react
-dotnet new react --help
-
-# To see all SPA-related templates
-dotnet new list react
-dotnet new list angular
-dotnet new list
-
 # Install global command line tool
 dotnet tool install <name of package>
 
@@ -201,13 +190,9 @@ dotnet new -i <name of package>
 # build and test the Release version of your console application
 dotnet run --configuration Release
 
-# publish a console app
+# Publish a console app
 dotnet publish
 ```
-
-- Console Application: `dotnet new console`
-- Class Library: `dotnet new classlib`
-- xUnit Test Project: `dotnet new xunit`
 
 Suggested .gitignore entries instead of the huge version from `dotnet new gitignore`:
 
@@ -218,7 +203,7 @@ Suggested .gitignore entries instead of the huge version from `dotnet new gitign
 *.user
 ```
 
-## Methods breakdown
+## Various Methods
 
 > Lots of work needed for this section
 
@@ -249,18 +234,7 @@ Suggested .gitignore entries instead of the huge version from `dotnet new gitign
 
 Remove()
 
-## To-do - add these
-
-- code blocks of loops and conditionals
-- Add Console.Read(), Console.ReadLine(), Console.ReadKey()
-- string[] names = new string[3] + the syntax using {}
-- .Length
-- .Contains()
-- &&
-- string?
-- Float f or F
-- Decimal m or M
-- checked vs unchecked
+## Miscellaneous
 
 Null:
 
@@ -292,7 +266,6 @@ int divisor = int.Parse(Console.ReadLine()!);
 - .NET provides a large set of built-in libraries known as the **Base Class Library (BCL)**.
 - Developers can reference these libraries and call their methods in applications.
 - External libraries can be installed via package managers like **NuGet**.
-
 - An **application framework** (app model) includes:
   - Libraries
   - Project templates
@@ -336,15 +309,6 @@ int divisor = int.Parse(Console.ReadLine()!);
 
 ---
 
-## Basic Code Structure
-
-- `public static void Main()` defines the program entry point.
-- A **method** is a block of code that performs a specific task.
-- Methods are defined inside **classes**.
-- A class can contain multiple methods.
-
----
-
 ## How .NET Code Runs
 
 1. You run a build command (e.g., `dotnet build`).
@@ -373,32 +337,6 @@ int divisor = int.Parse(Console.ReadLine()!);
 ---
 
 ## Basics
-
-Writing C# code requires precision—small mistakes (even a single character) will cause compile-time errors.
-
-### `Console.WriteLine` vs `Console.Write`
-
-- `Console.WriteLine()`:
-  - Prints output followed by a **new line**
-  - Each call starts on a new line
-- `Console.Write()`:
-  - Prints output **without** adding a new line
-  - Subsequent output continues on the same line
-
-```cs
-Console.WriteLine("Hello World!");
-Console.Write("Congratulations!");
-Console.Write(" ");
-Console.Write("You wrote your first line of code.");
-```
-
-Basic Syntax Concepts
-
-- Console is a class
-- WriteLine() and Write() are methods inside the Console class
-- The . is the member access operator (used to access methods on a class)
-- ; is the statement terminator (marks the end of an instruction)
-- A compiler converts your source code into a format the computer can execute
 
 ### String Literals (string)
 
@@ -432,26 +370,13 @@ Used for decimal numbers. C# supports three types:
 - Used in conditions and decision-making
 
 ```cs
-// string literal:
-Console.WriteLine("Hello");
-
-// char literal:
-Console.WriteLine('b');
-
-// int literal:
-Console.WriteLine(123);
-
-// floating-point f or F:
-Console.WriteLine(0.25F);
-
-// double literal:
-Console.WriteLine(2.625);
-
-// decimal literal m or M - USE THIS ONE
-Console.WriteLine(12.39816m);
-
-// bool literal:
-Console.WriteLine(true);
+Console.WriteLine("Hello"); // string literal:
+Console.WriteLine('b'); // char literal:
+Console.WriteLine(123); // int literal:
+Console.WriteLine(0.25F); // floating-point f or F:
+Console.WriteLine(2.625); // double literal:
+Console.WriteLine(12.39816m); // decimal literal m or M
+Console.WriteLine(true); // bool literal:
 ```
 
 ## Variables
@@ -660,16 +585,6 @@ Increment/decrement:
 
 ## Create and Run Simple C# Console Applications
 
-`SDK` - software development kit
-
-Check to see if .NET is already installed:
-
-```sh
-# Windows Command Prompt or PowerShell
-dotnet --version
-# 7.0.400
-```
-
 - NOTE: markdown language code block for PowerShell: powershell, ps, ps1, ps1 is best IMO
 
 1. Go to https://dotnet.microsoft.com/en-us/download
@@ -730,14 +645,8 @@ dotnet run
   - Desktop apps
   - Databases
   - And more
-
 - A **class** is a container for methods
 - Even data types (like `int`, `string`) are implemented as classes behind the scenes
-
-### Finding What You Need
-
-- Use search engines for examples and solutions
-- Use official Microsoft documentation for accurate reference
 
 ### Calling Methods
 
@@ -1060,7 +969,7 @@ Use the Length property of an array:
 - Depending on how the array is created, you may not know in advance how many elements an array contains.
 - To determine the size of an array, you can use the Length property
 
-## Implement the foreach statement (STOPPED EDITS HERE)
+## Implement the foreach statement
 
 Looping through an array using foreach:
 
@@ -1336,79 +1245,3 @@ When calling a method with an out parameter, you must use the keyword `out` befo
 The `out` keyword instructs the compiler that the `TryParse()` method doesn't return a value the traditional way only (as a return value), but also communicates an output through this two-way parameter (?)
 
 - decimal to int is a narrowing conversion so to round, Convert is the best answer
-
-..................................................................
-
-> https://learn.microsoft.com/en-us/training/browse/?products=dotnet
-> **CODE EDITOR**: https://microsoftlearning.github.io/c-sharp-minor/
-
-<br>
-
-```sh
-dotnet -?
-
-sdk-options:
-  -d|--diagnostics  Enable diagnostic output.
-  -h|--help         Show command line help.
-  --info            Display .NET information.
-  --list-runtimes   Display the installed runtimes.
-  --list-sdks       Display the installed SDKs.
-  --version         Display .NET SDK version in use.
-
-SDK commands:
-  build             Build a .NET project.
-  build-server      Interact with servers started by a build.
-  clean             Clean build outputs of a .NET project.
-  format            Apply style preferences to a project or solution.
-  help              Opens the reference page in a browser for the specified command.
-  msbuild           Run Microsoft Build Engine (MSBuild) commands.
-  new               Create a new .NET project or file.
-  nuget             Provides additional NuGet commands.
-  pack              Create a NuGet package.
-  package           Search for, add, remove, or list PackageReferences for a .NET project.
-  publish           Publish a .NET project for deployment.
-  reference         Add, remove, or list ProjectReferences for a .NET project.
-  restore           Restore dependencies specified in a .NET project.
-  run               Build and run a .NET project output.
-  sdk               Manage .NET SDK installation.
-  solution          Modify Visual Studio solution files.
-  store             Store the specified assemblies in the runtime package store.
-  test              Run unit tests using the test runner specified in a .NET project.
-  tool              Install or manage tools that extend the .NET experience.
-  vstest            Run Microsoft Test Engine (VSTest) commands.
-  workload          Manage optional workloads.
-  tool              Install or manage tools that extend the .NET experience.
-  vstest            Run Microsoft Test Engine (VSTest) commands.
-  workload          Manage optional workloads.
-  vstest            Run Microsoft Test Engine (VSTest) commands.
-  workload          Manage optional workloads.
-  workload          Manage optional workloads.
-
-Additional commands from bundled tools:
-  dev-certs         Create and manage development certificates.
-  dev-certs         Create and manage development certificates.
-  fsi               Start F# Interactive / execute F# scripts.
-  user-jwts         Manage JSON Web Tokens in development.
-  user-secrets      Manage development user secrets.
-  watch             Start a file watcher that runs a command when files change.
-```
-
-```sh
-dotnet new --help
-
-Options:
-  -o, --output <output>    Location to place the generated output.
-  -n, --name <name>        The name for the output being created. If no name is specified, the
-                           name of the output directory is used.
-  --dry-run                Displays a summary of what would happen if the given command line
-                           were run if it would result in a template creation. [default: False]
-  --force                  Forces content to be generated even if it would change existing
-                           files. [default: False]
-  --no-update-check        Disables checking for the template package updates when instantiating
-                           a template. [default: False]
-  --project <project>      The project that should be used for context evaluation.
-  -v, --verbosity <LEVEL>  Sets the verbosity level. Allowed values are q[uiet], m[inimal],
-                           n[ormal], and diag[nostic]. [default: normal]
-  -d, --diagnostics        Enables diagnostic output. [default: False]
-  -?, -h, --help           Show command line help.
-```
