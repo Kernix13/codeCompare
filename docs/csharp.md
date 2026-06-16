@@ -131,6 +131,15 @@ dotnet build
 # Run your application - will build AND execute your application
 dotnet run
 
+# Build + run specific app when outside root folder
+# point to the folder containing the project file:
+dotnet run --project ./src/MyConsoleApp
+# point to the path of the specific .csproj file:
+dotnet run --project ./src/MyConsoleApp/MyConsoleApp.csproj
+
+# Build, run and and restart app when changes are made
+dotnet watch
+
 # Create .gitignore file (482 lines!)
 dotnet new gitignore
 
