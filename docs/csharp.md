@@ -29,6 +29,8 @@ official_docs: https://learn.microsoft.com/en-us/dotnet/csharp/
 
 ## Terms to define
 
+This repo of mine is better for syntax & notes: [csharp-boilerplate-code-snippets](https://github.com/Kernix13/csharp-boilerplate-code-snippets)
+
 - .NET compiler | .NET runtime | app models | .NET SDK | base class library | ASP.NET Core | ASP.NET Core Razor Pages | Blazor | .NET MAUI | workload | .NET CLI |
 
 ## Shell commands
@@ -406,21 +408,6 @@ Used for decimal numbers. C# supports three types:
 - `decimal` (high precision, commonly used for money) → requires `m` or `M` suffix
 - Prefer `decimal` for financial calculations (higher precision)
 
-### Boolean Literals (bool)
-
-- Represents `true` or `false`
-- Used in conditions and decision-making
-
-```cs
-Console.WriteLine("Hello"); // string literal:
-Console.WriteLine('b'); // char literal:
-Console.WriteLine(123); // int literal:
-Console.WriteLine(0.25F); // floating-point f or F:
-Console.WriteLine(2.625); // double literal:
-Console.WriteLine(12.39816m); // decimal literal m or M
-Console.WriteLine(true); // bool literal:
-```
-
 ## Variables
 
 - To create a new variable, you must first declare the data type of the variable, and then give it a name
@@ -446,22 +433,6 @@ bool hasJob = false;
 
 char flat = '♭';
 String name = "Luna";
-```
-
-### Reassign the value of a variable
-
-- **You can reuse and reassign the variable as many times as you want**
-
-```cs
-string firstName;
-firstName = "Buddy";
-Console.WriteLine(firstName);
-firstName = "Luna";
-Console.WriteLine(firstName);
-firstName = "Charlie";
-Console.WriteLine(firstName);
-firstName = "Rascal";
-Console.WriteLine(firstName);
 ```
 
 ## Declare implicitly typed local variables
@@ -520,62 +491,6 @@ Console.WriteLine(@"    c:\source\repos
         (this is where your code goes)");
 ```
 
-Unicode escape characters
-
-```cs
-Console.WriteLine("\u3053\u3093\u306B\u3061\u306F World!");
-```
-
-- Use character escape sequences when you need to insert a special character into a literal string
-- Use the `@` directive to create a verbatim string literal that keeps all whitespace formatting and backslash characters in a string
-- Use the `\u` plus a four-character code to represent Unicode characters
-
-## Combine strings using string concatenation
-
-- Often, you'll need to combine data from many different sources, including literal strings and variables containing both text and numeric data
-- String concatenation is "programmer speak" for simply combining two or more `string` values into a new `string` value
-- To concatenate two strings together, you use the string concatenation operator, which is the plus symbol `+`
-- You can perform several concatenation operations in the same line of code
-- String concatenation allows you to combine smaller literal and variable strings into a single string.
-- Avoid creating intermediate variables if adding them doesn't increase readability.
-
-```cs
-string firstName = "Bob";
-string message = "Hello " + firstName;
-Console.WriteLine(message);
-
-string greeting = "Hello";
-string message = greeting + " " + firstName + "!";
-Console.WriteLine(message);
-```
-
-## Combine strings using string interpolation
-
-While string concatenation is simple and convenient, string interpolation is growing in popularity in situations where you need to combine many literal strings and variables into a single formatted message
-
-- String interpolation combines multiple values into a single literal string by using a "template" and one or more interpolation expressions.
-- An interpolation expression is a variable surrounded by an opening and closing curly brace symbol `{ }`.
-- The literal string becomes a template when it's prefixed by the `$` character
-
-```cs
-string firstName = "Bob";
-string message = $"Hello {firstName}!";
-Console.WriteLine(message);
-
-int version = 11;
-string updateText = "Update to Windows";
-string message = $"{updateText} {version}";
-Console.WriteLine(message);
-```
-
-- You can use both the verbatim literal prefix symbol `@` and the string interpolation `$` symbol together:`$@"`
-
-```cs
-string projectName = "First-Project";
-Console.WriteLine($@"C:\Output\{projectName}\Data");
-// the $ symbol allows you to reference the projectName variable inside the brackets, while the @ symbol allows you to use the unescaped \ character
-```
-
 ## Perform Basic Operations on Numbers in C#
 
 Attempt a more advanced case of adding numbers and concatenating strings. the opening and closing parentheses form the _order of operations operator_.
@@ -617,86 +532,15 @@ decimal someValue1 = (decimal)numerator / denominator;
 decimal someValue2 = numerator / (decimal)denominator;
 ```
 
-Increment/decrement:
+<!-- Increment/decrement:
 
 - you'll need to increment and/or decrement values, especially when you're writing looping logic or code that interacts with a data structure
 - The `+=` operator adds and assigns the value on the right of the operator to the value on the left of the operator
 - The `++` operator increments the value of the variable by 1
 - Both the increment and decrement operators have an interesting quality — depending on their position, they perform their operation before or after they retrieve their value.
-- In other words, if you use the operator before the value as in `++value`, then the increment will happen before the value is retrieved. Likewise, `value++` will increment the value after the value has been retrieved
-
-## Create and Run Simple C# Console Applications
-
-- NOTE: markdown language code block for PowerShell: powershell, ps, ps1, ps1 is best IMO
-
-1. Go to https://dotnet.microsoft.com/en-us/download
-2. On the Download .NET page, select the recommended version of the .NET SDK
-3. Run the .NET SDK installer file
-4. On the .NET SDK Installer window, select Install
+- In other words, if you use the operator before the value as in `++value`, then the increment will happen before the value is retrieved. Likewise, `value++` will increment the value after the value has been retrieved -->
 
 <!-- 🚫 STOP HERE -->
-
-## Create, Build, and Run a .NET Application
-
-The **.NET SDK** includes the **.NET CLI**, which lets you create, build, and run applications from the terminal.
-
-### Create a New Project
-
-```sh
-dotnet new console -o ./ProjectName
-```
-
-**Command structure:**
-
-- **Driver**: `dotnet`
-- **Command**: `new console`
-- **Arguments**: `-o ./ProjectName`
-
-**Notes:**
-
-- `-o` = output directory (`--output`)
-- If omitted, files are created in the current directory
-- Creates a folder, project file (`.csproj`), and starter code
-
-### Build the Application
-
-```sh
-dotnet build
-```
-
-- Compiles source code into **Intermediate Language (IL)**
-- Outputs a `.dll` assembly and related files
-
-### Run the Application
-
-```sh
-dotnet run
-```
-
-- Builds and runs the application in one step
-- Useful for fast iteration during development
-
----
-
-## .NET Class Library
-
-- The **.NET Class Library** is a large collection of prebuilt classes and methods
-- Provides functionality for:
-  - Console I/O (`Console`)
-  - Web apps
-  - Desktop apps
-  - Databases
-  - And more
-- A **class** is a container for methods
-- Even data types (like `int`, `string`) are implemented as classes behind the scenes
-
-### Calling Methods
-
-- Methods can:
-  - Accept input (parameters)
-  - Return values
-
----
 
 ## Stateful vs Stateless Methods
 
@@ -1187,8 +1031,6 @@ There are multiple techniques to perform a data type conversion. The technique y
 
 The C# compiler attempts to accommodate your code, but doesn't compile operations that could result in an exception.
 
-> When you understand the C# compiler's primary concern, understanding why it functions a certain way is easier.
-
 Write code that attempts to add an int and a string and save the result in an int
 
 - the C# compiler doesn't implicitly perform the conversion from `string` to `int` for you
@@ -1248,6 +1090,8 @@ ing name = Convert.ToInt32(Console.ReadLine());
 
 So, when should you use the Convert class? **The Convert class is best for converting fractional numbers into whole numbers (int)** because it rounds up the way you would expect.
 
+**Examine the TryParse() method**!
+
 ### Casting truncates and converting rounds
 
 When you're casting int value = (int)1.5m;, the value of the float is truncated so the result is 1, meaning the value after the decimal is ignored completely. You could change the literal float to 1.999m and the result of casting would be the same.
@@ -1269,14 +1113,6 @@ double f = Math.Floor(3.99); // 3
 double g = Math.Max(x, y); // 5
 double h = Math.Min(x, y); // 3.99
 ```
-
-## Examine the TryParse() method
-
-The `TryParse()` method does several things simultaneously:
-
-- It attempts to parse a string into the given numeric data type.
-- If successful, it stores the converted value in an _out parameter_, explained in following section.
-- It returns a `bool` to indicate whether the action succeeded or failed.
 
 ## Out parameters
 
