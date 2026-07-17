@@ -101,7 +101,7 @@ dotnet new webapi -o MyWebApi
 dotnet new mvc -o MyMvcApp
 
 # 📌 6. Create an ASP.NET Core web application that uses React
-dotnet new react -o MyReactApp
+dotnet new react -o MyReactApp # this is bad, replace it
 
 # That command may not work so instead try this:
 dotnet new webapi -o MyProject
@@ -173,6 +173,7 @@ dotnet new gitignore
 ```sh
 # Add a NuGet Package
 dotnet add package PackageName
+dotnet add [path/to/csproj] PackageName
 dotnet add package Newtonsoft.Json
 
 # Add specific version package
@@ -203,6 +204,30 @@ dotnet run --configuration Release
 
 # Publish a console app
 dotnet publish
+```
+
+Scalar:
+
+```sh
+# Install the Scalar Package
+dotnet add package Scalar.AspNetCore
+```
+
+in Program.cs:
+
+```cs
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    // ADD THIS LINE:
+    app.MapScalarApiReference();
+}
+```
+
+in launchSettings.json change your `launchUrl`:
+
+```json
+"launchUrl": "scalar/v1",
 ```
 
 Suggested .gitignore entries instead of the huge version from `dotnet new gitignore`:
